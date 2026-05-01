@@ -1,0 +1,17 @@
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseFeedViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseFeedViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.DiagnosisBrowseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.DiagnosisBrowseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.consultation.ConsultationViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.consultation.ConsultationViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.patient.PatientCaseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.patient.PatientCaseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.settings.SettingsViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.settings.SettingsViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.settings.TrashViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.settings.TrashViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.shifts.ShiftDetailViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.shifts.ShiftDetailViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.shifts.ShiftsViewModel

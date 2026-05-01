@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#F4F3EE</color>
+    <color name="window_bg">#F4F3EE</color>
+    <string name="app_name">Kairos</string>
+    <string name="nav_cases">Cases</string>
+    <string name="nav_consultation">Consultation</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_shifts">Shifts</string>
+    <style name="Theme.Kairos.Splash" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
+</resources>

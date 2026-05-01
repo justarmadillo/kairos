@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.kairos.app-release-74:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.kairos.app-main-75:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.kairos.app-release-74:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.kairos.app-main-75:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.kairos.app-release-74:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.kairos.app-main-75:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.kairos.app-release-74:/xml_file_paths.xml.flat",
+        "source": "com.kairos.app-main-75:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.kairos.app-release-74:/xml_data_extraction_rules.xml.flat",
+        "source": "com.kairos.app-main-75:/xml/data_extraction_rules.xml"
+    }
+]

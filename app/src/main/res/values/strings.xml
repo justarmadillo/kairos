@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kairos</string>
+
+    <string name="nav_shifts">Shifts</string>
+    <string name="nav_consultation">Consultation</string>
+    <string name="nav_cases">Cases</string>
+    <string name="nav_settings">Settings</string>
+</resources>

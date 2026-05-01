@@ -1,0 +1,1 @@
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel

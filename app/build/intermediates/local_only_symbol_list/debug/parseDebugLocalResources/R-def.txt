@@ -1,0 +1,15 @@
+R_DEF: Internal format may change without notice
+local
+color ic_launcher_background
+color window_bg
+drawable ic_launcher_foreground
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string nav_cases
+string nav_consultation
+string nav_settings
+string nav_shifts
+style Theme.Kairos.Splash
+xml data_extraction_rules
+xml file_paths

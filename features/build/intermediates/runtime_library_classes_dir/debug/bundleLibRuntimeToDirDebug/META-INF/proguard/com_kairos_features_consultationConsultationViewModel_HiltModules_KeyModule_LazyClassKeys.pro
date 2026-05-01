@@ -1,0 +1,8 @@
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseFeedViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseFeedViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.DiagnosisBrowseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.cases.DiagnosisBrowseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.consultation.ConsultationViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.consultation.ConsultationViewModel
