@@ -1,1 +1,5 @@
 com.kairos.core
+font inter_bold
+font inter_medium
+font inter_regular
+font inter_semibold

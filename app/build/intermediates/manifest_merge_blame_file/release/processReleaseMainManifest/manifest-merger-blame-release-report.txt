@@ -60,8 +60,8 @@
 34-->D:\claude\Kairos\app\src\main\AndroidManifest.xml:12:5-56:19
 35        android:name="com.kairos.KairosApplication"
 35-->D:\claude\Kairos\app\src\main\AndroidManifest.xml:13:9-42
-36        android:allowBackup="true"
-36-->D:\claude\Kairos\app\src\main\AndroidManifest.xml:14:9-35
+36        android:allowBackup="false"
+36-->D:\claude\Kairos\app\src\main\AndroidManifest.xml:14:9-36
 37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 37-->[androidx.core:core:1.15.0] C:\Users\Oracle\.gradle\caches\8.10.2\transforms\fa9447d36092829149f5bd478ad957b2\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
 38        android:dataExtractionRules="@xml/data_extraction_rules"

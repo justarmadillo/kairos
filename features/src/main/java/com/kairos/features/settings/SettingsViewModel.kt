@@ -22,6 +22,7 @@ import javax.inject.Inject
 data class BackupUiState(
     val isExporting: Boolean = false,
     val isRestoring: Boolean = false,
+    val isVacuuming: Boolean = false,
     val lastMessage: String? = null,
     val restoreCompleted: Boolean = false,
 )
@@ -81,6 +82,18 @@ class SettingsViewModel @Inject constructor(
                     restoreCompleted = result.success,
                     lastMessage = if (!result.success) "Restore failed: ${result.error}" else null,
                 )
+            }
+        }
+    }
+
+    fun vacuumDatabase() {
+        viewModelScope.launch {
+            _backupUi.update { it.copy(isVacuuming = true, lastMessage = null) }
+            try {
+                backupEngine.vacuumDatabase()
+                _backupUi.update { it.copy(isVacuuming = false, lastMessage = "Database optimized") }
+            } catch (e: Exception) {
+                _backupUi.update { it.copy(isVacuuming = false, lastMessage = "Optimization failed: ${e.message}") }
             }
         }
     }

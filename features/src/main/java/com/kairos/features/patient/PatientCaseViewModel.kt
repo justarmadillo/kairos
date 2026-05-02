@@ -104,6 +104,7 @@ class PatientCaseViewModel @Inject constructor(
 
     // When editing an existing case, store the original id
     private var editingCaseId: Long = 0L
+    private var editingCase: Case? = null
 
     private var nextLocalId = 0
 
@@ -113,6 +114,7 @@ class PatientCaseViewModel @Inject constructor(
         editingCaseId = caseId
         viewModelScope.launch {
             val case = caseRepo.getById(caseId) ?: return@launch
+            editingCase = case
             val patient = case.patient
             _state.update { s ->
                 s.copy(
@@ -187,7 +189,14 @@ class PatientCaseViewModel @Inject constructor(
     }
 
     fun selectExistingPatient(patient: Patient) =
-        _state.update { it.copy(selectedPatient = patient) }
+        _state.update {
+            it.copy(
+                name = patient.name,
+                age = patient.age?.toString() ?: "",
+                phones = patient.phones,
+                selectedPatient = patient,
+            )
+        }
 
     fun clearSelectedPatient() =
         _state.update { it.copy(selectedPatient = null) }
@@ -271,9 +280,10 @@ class PatientCaseViewModel @Inject constructor(
         if (s.isSaving) return
 
         val patientToUse = s.selectedPatient
+        val isEditingCase = editingCaseId > 0L
         val isNewPatient = patientToUse == null
 
-        if (isNewPatient && s.name.isBlank()) {
+        if ((isNewPatient || isEditingCase) && s.name.isBlank()) {
             _state.update { it.copy(error = "Patient name is required") }
             return
         }
@@ -286,21 +296,36 @@ class PatientCaseViewModel @Inject constructor(
                     val now = System.currentTimeMillis()
 
                     // 1. Patient
-                    val patientId: Long = if (isNewPatient) {
-                        patientRepo.upsert(
-                            Patient(
-                                name = s.name.trim(),
-                                age = s.age.toIntOrNull(),
-                                phones = s.phones,
-                                createdAt = now,
-                                updatedAt = now,
+                    val patientId: Long = when {
+                        isEditingCase -> {
+                            val patient = patientToUse ?: error("No patient selected")
+                            patientRepo.upsert(
+                                patient.copy(
+                                    name = s.name.trim(),
+                                    age = s.age.toIntOrNull(),
+                                    phones = s.phones,
+                                    updatedAt = now,
+                                )
                             )
-                        )
-                    } else {
-                        patientToUse?.id ?: error("No patient selected")
+                        }
+                        isNewPatient -> {
+                            patientRepo.upsert(
+                                Patient(
+                                    name = s.name.trim(),
+                                    age = s.age.toIntOrNull(),
+                                    phones = s.phones,
+                                    createdAt = now,
+                                    updatedAt = now,
+                                )
+                            )
+                        }
+                        else -> {
+                            patientToUse?.id ?: error("No patient selected")
+                        }
                     }
 
                     // 2. Case (id = 0 -> insert, id > 0 -> update)
+                    val existingCase = editingCase
                     val caseId = caseRepo.upsertCase(
                         case = Case(
                             id = editingCaseId,
@@ -308,7 +333,7 @@ class PatientCaseViewModel @Inject constructor(
                             caseDate = s.caseDate,
                             mechanism = s.mechanism.trim().ifEmpty { null },
                             notesHtml = s.notesHtml.ifEmpty { null },
-                            createdAt = now,
+                            createdAt = existingCase?.createdAt ?: now,
                             updatedAt = now,
                         ),
                         diagnosisNames = s.diagnoses,

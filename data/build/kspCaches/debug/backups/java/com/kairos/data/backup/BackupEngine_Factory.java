@@ -2,6 +2,7 @@ package com.kairos.data.backup;
 
 import android.content.Context;
 import com.kairos.core.media.MediaFileManager;
+import com.kairos.core.repository.DataSafetyCoordinator;
 import com.kairos.data.db.KairosDatabase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -34,31 +35,37 @@ public final class BackupEngine_Factory implements Factory<BackupEngine> {
 
   private final Provider<MediaFileManager> mediaFileManagerProvider;
 
+  private final Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider;
+
   public BackupEngine_Factory(Provider<Context> contextProvider,
-      Provider<KairosDatabase> dbProvider, Provider<MediaFileManager> mediaFileManagerProvider) {
+      Provider<KairosDatabase> dbProvider, Provider<MediaFileManager> mediaFileManagerProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
     this.contextProvider = contextProvider;
     this.dbProvider = dbProvider;
     this.mediaFileManagerProvider = mediaFileManagerProvider;
+    this.dataSafetyCoordinatorProvider = dataSafetyCoordinatorProvider;
   }
 
   @Override
   public BackupEngine get() {
-    return newInstance(contextProvider.get(), dbProvider.get(), mediaFileManagerProvider.get());
+    return newInstance(contextProvider.get(), dbProvider.get(), mediaFileManagerProvider.get(), dataSafetyCoordinatorProvider.get());
   }
 
   public static BackupEngine_Factory create(javax.inject.Provider<Context> contextProvider,
       javax.inject.Provider<KairosDatabase> dbProvider,
-      javax.inject.Provider<MediaFileManager> mediaFileManagerProvider) {
-    return new BackupEngine_Factory(Providers.asDaggerProvider(contextProvider), Providers.asDaggerProvider(dbProvider), Providers.asDaggerProvider(mediaFileManagerProvider));
+      javax.inject.Provider<MediaFileManager> mediaFileManagerProvider,
+      javax.inject.Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new BackupEngine_Factory(Providers.asDaggerProvider(contextProvider), Providers.asDaggerProvider(dbProvider), Providers.asDaggerProvider(mediaFileManagerProvider), Providers.asDaggerProvider(dataSafetyCoordinatorProvider));
   }
 
   public static BackupEngine_Factory create(Provider<Context> contextProvider,
-      Provider<KairosDatabase> dbProvider, Provider<MediaFileManager> mediaFileManagerProvider) {
-    return new BackupEngine_Factory(contextProvider, dbProvider, mediaFileManagerProvider);
+      Provider<KairosDatabase> dbProvider, Provider<MediaFileManager> mediaFileManagerProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new BackupEngine_Factory(contextProvider, dbProvider, mediaFileManagerProvider, dataSafetyCoordinatorProvider);
   }
 
   public static BackupEngine newInstance(Context context, KairosDatabase db,
-      MediaFileManager mediaFileManager) {
-    return new BackupEngine(context, db, mediaFileManager);
+      MediaFileManager mediaFileManager, DataSafetyCoordinator dataSafetyCoordinator) {
+    return new BackupEngine(context, db, mediaFileManager, dataSafetyCoordinator);
   }
 }

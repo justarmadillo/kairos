@@ -64,4 +64,8 @@ interface DiagnosisDao {
         """
     )
     suspend fun searchByPrefix(prefix: String, limit: Int): List<DiagnosisEntity>
+
+    /** Delete diagnoses that no case references (orphaned after case hard-delete). */
+    @Query("DELETE FROM diagnoses WHERE id NOT IN (SELECT DISTINCT diagnosis_id FROM case_diagnoses)")
+    suspend fun deleteOrphaned(): Int
 }

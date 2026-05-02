@@ -570,7 +570,13 @@ public class PatientDao_Impl(
   }
 
   public override suspend fun purgeOlderThan(threshold: Long): Int {
-    val _sql: String = "DELETE FROM patients WHERE is_deleted = 1 AND deleted_at < ?"
+    val _sql: String = """
+        |
+        |        DELETE FROM patients
+        |        WHERE is_deleted = 1 AND deleted_at < ?
+        |          AND id NOT IN (SELECT DISTINCT patient_id FROM cases WHERE is_deleted = 0)
+        |    
+        """.trimMargin()
     return performSuspending(__db, false, true) { _connection ->
       val _stmt: SQLiteStatement = _connection.prepare(_sql)
       try {

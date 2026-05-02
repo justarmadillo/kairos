@@ -9,6 +9,7 @@ import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.data.db.dao.CaseDao
 import com.kairos.data.db.dao.CaseMediaDao
 import com.kairos.data.db.dao.ConsultationSessionDao
+import com.kairos.data.db.dao.DiagnosisDao
 import com.kairos.data.db.dao.PatientDao
 import com.kairos.data.db.dao.ShiftDao
 import dagger.assisted.Assisted
@@ -22,6 +23,7 @@ class TrashPurgeWorker @AssistedInject constructor(
     private val patientDao: PatientDao,
     private val caseDao: CaseDao,
     private val caseMediaDao: CaseMediaDao,
+    private val diagnosisDao: DiagnosisDao,
     private val shiftDao: ShiftDao,
     private val sessionDao: ConsultationSessionDao,
     private val mediaFileManager: MediaFileManager,
@@ -48,6 +50,9 @@ class TrashPurgeWorker @AssistedInject constructor(
                 patientDao.purgeOlderThan(threshold)
                 shiftDao.purgeOlderThan(threshold)
                 sessionDao.purgeOlderThan(threshold)
+
+                // Clean up diagnoses that no case references anymore
+                diagnosisDao.deleteOrphaned()
 
                 // THEN delete files — DB is now consistent even if this is interrupted
                 mediaPaths.forEach { path ->

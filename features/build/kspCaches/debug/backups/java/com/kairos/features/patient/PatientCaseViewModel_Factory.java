@@ -3,6 +3,7 @@ package com.kairos.features.patient;
 import com.kairos.core.media.AudioRecorderEngine;
 import com.kairos.core.media.MediaFileManager;
 import com.kairos.core.repository.CaseRepository;
+import com.kairos.core.repository.DataSafetyCoordinator;
 import com.kairos.core.repository.DiagnosisRepository;
 import com.kairos.core.repository.MediaRepository;
 import com.kairos.core.repository.PatientRepository;
@@ -43,23 +44,27 @@ public final class PatientCaseViewModel_Factory implements Factory<PatientCaseVi
 
   private final Provider<AudioRecorderEngine> audioEngineProvider;
 
+  private final Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider;
+
   public PatientCaseViewModel_Factory(Provider<PatientRepository> patientRepoProvider,
       Provider<CaseRepository> caseRepoProvider,
       Provider<DiagnosisRepository> diagnosisRepoProvider,
       Provider<MediaRepository> mediaRepoProvider,
       Provider<MediaFileManager> mediaFileManagerProvider,
-      Provider<AudioRecorderEngine> audioEngineProvider) {
+      Provider<AudioRecorderEngine> audioEngineProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
     this.patientRepoProvider = patientRepoProvider;
     this.caseRepoProvider = caseRepoProvider;
     this.diagnosisRepoProvider = diagnosisRepoProvider;
     this.mediaRepoProvider = mediaRepoProvider;
     this.mediaFileManagerProvider = mediaFileManagerProvider;
     this.audioEngineProvider = audioEngineProvider;
+    this.dataSafetyCoordinatorProvider = dataSafetyCoordinatorProvider;
   }
 
   @Override
   public PatientCaseViewModel get() {
-    return newInstance(patientRepoProvider.get(), caseRepoProvider.get(), diagnosisRepoProvider.get(), mediaRepoProvider.get(), mediaFileManagerProvider.get(), audioEngineProvider.get());
+    return newInstance(patientRepoProvider.get(), caseRepoProvider.get(), diagnosisRepoProvider.get(), mediaRepoProvider.get(), mediaFileManagerProvider.get(), audioEngineProvider.get(), dataSafetyCoordinatorProvider.get());
   }
 
   public static PatientCaseViewModel_Factory create(
@@ -68,8 +73,9 @@ public final class PatientCaseViewModel_Factory implements Factory<PatientCaseVi
       javax.inject.Provider<DiagnosisRepository> diagnosisRepoProvider,
       javax.inject.Provider<MediaRepository> mediaRepoProvider,
       javax.inject.Provider<MediaFileManager> mediaFileManagerProvider,
-      javax.inject.Provider<AudioRecorderEngine> audioEngineProvider) {
-    return new PatientCaseViewModel_Factory(Providers.asDaggerProvider(patientRepoProvider), Providers.asDaggerProvider(caseRepoProvider), Providers.asDaggerProvider(diagnosisRepoProvider), Providers.asDaggerProvider(mediaRepoProvider), Providers.asDaggerProvider(mediaFileManagerProvider), Providers.asDaggerProvider(audioEngineProvider));
+      javax.inject.Provider<AudioRecorderEngine> audioEngineProvider,
+      javax.inject.Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new PatientCaseViewModel_Factory(Providers.asDaggerProvider(patientRepoProvider), Providers.asDaggerProvider(caseRepoProvider), Providers.asDaggerProvider(diagnosisRepoProvider), Providers.asDaggerProvider(mediaRepoProvider), Providers.asDaggerProvider(mediaFileManagerProvider), Providers.asDaggerProvider(audioEngineProvider), Providers.asDaggerProvider(dataSafetyCoordinatorProvider));
   }
 
   public static PatientCaseViewModel_Factory create(Provider<PatientRepository> patientRepoProvider,
@@ -77,13 +83,15 @@ public final class PatientCaseViewModel_Factory implements Factory<PatientCaseVi
       Provider<DiagnosisRepository> diagnosisRepoProvider,
       Provider<MediaRepository> mediaRepoProvider,
       Provider<MediaFileManager> mediaFileManagerProvider,
-      Provider<AudioRecorderEngine> audioEngineProvider) {
-    return new PatientCaseViewModel_Factory(patientRepoProvider, caseRepoProvider, diagnosisRepoProvider, mediaRepoProvider, mediaFileManagerProvider, audioEngineProvider);
+      Provider<AudioRecorderEngine> audioEngineProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new PatientCaseViewModel_Factory(patientRepoProvider, caseRepoProvider, diagnosisRepoProvider, mediaRepoProvider, mediaFileManagerProvider, audioEngineProvider, dataSafetyCoordinatorProvider);
   }
 
   public static PatientCaseViewModel newInstance(PatientRepository patientRepo,
       CaseRepository caseRepo, DiagnosisRepository diagnosisRepo, MediaRepository mediaRepo,
-      MediaFileManager mediaFileManager, AudioRecorderEngine audioEngine) {
-    return new PatientCaseViewModel(patientRepo, caseRepo, diagnosisRepo, mediaRepo, mediaFileManager, audioEngine);
+      MediaFileManager mediaFileManager, AudioRecorderEngine audioEngine,
+      DataSafetyCoordinator dataSafetyCoordinator) {
+    return new PatientCaseViewModel(patientRepo, caseRepo, diagnosisRepo, mediaRepo, mediaFileManager, audioEngine, dataSafetyCoordinator);
   }
 }

@@ -203,7 +203,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Or
 	android:icon
 		ADDED from D:\claude\Kairos\app\src\main\AndroidManifest.xml:17:9-43
 	android:allowBackup
-		ADDED from D:\claude\Kairos\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from D:\claude\Kairos\app\src\main\AndroidManifest.xml:14:9-36
 	android:theme
 		ADDED from D:\claude\Kairos\app\src\main\AndroidManifest.xml:21:9-51
 	android:dataExtractionRules

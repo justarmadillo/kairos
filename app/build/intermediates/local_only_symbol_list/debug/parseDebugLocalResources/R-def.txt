@@ -11,5 +11,6 @@ string nav_consultation
 string nav_settings
 string nav_shifts
 style Theme.Kairos.Splash
+xml backup_rules
 xml data_extraction_rules
 xml file_paths

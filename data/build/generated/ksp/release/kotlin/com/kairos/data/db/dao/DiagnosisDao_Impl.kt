@@ -4,6 +4,7 @@ import androidx.room.EntityInsertAdapter
 import androidx.room.RoomDatabase
 import androidx.room.coroutines.createFlow
 import androidx.room.util.getColumnIndexOrThrow
+import androidx.room.util.getTotalChangedRows
 import androidx.room.util.performSuspending
 import androidx.sqlite.SQLiteStatement
 import com.kairos.`data`.db.entities.DiagnosisEntity
@@ -282,6 +283,20 @@ public class DiagnosisDao_Impl(
           _result.add(_item)
         }
         _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
+  public override suspend fun deleteOrphaned(): Int {
+    val _sql: String =
+        "DELETE FROM diagnoses WHERE id NOT IN (SELECT DISTINCT diagnosis_id FROM case_diagnoses)"
+    return performSuspending(__db, false, true) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        _stmt.step()
+        getTotalChangedRows(_connection)
       } finally {
         _stmt.close()
       }

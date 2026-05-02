@@ -1,10 +1,10 @@
 <libraries>
   <library
       name=":@@:core::release"
-      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\5fb74424438de13944758b5d8dd25cee\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\5fb74424438de13944758b5d8dd25cee\transformed\out\jars\libs\R.jar"
+      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\058b3c913650869b6ced0b492043d664\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\058b3c913650869b6ced0b492043d664\transformed\out\jars\libs\R.jar"
       resolved="Kairos:core:unspecified"
       partialResultsDir="D:\claude\Kairos\core\build\intermediates\lint_vital_partial_results\release\lintVitalAnalyzeRelease\out"
-      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\5fb74424438de13944758b5d8dd25cee\transformed\out"
+      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\058b3c913650869b6ced0b492043d664\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -15,10 +15,10 @@
       proguardRules="proguard.txt"/>
   <library
       name=":@@:data::release"
-      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\3b37dbf490d865a286a51da0da67e7b1\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\3b37dbf490d865a286a51da0da67e7b1\transformed\out\jars\libs\R.jar"
+      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\fc7b0100cb6f19990f8736ec0a923f56\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\fc7b0100cb6f19990f8736ec0a923f56\transformed\out\jars\libs\R.jar"
       resolved="Kairos:data:unspecified"
       partialResultsDir="D:\claude\Kairos\data\build\intermediates\lint_vital_partial_results\release\lintVitalAnalyzeRelease\out"
-      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\3b37dbf490d865a286a51da0da67e7b1\transformed\out"
+      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\fc7b0100cb6f19990f8736ec0a923f56\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -29,10 +29,10 @@
       proguardRules="proguard.txt"/>
   <library
       name=":@@:features::release"
-      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\8482a96c755f02c67933a3110630e5a7\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\8482a96c755f02c67933a3110630e5a7\transformed\out\jars\libs\R.jar"
+      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\927dcc61ca09c67c7355f7cfe443c86e\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\927dcc61ca09c67c7355f7cfe443c86e\transformed\out\jars\libs\R.jar"
       resolved="Kairos:features:unspecified"
       partialResultsDir="D:\claude\Kairos\features\build\intermediates\lint_vital_partial_results\release\lintVitalAnalyzeRelease\out"
-      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\8482a96c755f02c67933a3110630e5a7\transformed\out"
+      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\927dcc61ca09c67c7355f7cfe443c86e\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

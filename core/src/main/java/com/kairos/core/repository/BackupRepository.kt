@@ -14,4 +14,6 @@ data class RestoreResult(
 interface BackupRepository {
     suspend fun export(folderUri: String): BackupResult
     suspend fun restore(zipUri: String): RestoreResult
+    /** Run VACUUM to reclaim free space and defragment the database. */
+    suspend fun vacuumDatabase()
 }

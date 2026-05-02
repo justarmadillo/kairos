@@ -18,5 +18,9 @@
     {
         "merged": "com.kairos.app-debug-77:/drawable_ic_launcher_foreground.xml.flat",
         "source": "com.kairos.app-main-79:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.kairos.app-debug-77:/xml_backup_rules.xml.flat",
+        "source": "com.kairos.app-main-79:/xml/backup_rules.xml"
     }
 ]

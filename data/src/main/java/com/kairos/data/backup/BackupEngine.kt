@@ -43,6 +43,13 @@ class BackupEngine @Inject constructor(
             }
         }
 
+    override suspend fun vacuumDatabase() =
+        dataSafetyCoordinator.withDataLock {
+            withContext(Dispatchers.IO) {
+                db.openHelper.writableDatabase.execSQL("VACUUM")
+            }
+        }
+
     override suspend fun restore(zipUri: String): RestoreResult =
         dataSafetyCoordinator.withDataLock {
             withContext(Dispatchers.IO) {
@@ -95,6 +102,12 @@ class BackupEngine @Inject constructor(
                             }
                     }
 
+                    // Include DataStore preferences so settings survive restore
+                    val prefsFile = File(context.filesDir, "datastore/$PREFS_NAME")
+                    if (prefsFile.exists()) {
+                        totalBytes += addFileEntry(zip, prefsFile, PREFS_NAME, fileManifest)
+                    }
+
                     val manifest = JSONObject().apply {
                         put("backup_format_version", BACKUP_FORMAT_VERSION)
                         put("app_version", appVersionName())
@@ -123,6 +136,7 @@ class BackupEngine @Inject constructor(
         val extractDir = File(tempDir, "extracted")
         var dbBackups: List<Pair<File, File>> = emptyList()
         var oldMediaBackup: File? = null
+        var oldPrefsBackup: File? = null
         var liveFilesTouched = false
 
         return try {
@@ -174,12 +188,26 @@ class BackupEngine @Inject constructor(
             }
             moveReplacing(newMediaRoot, mediaRoot)
 
+            // Restore DataStore preferences if present in backup
+            val extractedPrefs = File(extractDir, PREFS_NAME)
+            if (extractedPrefs.exists()) {
+                val prefsDir = File(context.filesDir, "datastore")
+                prefsDir.mkdirs()
+                val prefsTarget = File(prefsDir, PREFS_NAME)
+                if (prefsTarget.exists()) {
+                    oldPrefsBackup = File(prefsDir, "$PREFS_NAME.restore_old_$now")
+                    prefsTarget.copyTo(oldPrefsBackup!!, overwrite = true)
+                }
+                extractedPrefs.copyTo(prefsTarget, overwrite = true)
+            }
+
             dbBackups.forEach { (_, backup) -> backup.delete() }
             oldMediaBackup?.deleteRecursively()
+            oldPrefsBackup?.delete()
             RestoreResult(success = true)
         } catch (e: Exception) {
             if (liveFilesTouched) {
-                rollbackRestore(dbBackups, oldMediaBackup)
+                rollbackRestore(dbBackups, oldMediaBackup, oldPrefsBackup)
             }
             RestoreResult(false, e.message ?: "Restore failed")
         } finally {
@@ -430,6 +458,7 @@ class BackupEngine @Inject constructor(
     private fun rollbackRestore(
         dbBackups: List<Pair<File, File>>,
         oldMediaBackup: File?,
+        oldPrefsBackup: File?,
     ) {
         try {
             if (dbBackups.isNotEmpty()) {
@@ -446,6 +475,12 @@ class BackupEngine @Inject constructor(
             if (oldMediaBackup != null && oldMediaBackup.exists()) {
                 if (mediaRoot.exists()) mediaRoot.deleteRecursively()
                 moveReplacing(oldMediaBackup, mediaRoot)
+            }
+
+            if (oldPrefsBackup != null && oldPrefsBackup.exists()) {
+                val prefsTarget = File(context.filesDir, "datastore/$PREFS_NAME")
+                oldPrefsBackup.copyTo(prefsTarget, overwrite = true)
+                oldPrefsBackup.delete()
             }
         } catch (_: Exception) {
         }
@@ -503,6 +538,7 @@ class BackupEngine @Inject constructor(
         const val DB_NAME = "kairos.db"
         const val MANIFEST_NAME = "manifest.json"
         const val BACKUP_FORMAT_VERSION = 2
+        const val PREFS_NAME = "kairos_prefs.preferences_pb"
         const val TEMP_CASE_MEDIA_PREFIX = "cases/0/"
         const val MAX_BACKUP_ENTRIES = 20_000
         const val MAX_ENTRY_BYTES = 10L * 1024L * 1024L * 1024L

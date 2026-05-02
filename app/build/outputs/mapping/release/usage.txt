@@ -31788,21 +31788,17 @@ androidx.documentfile.provider.DocumentFile:
     static final java.lang.String TAG
     public abstract boolean canRead()
     public abstract androidx.documentfile.provider.DocumentFile createDirectory(java.lang.String)
-    public abstract boolean delete()
     public abstract boolean exists()
     public androidx.documentfile.provider.DocumentFile findFile(java.lang.String)
     public static androidx.documentfile.provider.DocumentFile fromFile(java.io.File)
     public static androidx.documentfile.provider.DocumentFile fromSingleUri(android.content.Context,android.net.Uri)
-    public abstract java.lang.String getName()
     public androidx.documentfile.provider.DocumentFile getParentFile()
     public abstract java.lang.String getType()
     public abstract boolean isDirectory()
     public static boolean isDocumentUri(android.content.Context,android.net.Uri)
-    public abstract boolean isFile()
     public abstract boolean isVirtual()
     public abstract long lastModified()
     public abstract long length()
-    public abstract androidx.documentfile.provider.DocumentFile[] listFiles()
     public abstract boolean renameTo(java.lang.String)
 androidx.documentfile.provider.DocumentsContractApi19:
     private static final int FLAG_VIRTUAL_DOCUMENT
@@ -31811,10 +31807,8 @@ androidx.documentfile.provider.DocumentsContractApi19:
     public static boolean canRead(android.content.Context,android.net.Uri)
     public static boolean exists(android.content.Context,android.net.Uri)
     public static long getFlags(android.content.Context,android.net.Uri)
-    public static java.lang.String getName(android.content.Context,android.net.Uri)
     public static java.lang.String getType(android.content.Context,android.net.Uri)
     public static boolean isDirectory(android.content.Context,android.net.Uri)
-    public static boolean isFile(android.content.Context,android.net.Uri)
     public static boolean isVirtual(android.content.Context,android.net.Uri)
     public static long lastModified(android.content.Context,android.net.Uri)
     public static long length(android.content.Context,android.net.Uri)
@@ -31822,18 +31816,13 @@ androidx.documentfile.provider.RawDocumentFile
 androidx.documentfile.provider.SingleDocumentFile
 androidx.documentfile.provider.TreeDocumentFile:
     public boolean canRead()
-    private static void closeQuietly(java.lang.AutoCloseable)
     public androidx.documentfile.provider.DocumentFile createDirectory(java.lang.String)
-    public boolean delete()
     public boolean exists()
-    public java.lang.String getName()
     public java.lang.String getType()
     public boolean isDirectory()
-    public boolean isFile()
     public boolean isVirtual()
     public long lastModified()
     public long length()
-    public androidx.documentfile.provider.DocumentFile[] listFiles()
     public boolean renameTo(java.lang.String)
 androidx.emoji2.R
 androidx.emoji2.text.ConcurrencyHelpers$Handler28Impl:
@@ -46245,8 +46234,6 @@ com.kairos.core.model.Patient:
     public final long component5()
     public final long component6()
     public final java.lang.Long component7()
-    public final com.kairos.core.model.Patient copy(long,java.lang.String,java.lang.Integer,java.util.List,long,long,java.lang.Long)
-    public static synthetic com.kairos.core.model.Patient copy$default(com.kairos.core.model.Patient,long,java.lang.String,java.lang.Integer,java.util.List,long,long,java.lang.Long,int,java.lang.Object)
 com.kairos.core.model.PatientPhone:
     public static final int $stable
     public final long component1()
@@ -46330,12 +46317,14 @@ com.kairos.data.backup.BackupEngine:
     public static final long MAX_BACKUP_BYTES
     public static final int MAX_BACKUP_ENTRIES
     public static final long MAX_ENTRY_BYTES
+    public static final java.lang.String PREFS_NAME
     public static final java.lang.String TEMP_CASE_MEDIA_PREFIX
 com.kairos.data.backup.BackupEngine_Factory
 com.kairos.data.backup.DataSafetyCoordinatorImpl_Factory$InstanceHolder
 com.kairos.data.backup.DataSafetyCoordinatorImpl_Factory
 com.kairos.data.backup.ScheduledBackupWorker:
     public static final java.lang.String CHANNEL_ID
+    public static final int KEEP_BACKUPS
     public static final int NOTIFICATION_ID
     public static final java.lang.String PURGE_WORK_NAME
     public static final java.lang.String WORK_NAME
@@ -46790,8 +46779,9 @@ com.kairos.features.settings.BackupUiState:
     public void <init>()
     public final boolean component1()
     public final boolean component2()
-    public final java.lang.String component3()
-    public final boolean component4()
+    public final boolean component3()
+    public final java.lang.String component4()
+    public final boolean component5()
 com.kairos.features.settings.SettingsViewModel_Factory
 com.kairos.features.settings.SettingsViewModel_HiltModules$BindsModule
 com.kairos.features.settings.SettingsViewModel_HiltModules$KeyModule:
@@ -72992,8 +72982,13 @@ androidx.datastore.preferences.protobuf.Writer
 androidx.documentfile.provider.DocumentFile
 androidx.documentfile.provider.TreeDocumentFile:
     public final androidx.documentfile.provider.TreeDocumentFile mParent
+    public static void closeQuietly(android.database.Cursor)
     public static androidx.documentfile.provider.TreeDocumentFile createFile()
+    public static boolean delete()
+    public static androidx.documentfile.provider.TreeDocumentFile fromTreeUri(android.content.Context,android.net.Uri)
+    public final java.lang.String getName()
     public static android.net.Uri getUri()
+    public static boolean isFile()
 androidx.emoji2.text.ConcurrencyHelpers
 androidx.emoji2.text.DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory
 androidx.emoji2.text.DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper:
@@ -81935,7 +81930,6 @@ com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl:
     public static com.kairos.data.db.dao.CaseDao -$$Nest$mcaseDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.CaseMediaDao -$$Nest$mcaseMediaDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.ConsultationSessionDao -$$Nest$mconsultationSessionDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
-    public static com.kairos.data.db.dao.DiagnosisDao -$$Nest$mdiagnosisDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.PatientDao -$$Nest$mpatientDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.ShiftDao -$$Nest$mshiftDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.CaseDao caseDao()
@@ -82252,6 +82246,7 @@ com.kairos.core.model.MediaItem:
 com.kairos.core.model.Patient:
     public static final int $stable
     static void <clinit>()
+    public static com.kairos.core.model.Patient copy()
     public static java.lang.Integer getAge()
     public static long getCreatedAt()
     public static java.lang.Long getDeletedAt()
@@ -82276,6 +82271,7 @@ com.kairos.core.model.Shift:
 com.kairos.core.repository.BackupRepository:
     public abstract java.lang.Object export(java.lang.String,kotlin.coroutines.jvm.internal.ContinuationImpl)
     public abstract java.lang.Object restore()
+    public abstract java.lang.Object vacuumDatabase()
 com.kairos.core.repository.BackupResult:
     static void <clinit>()
     public static java.lang.String getError()
@@ -82310,7 +82306,7 @@ com.kairos.core.repository.PatientRepository:
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object restore()
     public abstract kotlinx.coroutines.flow.Flow search()
-    public abstract java.lang.Object upsert()
+    public abstract java.lang.Object upsert(com.kairos.core.model.Patient,com.kairos.features.patient.PatientCaseViewModel$save$3$1)
 com.kairos.core.repository.RestoreResult:
     static void <clinit>()
     public static java.lang.String getError()
@@ -82372,6 +82368,11 @@ com.kairos.data.backup.BackupEngine$restore$2$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.data.backup.BackupEngine$restore$2:
     public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.backup.BackupEngine$vacuumDatabase$2$1:
+    public int label
+    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
+com.kairos.data.backup.BackupEngine$vacuumDatabase$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.backup.BackupEngine:
     public static final com.kairos.data.backup.BackupEngine$Companion Companion
     static void <clinit>()
@@ -82385,6 +82386,7 @@ com.kairos.data.backup.BackupEngine:
     public static com.kairos.core.repository.RestoreResult restoreLocked()
     public static java.lang.String sha256()
     public static java.lang.String toHex(byte[])
+    public final java.lang.Object vacuumDatabase()
 com.kairos.data.backup.DataSafetyCoordinatorImpl$withDataLock$2$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.data.backup.ScheduledBackupWorker$Companion
@@ -82522,6 +82524,7 @@ com.kairos.data.db.dao.ConsultationSessionDao_Impl:
     public final java.lang.Object purgeOlderThan()
     public final java.lang.Object restore()
 com.kairos.data.db.dao.DiagnosisDao:
+    public abstract java.lang.Object deleteOrphaned()
     public abstract java.lang.Object findByNameCi(java.lang.String,kotlin.coroutines.jvm.internal.ContinuationImpl)
     public abstract java.lang.Object insert(com.kairos.data.db.entities.DiagnosisEntity,kotlin.coroutines.jvm.internal.ContinuationImpl)
     public abstract kotlinx.coroutines.flow.Flow observeAllAlphabetical()
@@ -82534,6 +82537,8 @@ com.kairos.data.db.dao.DiagnosisDao_Impl$$InternalSyntheticLambda$4$c0161df3353a
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.DiagnosisDao_Impl$$InternalSyntheticLambda$4$c977bbbdda104d2849dce791854e4253a5706f62a036f202f027505dbd8ddb3e$0:
     public final synthetic java.lang.String f$0
+com.kairos.data.db.dao.DiagnosisDao_Impl$$InternalSyntheticLambda$5$ce47aac2d957b0eb192c964be334fb10c552f4c546ddae5271cf4de7f4a78809$0:
+    public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.DiagnosisDao_Impl$$InternalSyntheticLambda$5$e563c96a306bd4a126040b90dc3160209cdf58575419b3276217f9bf682d0d90$0:
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.DiagnosisDao_Impl$$InternalSyntheticLambda$6$f71edf8f7ab3bbb2ad4840a92ff79b7d9b21cefb0f845fb25921b5a6f96e92cb$0:
@@ -82544,6 +82549,7 @@ com.kairos.data.db.dao.DiagnosisDao_Impl$Companion
 com.kairos.data.db.dao.DiagnosisDao_Impl:
     public static final com.kairos.data.db.dao.DiagnosisDao_Impl$Companion Companion
     static void <clinit>()
+    public final java.lang.Object deleteOrphaned()
     public final java.lang.Object insert(com.kairos.data.db.entities.DiagnosisEntity,kotlin.coroutines.jvm.internal.ContinuationImpl)
     public final kotlinx.coroutines.flow.Flow observeAllAlphabetical()
     public final kotlinx.coroutines.flow.Flow observeAllByMostUsed()
@@ -82796,7 +82802,7 @@ com.kairos.data.repository.PatientRepositoryImpl:
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object restore()
     public final kotlinx.coroutines.flow.Flow search()
-    public final java.lang.Object upsert()
+    public final java.lang.Object upsert(com.kairos.core.model.Patient,com.kairos.features.patient.PatientCaseViewModel$save$3$1)
 com.kairos.data.repository.SettingsRepositoryImpl:
     public final kotlinx.coroutines.flow.Flow observeSettings()
     public final java.lang.Object recordBackupRun(long,boolean,kotlin.coroutines.jvm.internal.ContinuationImpl)
@@ -83268,6 +83274,40 @@ com.kairos.features.patient.PatientCaseScreenKt$$InternalSyntheticLambda$4$92fd3
     public final synthetic int f$6
 com.kairos.features.patient.PatientCaseScreenKt$$InternalSyntheticLambda$5$636b9c8ffd40a49b7b30d6ccf4a33859dd986973ec7856cdd031e7b68acbdbf2$4:
     public final synthetic int f$5
+com.kairos.features.patient.PatientCaseScreenKt$$InternalSyntheticLambda$5$d8ab742279a9a9935347917d629314fe398b3ecf6fa91f8283f42895b58be6ef$0:
+    public final synthetic int f$5
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$1$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$10$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$11$1:
+    public final void invoke$109()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$12$1:
+    public final void invoke(int)
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$13$1:
+    public final void invoke(int)
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$14$1:
+    public final void invoke()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$15$1:
+    public final void invoke()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$16$1:
+    public final void invoke()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$2$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$3$1:
+    public final void invoke$110()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$4$1:
+    public final void invoke$111()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$5$1:
+    public final void invoke(long)
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$6$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$7$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$8$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$EditablePatientCaseForm$9$1:
+    public final void invoke$107()
 com.kairos.features.patient.PatientCaseScreenKt$NewCaseForExistingPatient$1$10$1:
     public final void invoke$107()
 com.kairos.features.patient.PatientCaseScreenKt$NewCaseForExistingPatient$1$11$1:
@@ -83310,49 +83350,49 @@ com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$4:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$5:
     public final void invoke(androidx.compose.runtime.Composer,int)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$1$1$1$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$1$1$1$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$1$2$1$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$1$2$1$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$1$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$1$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$10$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$10$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$11$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$11$1:
     public final void invoke$109()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$12$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$12$1:
     public final void invoke(int)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$13$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$13$1:
     public final void invoke(int)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$14$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$14$1:
     public final void invoke()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$15$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$15$1:
     public final void invoke()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$16$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$16$1:
     public final void invoke()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$17$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$17$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$18$1:
-    public static void invoke$110()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$2$1:
-    public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$3$1:
-    public static void invoke$111()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$4$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$18$1:
     public static void invoke$112()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$5$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$2$1:
+    public final void invoke$107()
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$3$1:
+    public final void invoke$110()
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$4$1:
+    public final void invoke$111()
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$5$1:
     public final void invoke(long)
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$6$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$6$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$7$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$7$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$8$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$8$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2$9$1:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2$9$1:
     public final void invoke$107()
-com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$2$2:
+com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6$3$2:
     public final void invoke$108()
 com.kairos.features.patient.PatientCaseScreenKt$PatientCaseScreen$6:
     public final void invoke$104()
@@ -83400,16 +83440,12 @@ com.kairos.features.patient.PatientCaseViewModel$startRecording$2:
 com.kairos.features.patient.PatientCaseViewModel:
     public static final int $stable
     static void <clinit>()
-    public static void addPhone()
     public static void clearError()
     public static com.kairos.core.media.MediaFileManager getMediaFileManager()
     public static kotlinx.coroutines.flow.StateFlow getState()
     public static void loadCase()
-    public static void removePhone()
     public static void save()
     public static void selectExistingPatient()
-    public static void setAge()
-    public static void setName()
     public static void setSearchQuery()
     public static void startRecording()
 com.kairos.features.patient.PatientCaseViewModel_HiltModules$KeyModule
@@ -83435,6 +83471,7 @@ com.kairos.features.settings.BackupUiState:
     public static boolean getRestoreCompleted()
     public static boolean isExporting()
     public static boolean isRestoring()
+    public static boolean isVacuuming()
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-1$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-10$1:
@@ -83442,18 +83479,24 @@ com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-10$1:
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-11$1:
     public final void invoke$39()
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-12$1:
-    public final void invoke$39()
+    public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-13$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-14$1:
-    public final void invoke(androidx.compose.runtime.Composer,int)
+    public final void invoke$39()
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-15$1:
     public final void invoke$39()
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-16$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-17$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
+com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-18$1:
+    public final void invoke$39()
+com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-19$1:
+    public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-2$1:
+    public final void invoke(androidx.compose.runtime.Composer,int)
+com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-20$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.ComposableSingletons$SettingsScreenKt$lambda-3$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
@@ -83474,13 +83517,16 @@ com.kairos.features.settings.ComposableSingletons$SettingsScreenKt:
     public static kotlin.jvm.functions.Function2 getLambda-1$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-10$features_release()
     public static kotlin.jvm.functions.Function3 getLambda-11$features_release()
-    public static kotlin.jvm.functions.Function3 getLambda-12$features_release()
+    public static kotlin.jvm.functions.Function2 getLambda-12$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-13$features_release()
-    public static kotlin.jvm.functions.Function2 getLambda-14$features_release()
+    public static kotlin.jvm.functions.Function3 getLambda-14$features_release()
     public static kotlin.jvm.functions.Function3 getLambda-15$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-16$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-17$features_release()
+    public static kotlin.jvm.functions.Function3 getLambda-18$features_release()
+    public static kotlin.jvm.functions.Function2 getLambda-19$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-2$features_release()
+    public static kotlin.jvm.functions.Function2 getLambda-20$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-3$features_release()
     public static kotlin.jvm.functions.Function3 getLambda-4$features_release()
     public static kotlin.jvm.functions.Function2 getLambda-5$features_release()
@@ -83548,6 +83594,10 @@ com.kairos.features.settings.SettingsScreenKt$SettingsScreen$5$1$13:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.SettingsScreenKt$SettingsScreen$5$1$14$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
+com.kairos.features.settings.SettingsScreenKt$SettingsScreen$5$1$15$1$1:
+    public final void invoke()
+com.kairos.features.settings.SettingsScreenKt$SettingsScreen$5$1$15:
+    public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.SettingsScreenKt$SettingsScreen$5$1$8:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.settings.SettingsScreenKt$SettingsScreen$5:
@@ -83580,6 +83630,8 @@ com.kairos.features.settings.SettingsViewModel$setDiagnosisSort$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.features.settings.SettingsViewModel$setTheme$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
+com.kairos.features.settings.SettingsViewModel$vacuumDatabase$1:
+    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.features.settings.SettingsViewModel:
     public static final int $stable
     static void <clinit>()
@@ -83594,6 +83646,7 @@ com.kairos.features.settings.SettingsViewModel:
     public static kotlinx.coroutines.Job setConsultationDay()
     public static kotlinx.coroutines.Job setDiagnosisSort()
     public static kotlinx.coroutines.Job setTheme()
+    public static void vacuumDatabase()
 com.kairos.features.settings.SettingsViewModel_HiltModules$KeyModule
 com.kairos.features.settings.SettingsViewModel_HiltModules_BindsModule_Binds_LazyMapKey:
     public static java.lang.String lazyClassKeyName

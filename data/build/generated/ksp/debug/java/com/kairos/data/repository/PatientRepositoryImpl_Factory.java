@@ -1,5 +1,6 @@
 package com.kairos.data.repository;
 
+import com.kairos.core.repository.DataSafetyCoordinator;
 import com.kairos.data.db.KairosDatabase;
 import com.kairos.data.db.dao.PatientDao;
 import dagger.internal.DaggerGenerated;
@@ -31,28 +32,35 @@ public final class PatientRepositoryImpl_Factory implements Factory<PatientRepos
 
   private final Provider<KairosDatabase> dbProvider;
 
+  private final Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider;
+
   public PatientRepositoryImpl_Factory(Provider<PatientDao> daoProvider,
-      Provider<KairosDatabase> dbProvider) {
+      Provider<KairosDatabase> dbProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
     this.daoProvider = daoProvider;
     this.dbProvider = dbProvider;
+    this.dataSafetyCoordinatorProvider = dataSafetyCoordinatorProvider;
   }
 
   @Override
   public PatientRepositoryImpl get() {
-    return newInstance(daoProvider.get(), dbProvider.get());
+    return newInstance(daoProvider.get(), dbProvider.get(), dataSafetyCoordinatorProvider.get());
   }
 
   public static PatientRepositoryImpl_Factory create(javax.inject.Provider<PatientDao> daoProvider,
-      javax.inject.Provider<KairosDatabase> dbProvider) {
-    return new PatientRepositoryImpl_Factory(Providers.asDaggerProvider(daoProvider), Providers.asDaggerProvider(dbProvider));
+      javax.inject.Provider<KairosDatabase> dbProvider,
+      javax.inject.Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new PatientRepositoryImpl_Factory(Providers.asDaggerProvider(daoProvider), Providers.asDaggerProvider(dbProvider), Providers.asDaggerProvider(dataSafetyCoordinatorProvider));
   }
 
   public static PatientRepositoryImpl_Factory create(Provider<PatientDao> daoProvider,
-      Provider<KairosDatabase> dbProvider) {
-    return new PatientRepositoryImpl_Factory(daoProvider, dbProvider);
+      Provider<KairosDatabase> dbProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new PatientRepositoryImpl_Factory(daoProvider, dbProvider, dataSafetyCoordinatorProvider);
   }
 
-  public static PatientRepositoryImpl newInstance(PatientDao dao, KairosDatabase db) {
-    return new PatientRepositoryImpl(dao, db);
+  public static PatientRepositoryImpl newInstance(PatientDao dao, KairosDatabase db,
+      DataSafetyCoordinator dataSafetyCoordinator) {
+    return new PatientRepositoryImpl(dao, db, dataSafetyCoordinator);
   }
 }

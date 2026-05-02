@@ -209,6 +209,22 @@ fun SettingsScreen(
             SectionHeader("Data")
 
             ListItem(
+                headlineContent = { Text("Optimize database") },
+                supportingContent = { Text("Reclaim space after bulk deletes") },
+                trailingContent = {
+                    if (backupUi.isVacuuming) {
+                        CircularProgressIndicator(modifier = Modifier.padding(8.dp))
+                    } else {
+                        Button(
+                            onClick = viewModel::vacuumDatabase,
+                            enabled = !backupUi.isExporting && !backupUi.isRestoring,
+                            shape = MaterialTheme.shapes.medium,
+                        ) { Text("Optimize") }
+                    }
+                },
+            )
+
+            ListItem(
                 headlineContent = { Text("Trash") },
                 supportingContent = { Text("Restore or permanently delete items") },
                 modifier = Modifier

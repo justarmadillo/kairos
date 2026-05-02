@@ -704,6 +704,10 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
       return DatabaseModule_ProvideCaseMediaDaoFactory.provideCaseMediaDao(provideDatabaseProvider.get());
     }
 
+    private DiagnosisDao diagnosisDao() {
+      return DatabaseModule_ProvideDiagnosisDaoFactory.provideDiagnosisDao(provideDatabaseProvider.get());
+    }
+
     private ShiftDao shiftDao() {
       return DatabaseModule_ProvideShiftDaoFactory.provideShiftDao(provideDatabaseProvider.get());
     }
@@ -719,10 +723,6 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
 
     private HiltWorkerFactory hiltWorkerFactory() {
       return WorkerFactoryModule_ProvideFactoryFactory.provideFactory(mapOfStringAndProviderOfWorkerAssistedFactoryOf());
-    }
-
-    private DiagnosisDao diagnosisDao() {
-      return DatabaseModule_ProvideDiagnosisDaoFactory.provideDiagnosisDao(provideDatabaseProvider.get());
     }
 
     @SuppressWarnings("unchecked")
@@ -746,8 +746,8 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectKairosApplication(KairosApplication arg0) {
-      injectKairosApplication2(arg0);
+    public void injectKairosApplication(KairosApplication kairosApplication) {
+      injectKairosApplication2(kairosApplication);
     }
 
     @Override
@@ -816,7 +816,7 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
           return (T) new TrashPurgeWorker_AssistedFactory() {
             @Override
             public TrashPurgeWorker create(Context context2, WorkerParameters params2) {
-              return new TrashPurgeWorker(context2, params2, singletonCImpl.patientDao(), singletonCImpl.caseDao(), singletonCImpl.caseMediaDao(), singletonCImpl.shiftDao(), singletonCImpl.consultationSessionDao(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
+              return new TrashPurgeWorker(context2, params2, singletonCImpl.patientDao(), singletonCImpl.caseDao(), singletonCImpl.caseMediaDao(), singletonCImpl.diagnosisDao(), singletonCImpl.shiftDao(), singletonCImpl.consultationSessionDao(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
             }
           };
 

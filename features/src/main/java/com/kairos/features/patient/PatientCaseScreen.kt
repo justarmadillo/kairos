@@ -49,6 +49,7 @@ fun PatientCaseScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val mediaFileManager = viewModel.mediaFileManager
+    val isEditingCase = editCaseId != null
 
     // Pre-fill form when editing an existing case
     LaunchedEffect(editCaseId) {
@@ -76,6 +77,7 @@ fun PatientCaseScreen(
             TopAppBar(
                 title = {
                     val label = when {
+                        isEditingCase -> "Edit case"
                         state.selectedPatient != null -> "New case for ${state.selectedPatient!!.name}"
                         pagerState.currentPage == 0 -> "New patient"
                         else -> "Existing patient"
@@ -115,16 +117,26 @@ fun PatientCaseScreen(
     ) { innerPadding ->
 
         // Hide tabs if an existing patient is selected (form collapses to new-case-for-patient)
-        if (state.selectedPatient != null) {
-            Box(modifier = Modifier.padding(innerPadding)) {
-                NewCaseForExistingPatient(
-                    state = state,
-                    mediaFileManager = mediaFileManager,
-                    viewModel = viewModel,
-                )
+        when {
+            isEditingCase -> {
+                Box(modifier = Modifier.padding(innerPadding)) {
+                    EditablePatientCaseForm(
+                        state = state,
+                        mediaFileManager = mediaFileManager,
+                        viewModel = viewModel,
+                    )
+                }
             }
-        } else {
-            Column(modifier = Modifier.padding(innerPadding)) {
+            state.selectedPatient != null -> {
+                Box(modifier = Modifier.padding(innerPadding)) {
+                    NewCaseForExistingPatient(
+                        state = state,
+                        mediaFileManager = mediaFileManager,
+                        viewModel = viewModel,
+                    )
+                }
+            }
+            else -> Column(modifier = Modifier.padding(innerPadding)) {
                 TabRow(selectedTabIndex = pagerState.currentPage) {
                     Tab(
                         selected = pagerState.currentPage == 0,
@@ -175,6 +187,38 @@ fun PatientCaseScreen(
             }
         }
     }
+}
+
+@Composable
+private fun EditablePatientCaseForm(
+    state: PatientCaseUiState,
+    mediaFileManager: MediaFileManager,
+    viewModel: PatientCaseViewModel,
+    modifier: Modifier = Modifier,
+) {
+    NewPatientTab(
+        state = state,
+        mediaFileManager = mediaFileManager,
+        onNameChange = viewModel::setName,
+        onAgeChange = viewModel::setAge,
+        onAddPhone = viewModel::addPhone,
+        onRemovePhone = viewModel::removePhone,
+        onCaseDateChange = viewModel::setCaseDate,
+        onMechanismChange = viewModel::setMechanism,
+        onNotesChange = viewModel::setNotes,
+        onDiagnosisQuery = viewModel::setDiagnosisQuery,
+        onSelectDiagnosis = viewModel::selectDiagnosis,
+        onRemoveDiagnosis = viewModel::removeDiagnosis,
+        onAttachFile = viewModel::attachFile,
+        onRemoveMedia = viewModel::removePendingMedia,
+        onSetPrimaryMedia = viewModel::setPrimaryMedia,
+        onStartRecording = viewModel::startRecording,
+        onStopRecording = viewModel::stopRecording,
+        onCancelRecording = viewModel::cancelRecording,
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+    )
 }
 
 /** Form displayed after selecting an existing patient — only case fields are editable. */

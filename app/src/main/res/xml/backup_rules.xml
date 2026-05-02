@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Android auto-backup is DISABLED for Kairos.
+    We have our own backup/restore system (BackupEngine) that guarantees
+    DB + media consistency via WAL checkpoint, SHA-256 checksums, and
+    atomic restore with rollback.
+    Auto-backup can restore DB from one point in time with media from
+    another, causing broken file references. Not worth the risk.
+-->
 <full-backup-content>
-    <include domain="database" path="." />
-    <include domain="file" path="." />
-    <include domain="sharedpref" path="." />
-    <include domain="external" path="." />
+    <exclude domain="database" path="." />
+    <exclude domain="file" path="." />
+    <exclude domain="sharedpref" path="." />
+    <exclude domain="external" path="." />
 </full-backup-content>

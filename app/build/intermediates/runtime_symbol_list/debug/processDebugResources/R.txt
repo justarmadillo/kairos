@@ -302,7 +302,11 @@ int drawable notification_template_icon_bg 0x7f080062
 int drawable notification_template_icon_low_bg 0x7f080063
 int drawable notification_tile_bg 0x7f080064
 int drawable notify_panel_notification_icon_bg 0x7f080065
-int font roboto_medium_numbers 0x7f090000
+int font inter_bold 0x7f090000
+int font inter_medium 0x7f090001
+int font inter_regular 0x7f090002
+int font inter_semibold 0x7f090003
+int font roboto_medium_numbers 0x7f090004
 int id accessibility_action_clickable_span 0x7f0a0000
 int id accessibility_custom_action_0 0x7f0a0001
 int id accessibility_custom_action_1 0x7f0a0002
@@ -965,5 +969,6 @@ int styleable StateListDrawable_android_enterFadeDuration 4
 int styleable StateListDrawable_android_exitFadeDuration 5
 int[] styleable StateListDrawableItem { 0x01010199 }
 int styleable StateListDrawableItem_android_drawable 0
-int xml data_extraction_rules 0x7f120000
-int xml file_paths 0x7f120001
+int xml backup_rules 0x7f120000
+int xml data_extraction_rules 0x7f120001
+int xml file_paths 0x7f120002
