@@ -189,6 +189,7 @@ fun CaseDetailScreen(
                             label = { Text(d.name) },
                             colors = SuggestionChipDefaults.suggestionChipColors(
                                 containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                labelColor = MaterialTheme.colorScheme.onSurface,
                             ),
                         )
                     }

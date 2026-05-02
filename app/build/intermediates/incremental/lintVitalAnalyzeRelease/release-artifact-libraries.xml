@@ -1,10 +1,10 @@
 <libraries>
   <library
       name=":@@:core::release"
-      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\17e915f2e519fe80c3e27764de2353d8\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\17e915f2e519fe80c3e27764de2353d8\transformed\out\jars\libs\R.jar"
+      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\25e4532d3b63b1dd81bef1c8fb53480e\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\25e4532d3b63b1dd81bef1c8fb53480e\transformed\out\jars\libs\R.jar"
       resolved="Kairos:core:unspecified"
       partialResultsDir="D:\claude\Kairos\core\build\intermediates\lint_vital_partial_results\release\lintVitalAnalyzeRelease\out"
-      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\17e915f2e519fe80c3e27764de2353d8\transformed\out"
+      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\25e4532d3b63b1dd81bef1c8fb53480e\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -29,10 +29,10 @@
       proguardRules="proguard.txt"/>
   <library
       name=":@@:features::release"
-      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\8ac3f72fe05d06390302211524e9607b\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\8ac3f72fe05d06390302211524e9607b\transformed\out\jars\libs\R.jar"
+      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\7c55e5a9d7c8b0e493b765f6b16a2ad3\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\7c55e5a9d7c8b0e493b765f6b16a2ad3\transformed\out\jars\libs\R.jar"
       resolved="Kairos:features:unspecified"
       partialResultsDir="D:\claude\Kairos\features\build\intermediates\lint_vital_partial_results\release\lintVitalAnalyzeRelease\out"
-      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\8ac3f72fe05d06390302211524e9607b\transformed\out"
+      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\7c55e5a9d7c8b0e493b765f6b16a2ad3\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

@@ -135,6 +135,7 @@ fun CaseCard(
                                 },
                                 colors = SuggestionChipDefaults.suggestionChipColors(
                                     containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                    labelColor = MaterialTheme.colorScheme.onSurface,
                                 ),
                             )
                         }
