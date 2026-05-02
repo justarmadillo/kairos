@@ -6,5 +6,7 @@
 -keep,allowobfuscation,allowshrinking class com.kairos.features.cases.DiagnosisBrowseViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.consultation.ConsultationViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.consultation.ConsultationViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.dashboard.DashboardViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.dashboard.DashboardViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.patient.PatientCaseViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.patient.PatientCaseViewModel

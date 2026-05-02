@@ -13,6 +13,13 @@ import com.kairos.data.db.entities.ShiftCaseCrossRef
 import com.kairos.data.db.relations.CaseWithRelations
 import kotlinx.coroutines.flow.Flow
 
+data class RecentCaseRow(
+    val caseId: Long,
+    val patientName: String,
+    val diagnosisName: String?,
+    val caseDate: Long,
+)
+
 @Dao
 interface CaseDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -107,4 +114,30 @@ interface CaseDao {
 
     @Query("DELETE FROM cases WHERE id IN (:ids)")
     suspend fun hardDelete(ids: List<Long>)
+
+    @Query("SELECT COUNT(*) FROM cases WHERE is_deleted = 0")
+    fun observeTotalCases(): Flow<Int>
+
+    @Query(
+        """
+        SELECT COUNT(*) FROM cases
+        WHERE is_deleted = 0 AND created_at >= :startMs AND created_at < :endMs
+        """
+    )
+    suspend fun countCasesInRange(startMs: Long, endMs: Long): Int
+
+    @Query(
+        """
+        SELECT c.id AS caseId, p.name AS patientName, c.case_date AS caseDate,
+               (SELECT d.name FROM case_diagnoses cd
+                INNER JOIN diagnoses d ON d.id = cd.diagnosis_id
+                WHERE cd.case_id = c.id LIMIT 1) AS diagnosisName
+        FROM cases c
+        INNER JOIN patients p ON p.id = c.patient_id
+        WHERE c.is_deleted = 0 AND p.is_deleted = 0
+        ORDER BY c.created_at DESC
+        LIMIT 5
+        """
+    )
+    fun observeRecentCases(): Flow<List<RecentCaseRow>>
 }

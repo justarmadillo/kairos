@@ -11558,7 +11558,6 @@ androidx.compose.material.icons.outlined.SouthKt
 androidx.compose.material.icons.outlined.SouthWestKt
 androidx.compose.material.icons.outlined.SpaKt
 androidx.compose.material.icons.outlined.SpaceBarKt
-androidx.compose.material.icons.outlined.SpaceDashboardKt
 androidx.compose.material.icons.outlined.SpatialAudioKt
 androidx.compose.material.icons.outlined.SpatialAudioOffKt
 androidx.compose.material.icons.outlined.SpatialTrackingKt
@@ -13686,7 +13685,6 @@ androidx.compose.material.icons.rounded.SouthKt
 androidx.compose.material.icons.rounded.SouthWestKt
 androidx.compose.material.icons.rounded.SpaKt
 androidx.compose.material.icons.rounded.SpaceBarKt
-androidx.compose.material.icons.rounded.SpaceDashboardKt
 androidx.compose.material.icons.rounded.SpatialAudioKt
 androidx.compose.material.icons.rounded.SpatialAudioOffKt
 androidx.compose.material.icons.rounded.SpatialTrackingKt
@@ -19465,19 +19463,13 @@ androidx.compose.material3.PinnedScrollBehavior$nestedScrollConnection$1
 androidx.compose.material3.PinnedScrollBehavior
 androidx.compose.material3.ProgressIndicatorDefaults:
     public static final int $stable
-    public final void drawStopIndicator-EgI2THU(androidx.compose.ui.graphics.drawscope.DrawScope,float,long,int)
     public final int getCircularDeterminateStrokeCap-KaPHkGw()
     public final long getCircularDeterminateTrackColor(androidx.compose.runtime.Composer,int)
     public final float getCircularIndicatorTrackGapSize-D9Ej5fM()
     public static synthetic void getCircularIndicatorTrackGapSize-D9Ej5fM$annotations()
     public final long getCircularTrackColor(androidx.compose.runtime.Composer,int)
     public static synthetic void getCircularTrackColor$annotations()
-    public final long getLinearColor(androidx.compose.runtime.Composer,int)
-    public final float getLinearIndicatorTrackGapSize-D9Ej5fM()
     public static synthetic void getLinearIndicatorTrackGapSize-D9Ej5fM$annotations()
-    public final int getLinearStrokeCap-KaPHkGw()
-    public final long getLinearTrackColor(androidx.compose.runtime.Composer,int)
-    public final float getLinearTrackStopIndicatorSize-D9Ej5fM()
     public static synthetic void getLinearTrackStopIndicatorSize-D9Ej5fM$annotations()
     public final androidx.compose.animation.core.SpringSpec getProgressAnimationSpec()
 androidx.compose.material3.ProgressIndicatorKt$CircularProgressIndicator$10
@@ -19493,15 +19485,10 @@ androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$10
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$11
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$12
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$1
-androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$2$1
-androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$3$1
-androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$4$1
-androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$5
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$6
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$7$1
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$8
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$9$1
-androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$coercedProgress$1$1
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$firstLineHead$1
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$firstLineTail$1
 androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$secondLineHead$1
@@ -19530,7 +19517,6 @@ androidx.compose.material3.ProgressIndicatorKt:
     public static final synthetic void CircularProgressIndicator-MBs18nI(float,androidx.compose.ui.Modifier,long,float,androidx.compose.runtime.Composer,int,int)
     public static final synthetic void CircularProgressIndicator-aM-cp0Q(androidx.compose.ui.Modifier,long,float,androidx.compose.runtime.Composer,int,int)
     public static final synthetic void LinearProgressIndicator-2cYBFYY(androidx.compose.ui.Modifier,long,long,int,androidx.compose.runtime.Composer,int,int)
-    public static final void LinearProgressIndicator-GJbTh5U(kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,long,long,int,float,kotlin.jvm.functions.Function1,androidx.compose.runtime.Composer,int,int)
     public static final synthetic void LinearProgressIndicator-RIQooxk(androidx.compose.ui.Modifier,long,long,androidx.compose.runtime.Composer,int,int)
     public static final void LinearProgressIndicator-_5eSR-E(float,androidx.compose.ui.Modifier,long,long,int,androidx.compose.runtime.Composer,int,int)
     public static final synthetic void LinearProgressIndicator-_5eSR-E(kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,long,long,int,androidx.compose.runtime.Composer,int,int)
@@ -19538,13 +19524,11 @@ androidx.compose.material3.ProgressIndicatorKt:
     public static final void LinearProgressIndicator-rIrjwxo(androidx.compose.ui.Modifier,long,long,int,float,androidx.compose.runtime.Composer,int,int)
     public static final synthetic void access$drawCircularIndicator-42QJj7c(androidx.compose.ui.graphics.drawscope.DrawScope,float,float,long,androidx.compose.ui.graphics.drawscope.Stroke)
     public static final synthetic void access$drawDeterminateCircularIndicator-42QJj7c(androidx.compose.ui.graphics.drawscope.DrawScope,float,float,long,androidx.compose.ui.graphics.drawscope.Stroke)
-    public static final synthetic void access$drawLinearIndicator-qYKTg0g(androidx.compose.ui.graphics.drawscope.DrawScope,float,float,long,float,int)
     public static final synthetic androidx.compose.animation.core.CubicBezierEasing access$getFirstLineHeadEasing$p()
     public static final synthetic androidx.compose.animation.core.CubicBezierEasing access$getFirstLineTailEasing$p()
     public static final synthetic androidx.compose.animation.core.CubicBezierEasing access$getSecondLineHeadEasing$p()
     public static final synthetic androidx.compose.animation.core.CubicBezierEasing access$getSecondLineTailEasing$p()
     private static final void drawDeterminateCircularIndicator-42QJj7c(androidx.compose.ui.graphics.drawscope.DrawScope,float,float,long,androidx.compose.ui.graphics.drawscope.Stroke)
-    private static final void drawLinearIndicator-qYKTg0g(androidx.compose.ui.graphics.drawscope.DrawScope,float,float,long,float,int)
     public static final float getCircularIndicatorDiameter()
     public static final float getLinearIndicatorHeight()
     public static final float getLinearIndicatorWidth()
@@ -21005,7 +20989,6 @@ androidx.compose.material3.tokens.ProgressIndicatorTokens:
     public final float getActiveThickness-D9Ej5fM()
     public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getStopColor()
     public final float getStopShape-D9Ej5fM()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getTrackColor()
     public final androidx.compose.material3.tokens.ShapeKeyTokens getTrackShape()
 androidx.compose.material3.tokens.RadioButtonTokens
 androidx.compose.material3.tokens.RichTooltipTokens
@@ -46273,6 +46256,13 @@ com.kairos.core.repository.PatientRepository:
     public abstract java.lang.Object getById(long,kotlin.coroutines.Continuation)
     public abstract kotlinx.coroutines.flow.Flow observeById(long)
     public abstract java.lang.Object softDelete(long,kotlin.coroutines.Continuation)
+com.kairos.core.repository.RecentCase:
+    public final long component1()
+    public final java.lang.String component2()
+    public final java.lang.String component3()
+    public final long component4()
+    public final com.kairos.core.repository.RecentCase copy(long,java.lang.String,java.lang.String,long)
+    public static synthetic com.kairos.core.repository.RecentCase copy$default(com.kairos.core.repository.RecentCase,long,java.lang.String,java.lang.String,long,int,java.lang.Object)
 com.kairos.core.repository.RestoreResult:
     public static final int $stable
     public final boolean component1()
@@ -46292,7 +46282,6 @@ com.kairos.core.theme.ColorKt:
     public static final long getPaletteMutedSoft()
     public static final long getPaletteOnDarkSoft()
     public static final long getPaletteStone()
-    public static final long getPaletteSuccess()
     public static final long getPaletteTerracotta()
     public static final long getPaletteWarning()
     public static final long getPaletteWhite()
@@ -46341,7 +46330,7 @@ com.kairos.data.db.dao.CaseDao:
     public abstract java.lang.Object unlinkFromSession(long,long,kotlin.coroutines.Continuation)
 com.kairos.data.db.dao.CaseDao_Impl:
     public java.lang.Object unlinkFromSession(long,long,kotlin.coroutines.Continuation)
-    private static final kotlin.Unit unlinkFromSession$lambda$14(java.lang.String,long,long,androidx.sqlite.SQLiteConnection)
+    private static final kotlin.Unit unlinkFromSession$lambda$17(java.lang.String,long,long,androidx.sqlite.SQLiteConnection)
 com.kairos.data.db.dao.CaseMediaDao:
     public abstract java.lang.Object clearPrimary(long,kotlin.coroutines.Continuation)
     public abstract kotlinx.coroutines.flow.Flow observeForCase(long)
@@ -46376,7 +46365,14 @@ com.kairos.data.db.dao.PatientDao_Impl:
     public kotlinx.coroutines.flow.Flow observeById(long)
     private static final com.kairos.data.db.relations.PatientWithPhones observeById$lambda$4(java.lang.String,long,com.kairos.data.db.dao.PatientDao_Impl,androidx.sqlite.SQLiteConnection)
     public java.lang.Object softDelete(long,long,kotlin.coroutines.Continuation)
-    private static final kotlin.Unit softDelete$lambda$8(java.lang.String,long,long,androidx.sqlite.SQLiteConnection)
+    private static final kotlin.Unit softDelete$lambda$9(java.lang.String,long,long,androidx.sqlite.SQLiteConnection)
+com.kairos.data.db.dao.RecentCaseRow:
+    public final long component1()
+    public final java.lang.String component2()
+    public final java.lang.String component3()
+    public final long component4()
+    public final com.kairos.data.db.dao.RecentCaseRow copy(long,java.lang.String,java.lang.String,long)
+    public static synthetic com.kairos.data.db.dao.RecentCaseRow copy$default(com.kairos.data.db.dao.RecentCaseRow,long,java.lang.String,java.lang.String,long,int,java.lang.Object)
 com.kairos.data.db.dao.ShiftDao:
     public abstract java.lang.Object getById(long,kotlin.coroutines.Continuation)
 com.kairos.data.db.dao.ShiftDao_Impl:
@@ -46582,6 +46578,9 @@ com.kairos.data.repository.ConsultationRepositoryImpl:
     public java.lang.Object getById(long,kotlin.coroutines.Continuation)
     public java.lang.Object softDelete(long,kotlin.coroutines.Continuation)
 com.kairos.data.repository.ConsultationRepositoryImpl_Factory
+com.kairos.data.repository.DashboardRepositoryImpl$observeRecentCases$$inlined$map$1$2$1:
+    java.lang.Object L$0
+com.kairos.data.repository.DashboardRepositoryImpl_Factory
 com.kairos.data.repository.DiagnosisRepositoryImpl$getById$1
 com.kairos.data.repository.DiagnosisRepositoryImpl$observeAll$$inlined$map$1$2$1:
     java.lang.Object L$0
@@ -46730,6 +46729,54 @@ com.kairos.features.consultation.DateItem:
     public final com.kairos.core.model.ConsultationSession component3()
     public final com.kairos.features.consultation.DateItem copy(java.time.LocalDate,boolean,com.kairos.core.model.ConsultationSession)
     public static synthetic com.kairos.features.consultation.DateItem copy$default(com.kairos.features.consultation.DateItem,java.time.LocalDate,boolean,com.kairos.core.model.ConsultationSession,int,java.lang.Object)
+com.kairos.features.dashboard.CaseMetrics:
+    public final int component1()
+    public final com.kairos.features.dashboard.PeriodCounts component2()
+    public final com.kairos.features.dashboard.CaseMetrics copy(int,com.kairos.features.dashboard.PeriodCounts)
+    public static synthetic com.kairos.features.dashboard.CaseMetrics copy$default(com.kairos.features.dashboard.CaseMetrics,int,com.kairos.features.dashboard.PeriodCounts,int,java.lang.Object)
+com.kairos.features.dashboard.DashboardUiState:
+    public void <init>()
+    public final int component1()
+    public final java.lang.Integer component10()
+    public final int component2()
+    public final int component3()
+    public final int component4()
+    public final int component5()
+    public final int component6()
+    public final int component7()
+    public final java.util.List component8()
+    public final com.kairos.features.dashboard.MilestoneProgress component9()
+    public final com.kairos.features.dashboard.DashboardUiState copy(int,int,int,int,int,int,int,java.util.List,com.kairos.features.dashboard.MilestoneProgress,java.lang.Integer)
+    public static synthetic com.kairos.features.dashboard.DashboardUiState copy$default(com.kairos.features.dashboard.DashboardUiState,int,int,int,int,int,int,int,java.util.List,com.kairos.features.dashboard.MilestoneProgress,java.lang.Integer,int,java.lang.Object)
+com.kairos.features.dashboard.DashboardViewModel_Factory
+com.kairos.features.dashboard.DashboardViewModel_HiltModules$BindsModule
+com.kairos.features.dashboard.DashboardViewModel_HiltModules$KeyModule:
+    private void <init>()
+com.kairos.features.dashboard.DashboardViewModel_HiltModules
+com.kairos.features.dashboard.DashboardViewModel_HiltModules_BindsModule_Binds_LazyMapKey:
+    static com.kairos.features.dashboard.DashboardViewModel keepFieldType
+    public void <init>()
+com.kairos.features.dashboard.DashboardViewModel_HiltModules_KeyModule_ProvideFactory$InstanceHolder
+com.kairos.features.dashboard.DashboardViewModel_HiltModules_KeyModule_ProvideFactory
+com.kairos.features.dashboard.DashboardViewModel_HiltModules_KeyModule_Provide_LazyMapKey:
+    static com.kairos.features.dashboard.DashboardViewModel keepFieldType
+    public void <init>()
+com.kairos.features.dashboard.MilestoneProgress:
+    public static final int $stable
+    public final int component1()
+    public final int component2()
+    public final int component3()
+    public final com.kairos.features.dashboard.MilestoneProgress copy(int,int,int)
+    public static synthetic com.kairos.features.dashboard.MilestoneProgress copy$default(com.kairos.features.dashboard.MilestoneProgress,int,int,int,int,java.lang.Object)
+com.kairos.features.dashboard.PeriodCounts:
+    public void <init>()
+    public synthetic void <init>(int,int,int,int,int,kotlin.jvm.internal.DefaultConstructorMarker)
+    public final int component1()
+    public final int component2()
+    public final int component3()
+    public final int component4()
+    public final com.kairos.features.dashboard.PeriodCounts copy(int,int,int,int)
+    public static synthetic com.kairos.features.dashboard.PeriodCounts copy$default(com.kairos.features.dashboard.PeriodCounts,int,int,int,int,int,java.lang.Object)
 com.kairos.features.patient.ExistingPatientTabKt$ExistingPatientTab$lambda$4$lambda$3$lambda$2$$inlined$items$default$2
 com.kairos.features.patient.PatientCaseUiState:
     public void <init>()
@@ -47332,6 +47379,8 @@ hilt_aggregated_deps._com_kairos_features_cases_DiagnosisBrowseViewModel_HiltMod
 hilt_aggregated_deps._com_kairos_features_cases_DiagnosisBrowseViewModel_HiltModules_KeyModule
 hilt_aggregated_deps._com_kairos_features_consultation_ConsultationViewModel_HiltModules_BindsModule
 hilt_aggregated_deps._com_kairos_features_consultation_ConsultationViewModel_HiltModules_KeyModule
+hilt_aggregated_deps._com_kairos_features_dashboard_DashboardViewModel_HiltModules_BindsModule
+hilt_aggregated_deps._com_kairos_features_dashboard_DashboardViewModel_HiltModules_KeyModule
 hilt_aggregated_deps._com_kairos_features_patient_PatientCaseViewModel_HiltModules_BindsModule
 hilt_aggregated_deps._com_kairos_features_patient_PatientCaseViewModel_HiltModules_KeyModule
 hilt_aggregated_deps._com_kairos_features_settings_SettingsViewModel_HiltModules_BindsModule
@@ -54399,7 +54448,6 @@ kotlinx.coroutines.flow.FlowKt:
     public static final java.lang.Object collectIndexed(kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function3,kotlin.coroutines.Continuation)
     public static final java.lang.Object collectWhile(kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation)
     public static final synthetic kotlinx.coroutines.flow.Flow combine(java.lang.Iterable,kotlin.jvm.functions.Function2)
-    public static final kotlinx.coroutines.flow.Flow combine(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function6)
     public static final synthetic kotlinx.coroutines.flow.Flow combine(kotlinx.coroutines.flow.Flow[],kotlin.jvm.functions.Function2)
     public static final kotlinx.coroutines.flow.Flow combineLatest(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function3)
     public static final kotlinx.coroutines.flow.Flow combineLatest(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function4)
@@ -54747,8 +54795,6 @@ kotlinx.coroutines.flow.FlowKt__TransformKt:
     public static final kotlinx.coroutines.flow.Flow runningReduce(kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function3)
     public static final kotlinx.coroutines.flow.Flow scan(kotlinx.coroutines.flow.Flow,java.lang.Object,kotlin.jvm.functions.Function3)
     public static final kotlinx.coroutines.flow.Flow withIndex(kotlinx.coroutines.flow.Flow)
-kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3$2
-kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$2$1
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$2
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$3$1
@@ -54780,7 +54826,6 @@ kotlinx.coroutines.flow.FlowKt__ZipKt$combineUnsafe$$inlined$unsafeFlow$1
 kotlinx.coroutines.flow.FlowKt__ZipKt$combineUnsafe$1$1
 kotlinx.coroutines.flow.FlowKt__ZipKt:
     public static final synthetic kotlinx.coroutines.flow.Flow combine(java.lang.Iterable,kotlin.jvm.functions.Function2)
-    public static final kotlinx.coroutines.flow.Flow combine(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function6)
     public static final synthetic kotlinx.coroutines.flow.Flow combine(kotlinx.coroutines.flow.Flow[],kotlin.jvm.functions.Function2)
     public static final synthetic kotlinx.coroutines.flow.Flow combineTransform(java.lang.Iterable,kotlin.jvm.functions.Function3)
     public static final kotlinx.coroutines.flow.Flow combineTransform(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.flow.Flow,kotlin.jvm.functions.Function4)
@@ -62130,6 +62175,8 @@ androidx.compose.material.icons.outlined.PersonKt:
     static void <clinit>()
 androidx.compose.material.icons.outlined.SettingsKt:
     static void <clinit>()
+androidx.compose.material.icons.outlined.SpaceDashboardKt:
+    static void <clinit>()
 androidx.compose.material.icons.rounded.CalendarMonthKt:
     static void <clinit>()
 androidx.compose.material.icons.rounded.LocalHospitalKt:
@@ -62137,6 +62184,8 @@ androidx.compose.material.icons.rounded.LocalHospitalKt:
 androidx.compose.material.icons.rounded.MedicalServicesKt:
     static void <clinit>()
 androidx.compose.material.icons.rounded.SettingsKt:
+    static void <clinit>()
+androidx.compose.material.icons.rounded.SpaceDashboardKt:
     static void <clinit>()
 androidx.compose.material.ripple.AndroidRippleIndicationInstance$onInvalidateRipple$1:
     public final void invoke()
@@ -63405,14 +63454,17 @@ androidx.compose.material3.ProgressIndicatorDefaults:
     public static final int CircularDeterminateStrokeCap
     public static final float CircularIndicatorTrackGapSize
     public static final androidx.compose.material3.ProgressIndicatorDefaults INSTANCE
-    public static final float LinearIndicatorTrackGapSize
-    public static final int LinearStrokeCap
-    public static final float LinearTrackStopIndicatorSize
     public static final androidx.compose.animation.core.SpringSpec ProgressAnimationSpec
+    public static void drawStopIndicator-EgI2THU()
     public static long getCircularColor()
     public static int getCircularIndeterminateStrokeCap-KaPHkGw()
     public static long getCircularIndeterminateTrackColor()
     public static float getCircularStrokeWidth-D9Ej5fM()
+    public static long getLinearColor()
+    public static float getLinearIndicatorTrackGapSize-D9Ej5fM()
+    public static int getLinearStrokeCap-KaPHkGw()
+    public static long getLinearTrackColor()
+    public static float getLinearTrackStopIndicatorSize-D9Ej5fM()
 androidx.compose.material3.ProgressIndicatorKt$CircularProgressIndicator$5$1:
     public final void invoke$27()
 androidx.compose.material3.ProgressIndicatorKt$CircularProgressIndicator$6:
@@ -63426,12 +63478,20 @@ androidx.compose.material3.ProgressIndicatorKt$IncreaseSemanticsBounds$1:
     public final androidx.compose.ui.layout.MeasureResult invoke-3p2s80s()
 androidx.compose.material3.ProgressIndicatorKt$IncreaseSemanticsBounds$2:
     public final void invoke$10()
+androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$2$1:
+    public final void invoke$27()
+androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$3$1:
+    public final void invoke$10()
+androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$4$1:
+    public final void invoke$27()
+androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$5:
+    public final synthetic int $$default
+    public final void invoke(androidx.compose.runtime.Composer,int)
+androidx.compose.material3.ProgressIndicatorKt$LinearProgressIndicator$coercedProgress$1$1:
+    public final java.lang.Float invoke$1()
 androidx.compose.material3.ProgressIndicatorKt:
     public static final androidx.compose.animation.core.CubicBezierEasing FirstLineHeadEasing
     public static final androidx.compose.animation.core.CubicBezierEasing FirstLineTailEasing
-    public static final androidx.compose.ui.Modifier IncreaseSemanticsBounds
-    public static final float LinearIndicatorHeight
-    public static final float LinearIndicatorWidth
     public static final androidx.compose.animation.core.CubicBezierEasing SecondLineHeadEasing
     public static final androidx.compose.animation.core.CubicBezierEasing SecondLineTailEasing
     public static final synthetic float access$getSemanticsBoundsPadding$p()
@@ -64674,17 +64734,16 @@ androidx.compose.material3.tokens.ProgressIndicatorTokens:
     public static final int ActiveIndicatorColor
     public static final int ActiveShape
     public static final float ActiveThickness
-    public static final float ActiveTrackSpace
     public static final androidx.compose.material3.tokens.ProgressIndicatorTokens INSTANCE
     public static final int StopColor
     public static final float StopShape
-    public static final float StopSize
     public static final int TrackColor
     public static final int TrackShape
     public static int getActiveIndicatorColor()
     public static float getActiveTrackSpace-D9Ej5fM()
     public static float getSize-D9Ej5fM()
     public static float getStopSize-D9Ej5fM()
+    public static int getTrackColor()
     public static float getTrackThickness-D9Ej5fM()
 androidx.compose.material3.tokens.ShapeKeyTokens$EnumUnboxingLocalUtility
 androidx.compose.material3.tokens.ShapeKeyTokens
@@ -69381,6 +69440,7 @@ androidx.compose.ui.semantics.LiveRegionMode:
     public static synthetic int unbox-impl()
 androidx.compose.ui.semantics.ProgressBarRangeInfo:
     public static final androidx.compose.ui.semantics.ProgressBarRangeInfo$Companion Companion
+    public synthetic void <init>(float,kotlin.ranges.ClosedFloatRange)
     public final float getCurrent()
     public static int getSteps()
 androidx.compose.ui.semantics.Role$Companion
@@ -78913,10 +78973,8 @@ androidx.navigation.compose.NavHostKt$NavHost$33$1:
 androidx.navigation.compose.NavHostKt$NavHost$34:
     public final synthetic int $$default
     public final void invoke(androidx.compose.runtime.Composer,int)
-androidx.navigation.compose.NavHostKt$NavHost$7:
-    public final androidx.compose.animation.EnterTransitionImpl invoke()
-androidx.navigation.compose.NavHostKt$NavHost$8:
-    public final androidx.compose.animation.ExitTransitionImpl invoke()
+androidx.navigation.compose.NavHostKt$NavHost$7
+androidx.navigation.compose.NavHostKt$NavHost$8
 androidx.navigation.compose.NavHostKt$NavHost$composeNavigator$1:
     public final synthetic int $$default
     public final void invoke(androidx.compose.runtime.Composer,int)
@@ -81927,11 +81985,8 @@ com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl$Swit
 com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl$SwitchingProvider$2:
     public static com.kairos.data.backup.TrashPurgeWorker create()
 com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl:
-    public static com.kairos.data.db.dao.CaseDao -$$Nest$mcaseDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.CaseMediaDao -$$Nest$mcaseMediaDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.ConsultationSessionDao -$$Nest$mconsultationSessionDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
-    public static com.kairos.data.db.dao.PatientDao -$$Nest$mpatientDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
-    public static com.kairos.data.db.dao.ShiftDao -$$Nest$mshiftDao(com.kairos.DaggerKairosApplication_HiltComponents_SingletonC$SingletonCImpl)
     public static com.kairos.data.db.dao.CaseDao caseDao()
     public static com.kairos.data.db.dao.CaseMediaDao caseMediaDao()
     public static com.kairos.data.db.dao.ConsultationSessionDao consultationSessionDao()
@@ -82293,6 +82348,12 @@ com.kairos.core.repository.ConsultationRepository:
     public abstract kotlinx.coroutines.flow.Flow observeForDateRange()
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object restore()
+com.kairos.core.repository.DashboardRepository:
+    public abstract java.lang.Object countCasesInRange(long,long,com.kairos.features.dashboard.DashboardViewModel$loadPeriodCounts$1)
+    public abstract kotlinx.coroutines.flow.Flow observeRecentCases()
+    public abstract kotlinx.coroutines.flow.Flow observeTotalCases()
+    public abstract kotlinx.coroutines.flow.Flow observeTotalPatients()
+    public abstract kotlinx.coroutines.flow.Flow observeTotalShifts()
 com.kairos.core.repository.DataSafetyCoordinator:
     public abstract java.lang.Object withDataLock(kotlin.jvm.functions.Function1,kotlin.coroutines.Continuation)
 com.kairos.core.repository.DiagnosisRepository:
@@ -82307,6 +82368,13 @@ com.kairos.core.repository.PatientRepository:
     public abstract java.lang.Object restore()
     public abstract kotlinx.coroutines.flow.Flow search()
     public abstract java.lang.Object upsert(com.kairos.core.model.Patient,com.kairos.features.patient.PatientCaseViewModel$save$3$1)
+com.kairos.core.repository.RecentCase:
+    public static final int $stable
+    static void <clinit>()
+    public static long getCaseDate()
+    public static long getCaseId()
+    public static java.lang.String getDiagnosisName()
+    public static java.lang.String getPatientName()
 com.kairos.core.repository.RestoreResult:
     static void <clinit>()
     public static java.lang.String getError()
@@ -82337,7 +82405,6 @@ com.kairos.core.theme.ColorKt:
     public static final long PaletteMutedSoft
     public static final long PaletteOnDarkSoft
     public static final long PaletteStone
-    public static final long PaletteSuccess
     public static final long PaletteTerracotta
     public static final long PaletteWarning
     public static final long PaletteWhite
@@ -82404,6 +82471,7 @@ com.kairos.data.db.KairosDatabase_Impl:
     public static androidx.room.RoomOpenDelegate createOpenDelegate()
 com.kairos.data.db.dao.CaseDao:
     public abstract java.lang.Object clearDiagnosisLinks()
+    public abstract java.lang.Object countCasesInRange()
     public abstract java.lang.Object getById()
     public abstract java.lang.Object hardDelete()
     public abstract java.lang.Object insert()
@@ -82415,6 +82483,8 @@ com.kairos.data.db.dao.CaseDao:
     public abstract kotlinx.coroutines.flow.Flow observeById()
     public abstract kotlinx.coroutines.flow.Flow observeBySession()
     public abstract kotlinx.coroutines.flow.Flow observeByShift()
+    public abstract kotlinx.coroutines.flow.Flow observeRecentCases()
+    public abstract kotlinx.coroutines.flow.Flow observeTotalCases()
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object restore()
     public abstract java.lang.Object softDelete()
@@ -82428,7 +82498,13 @@ com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$4$2cd46c01ab320fc23
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$4$5ed1944fe165b2cb3c426623f581571e596925b6091ed3a93d2700811887ea13$0:
     public final synthetic java.lang.String f$0
+com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$4$7ef6fc5bd6bac9405173028c5131e1c99b81ebcef6e479ac6e36374725c069e0$0:
+    public final synthetic java.lang.String f$0
+com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$4$80272c6d644f250dd777e99e7df9683ead5f91aadfb27d0e1a1e616eba0385b1$0:
+    public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$4$eba0695a6912db6a1a09ee6b93923c81319d84e2edcec858881830cd0a1cdf3b$0:
+    public final synthetic java.lang.String f$0
+com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$4$f297aa6418afbd2803e6ca202fe97bed14c497efe2de9f41f020d0e67b266559$0:
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.CaseDao_Impl$$InternalSyntheticLambda$5$927d80d3edbce8a69b5273bd5e0224b8b3b67f8b1529faed2671c9cc3900f664$0:
     public final synthetic java.lang.String f$0
@@ -82457,6 +82533,7 @@ com.kairos.data.db.dao.CaseDao_Impl:
     public static final com.kairos.data.db.dao.CaseDao_Impl$Companion Companion
     static void <clinit>()
     public final java.lang.Object clearDiagnosisLinks()
+    public final java.lang.Object countCasesInRange()
     public final java.lang.Object getById()
     public final java.lang.Object hardDelete()
     public final java.lang.Object insert()
@@ -82468,6 +82545,8 @@ com.kairos.data.db.dao.CaseDao_Impl:
     public final kotlinx.coroutines.flow.Flow observeById()
     public final kotlinx.coroutines.flow.Flow observeBySession()
     public final kotlinx.coroutines.flow.Flow observeByShift()
+    public final kotlinx.coroutines.flow.Flow observeRecentCases()
+    public final kotlinx.coroutines.flow.Flow observeTotalCases()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object restore()
     public final java.lang.Object softDelete()
@@ -82559,11 +82638,14 @@ com.kairos.data.db.dao.PatientDao:
     public abstract java.lang.Object deletePhonesFor(long,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
     public abstract java.lang.Object insert()
     public abstract java.lang.Object insertPhones(java.util.ArrayList,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
+    public abstract kotlinx.coroutines.flow.Flow observeTotalPatients()
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object purgeOlderThan()
     public abstract java.lang.Object restore()
     public abstract kotlinx.coroutines.flow.Flow search()
     public abstract java.lang.Object update()
+com.kairos.data.db.dao.PatientDao_Impl$$InternalSyntheticLambda$4$378e46f7af1845465df4af2b714c7d441d17e70e068bc75a914bca872853a768$0:
+    public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.PatientDao_Impl$$InternalSyntheticLambda$4$bf3726186b10723824b2501311c891dcba58747d325b2df5b8faa57721cf9b20$0:
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.PatientDao_Impl$$InternalSyntheticLambda$4$ccaca57da23f929bc0a0f81cb00ab45d8f99d3d11a2bb199511355f3cdda52bb$0:
@@ -82587,15 +82669,22 @@ com.kairos.data.db.dao.PatientDao_Impl:
     public final java.lang.Object deletePhonesFor(long,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
     public final java.lang.Object insert()
     public final java.lang.Object insertPhones(java.util.ArrayList,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
+    public final kotlinx.coroutines.flow.Flow observeTotalPatients()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object purgeOlderThan()
     public final java.lang.Object restore()
     public final kotlinx.coroutines.flow.Flow search()
     public final java.lang.Object update()
+com.kairos.data.db.dao.RecentCaseRow:
+    public static long getCaseDate()
+    public static long getCaseId()
+    public static java.lang.String getDiagnosisName()
+    public static java.lang.String getPatientName()
 com.kairos.data.db.dao.ShiftDao:
     public abstract java.lang.Object insert()
     public abstract kotlinx.coroutines.flow.Flow observeAll()
     public abstract kotlinx.coroutines.flow.Flow observeById()
+    public abstract kotlinx.coroutines.flow.Flow observeTotalShifts()
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object purgeOlderThan()
     public abstract java.lang.Object restore()
@@ -82606,6 +82695,8 @@ com.kairos.data.db.dao.ShiftDao_Impl$$InternalSyntheticLambda$4$3adc0d04a819feaf
 com.kairos.data.db.dao.ShiftDao_Impl$$InternalSyntheticLambda$4$5c8589f11a1a9948462d841bbb5758bbcc4b8651b3b5c329c311a006f0775dcb$0:
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.ShiftDao_Impl$$InternalSyntheticLambda$4$cde6d2b487b82b3191bfb0128ff89e113149b8df8a3e51439aa98c6154f1d4f0$0:
+    public final synthetic java.lang.String f$0
+com.kairos.data.db.dao.ShiftDao_Impl$$InternalSyntheticLambda$4$ee8a922660ce53741b8b4595ea3015b375b5b31df75307f824c28a6cef2c2992$0:
     public final synthetic java.lang.String f$0
 com.kairos.data.db.dao.ShiftDao_Impl$$InternalSyntheticLambda$5$2b6cdbf3a778e2db9e33ffceb8d3633002b3ac8d2aa792909dcaffdbb3eb2fbe$0:
     public final synthetic java.lang.String f$0
@@ -82624,6 +82715,7 @@ com.kairos.data.db.dao.ShiftDao_Impl:
     public final java.lang.Object insert()
     public final kotlinx.coroutines.flow.Flow observeAll()
     public final kotlinx.coroutines.flow.Flow observeById()
+    public final kotlinx.coroutines.flow.Flow observeTotalShifts()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object purgeOlderThan()
     public final java.lang.Object restore()
@@ -82775,6 +82867,11 @@ com.kairos.data.repository.ConsultationRepositoryImpl:
     public final kotlinx.coroutines.flow.Flow observeForDateRange()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object restore()
+com.kairos.data.repository.DashboardRepositoryImpl:
+    public final kotlinx.coroutines.flow.Flow observeRecentCases()
+    public final kotlinx.coroutines.flow.Flow observeTotalCases()
+    public final kotlinx.coroutines.flow.Flow observeTotalPatients()
+    public final kotlinx.coroutines.flow.Flow observeTotalShifts()
 com.kairos.data.repository.DiagnosisRepositoryImpl$WhenMappings
 com.kairos.data.repository.DiagnosisRepositoryImpl$getOrCreate$2$1:
     public final java.lang.Object invoke(kotlin.coroutines.Continuation)
@@ -83204,6 +83301,84 @@ com.kairos.features.consultation.DateItem:
     public static java.time.LocalDate getDate()
     public static com.kairos.core.model.ConsultationSession getSession()
     public static boolean isConsultationDay()
+com.kairos.features.dashboard.CaseMetrics:
+    public static com.kairos.features.dashboard.PeriodCounts getPeriods()
+    public static int getTotalCases()
+com.kairos.features.dashboard.ComposableSingletons$DashboardScreenKt$lambda-1$1:
+    public final void invoke(androidx.compose.runtime.Composer,int)
+com.kairos.features.dashboard.ComposableSingletons$DashboardScreenKt:
+    public static final com.kairos.features.dashboard.ComposableSingletons$DashboardScreenKt INSTANCE
+    public static kotlin.jvm.functions.Function2 getLambda-1$features_release()
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$4$e06d0dfe851a2a64c3342fd30f283daf0c6778e2b65f3ecec762f2e11f031c46$0
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$4$e06d0dfe851a2a64c3342fd30f283daf0c6778e2b65f3ecec762f2e11f031c46$1:
+    public final synthetic int f$3
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$5$b0ce3e198c872b68a3434d00ff48cca483e666d29938275a9b3377721d9ef705$0:
+    public final synthetic int f$5
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$5$be42eaea2d7f03a2349c532dcdf589d2c42c1ed9766699dc13d5e523b4eef381$0:
+    public final synthetic int f$4
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$5$dbd52250c8393b10d0ab88a740e49c41ff338623696812c2e3abdd026d975d5e$0:
+    public final synthetic int f$4
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$5$ee1924efc67d37cdac91a6bb19f8fa76149971dab34db1a8bb7e2b52f427cdf5$0:
+    public final synthetic int f$5
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$6$de05eb89a3e1c4248250f5d4f2bb0e2894133e3af62b7cf5c976e22dbc094e49$0:
+    public final synthetic int f$4
+com.kairos.features.dashboard.DashboardScreenKt$$InternalSyntheticLambda$7$7648675ac51c27275a1b50834b76b7c57e4161f99a502b945b67ca2c9842166b$0:
+    public final synthetic int f$4
+com.kairos.features.dashboard.DashboardScreenKt$DashboardScreen$2:
+    public final void invoke$104()
+com.kairos.features.dashboard.DashboardScreenKt$HeroStatCard$1:
+    public final void invoke$12()
+com.kairos.features.dashboard.DashboardScreenKt$MilestoneCard$1:
+    public final void invoke$12()
+com.kairos.features.dashboard.DashboardScreenKt$PeriodCard$1:
+    public final void invoke$12()
+com.kairos.features.dashboard.DashboardScreenKt$RecentActivityCard$1:
+    public final void invoke$12()
+com.kairos.features.dashboard.DashboardScreenKt:
+    public static synthetic kotlin.Unit $r8$lambda$Mxa1JugWe1XjVdi83KdtzYk6NWs()
+    public static final kotlin.Unit DashboardScreen$lambda$1$lambda$0()
+com.kairos.features.dashboard.DashboardUiState:
+    public static final int $stable
+    static void <clinit>()
+    public static int getCasesLastMonth()
+    public static int getCasesLastWeek()
+    public static int getCasesThisMonth()
+    public static int getCasesThisWeek()
+    public static com.kairos.features.dashboard.MilestoneProgress getMilestone()
+    public static java.lang.Integer getMilestoneCelebration()
+    public static java.util.List getRecentCases()
+    public static int getTotalCases()
+    public static int getTotalPatients()
+    public static int getTotalShifts()
+com.kairos.features.dashboard.DashboardViewModel$maybeTriggerMilestoneCelebration$1:
+    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
+com.kairos.features.dashboard.DashboardViewModel$ui$1:
+    public int label
+    public static java.lang.Object invoke$53()
+com.kairos.features.dashboard.DashboardViewModel:
+    public static final int $stable
+    public final com.kairos.features.dashboard.DashboardViewModel$special$$inlined$map$1 caseMetrics
+    static void <clinit>()
+    public final kotlinx.coroutines.flow.StateFlow getUi()
+    public static java.lang.Object loadPeriodCounts()
+    public static void maybeTriggerMilestoneCelebration()
+com.kairos.features.dashboard.DashboardViewModel_HiltModules$KeyModule
+com.kairos.features.dashboard.DashboardViewModel_HiltModules_BindsModule_Binds_LazyMapKey:
+    public static java.lang.String lazyClassKeyName
+    static void <clinit>()
+com.kairos.features.dashboard.DashboardViewModel_HiltModules_KeyModule_Provide_LazyMapKey:
+    public static java.lang.String lazyClassKeyName
+    static void <clinit>()
+com.kairos.features.dashboard.MilestoneProgress:
+    static void <clinit>()
+    public static int getCurrent()
+    public static int getPrevious()
+    public static int getTarget()
+com.kairos.features.dashboard.PeriodCounts:
+    public static int getLastMonth()
+    public static int getLastWeek()
+    public static int getThisMonth()
+    public static int getThisWeek()
 com.kairos.features.patient.ComposableSingletons$ExistingPatientTabKt$lambda-1$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.features.patient.ComposableSingletons$ExistingPatientTabKt$lambda-2$1:
@@ -83720,7 +83895,7 @@ com.kairos.features.settings.TrashViewModel$restoreShift$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.features.settings.TrashViewModel$ui$1:
     public int label
-    public static java.lang.Object invoke$53()
+    public static java.lang.Object invoke$54()
 com.kairos.features.settings.TrashViewModel:
     public static final int $stable
     static void <clinit>()
@@ -83943,27 +84118,29 @@ com.kairos.features.shifts.ShiftsViewModel_HiltModules_BindsModule_Binds_LazyMap
 com.kairos.features.shifts.ShiftsViewModel_HiltModules_KeyModule_Provide_LazyMapKey:
     public static java.lang.String lazyClassKeyName
     static void <clinit>()
-com.kairos.navigation.KairosNavHostKt$$InternalSyntheticLambda$1$79413982ec71acf915f77619287829be0be689affe74b6efa30563e3f15f52df$1:
+com.kairos.navigation.KairosNavHostKt$$InternalSyntheticLambda$1$79413982ec71acf915f77619287829be0be689affe74b6efa30563e3f15f52df$5:
     public final synthetic int f$3
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$10:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$11:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$13:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$14:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$14:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$15:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$15:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$16:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$19:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$1:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$1:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$20:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$3:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$2:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$4:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$4:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$5:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$5:
     public final void invoke$101()
-com.kairos.navigation.KairosNavHostKt$KairosNavHost$1$1$8:
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$6:
+    public final void invoke$101()
+com.kairos.navigation.KairosNavHostKt$KairosNavHost$5$1$9:
     public final void invoke$101()
 com.kairos.navigation.TopLevelDestination:
     public static androidx.compose.ui.graphics.vector.ImageVector getIconActive()
@@ -85549,10 +85726,10 @@ kotlinx.coroutines.flow.FlowKt__MergeKt:
 kotlinx.coroutines.flow.FlowKt__ReduceKt
 kotlinx.coroutines.flow.FlowKt__ShareKt$launchSharing$1$1:
     public int label
-    public static java.lang.Object invoke$54()
+    public static java.lang.Object invoke$55()
 kotlinx.coroutines.flow.FlowKt__ShareKt$launchSharing$1$2$WhenMappings
 kotlinx.coroutines.flow.FlowKt__ShareKt$launchSharing$1$2:
-    public final java.lang.Object invoke$55()
+    public final java.lang.Object invoke$56()
 kotlinx.coroutines.flow.FlowKt__ShareKt$launchSharing$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 kotlinx.coroutines.flow.FlowKt__ShareKt:
@@ -85561,6 +85738,8 @@ kotlinx.coroutines.flow.FlowKt__TransformKt
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1$2:
     public final java.lang.Object invoke$45()
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2$2:
+    public final java.lang.Object invoke$45()
+kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3$2:
     public final java.lang.Object invoke$45()
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$1$1:
     public final java.lang.Object invoke$45()
@@ -85615,10 +85794,10 @@ kotlinx.coroutines.flow.StartedLazily$command$1
 kotlinx.coroutines.flow.StartedLazily:
     public final kotlinx.coroutines.flow.Flow command(kotlinx.coroutines.flow.internal.SubscriptionCountStateFlow)
 kotlinx.coroutines.flow.StartedWhileSubscribed$command$1:
-    public static java.lang.Object invoke$56()
+    public static java.lang.Object invoke$57()
 kotlinx.coroutines.flow.StartedWhileSubscribed$command$2:
     public int label
-    public final java.lang.Object invoke$55()
+    public final java.lang.Object invoke$56()
 kotlinx.coroutines.flow.StartedWhileSubscribed:
     public final kotlinx.coroutines.flow.Flow command(kotlinx.coroutines.flow.internal.SubscriptionCountStateFlow)
 kotlinx.coroutines.flow.StateFlowImpl$$InternalSyntheticThrowCCEIfNotNull$137$f1d1f40a1c8fc04c0a8d71575b6c25dc238f9224ed939db2b509a92e2c81cbda$0
@@ -85888,7 +86067,7 @@ kotlinx.coroutines.sync.MutexImpl$SelectInstanceWithOwner:
 kotlinx.coroutines.sync.MutexImpl$onLock$1:
     public static void invoke$117()
 kotlinx.coroutines.sync.MutexImpl$onLock$2:
-    public static java.lang.Object invoke$57()
+    public static java.lang.Object invoke$58()
 kotlinx.coroutines.sync.MutexImpl:
     public final int holdsLockImpl(java.lang.Object)
     public static java.lang.Object lockSuspend()

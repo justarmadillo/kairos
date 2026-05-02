@@ -9,6 +9,7 @@ import com.kairos.features.cases.CaseDetailViewModel_HiltModules;
 import com.kairos.features.cases.CaseFeedViewModel_HiltModules;
 import com.kairos.features.cases.DiagnosisBrowseViewModel_HiltModules;
 import com.kairos.features.consultation.ConsultationViewModel_HiltModules;
+import com.kairos.features.dashboard.DashboardViewModel_HiltModules;
 import com.kairos.features.patient.PatientCaseViewModel_HiltModules;
 import com.kairos.features.settings.SettingsViewModel_HiltModules;
 import com.kairos.features.settings.TrashViewModel_HiltModules;
@@ -172,6 +173,7 @@ public final class KairosApplication_HiltComponents {
           CaseDetailViewModel_HiltModules.KeyModule.class,
           CaseFeedViewModel_HiltModules.KeyModule.class,
           ConsultationViewModel_HiltModules.KeyModule.class,
+          DashboardViewModel_HiltModules.KeyModule.class,
           DiagnosisBrowseViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
@@ -220,6 +222,7 @@ public final class KairosApplication_HiltComponents {
           CaseDetailViewModel_HiltModules.BindsModule.class,
           CaseFeedViewModel_HiltModules.BindsModule.class,
           ConsultationViewModel_HiltModules.BindsModule.class,
+          DashboardViewModel_HiltModules.BindsModule.class,
           DiagnosisBrowseViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
           PatientCaseViewModel_HiltModules.BindsModule.class,

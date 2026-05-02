@@ -73,4 +73,7 @@ interface PatientDao {
           AND id NOT IN (SELECT DISTINCT patient_id FROM cases WHERE is_deleted = 0)
     """)
     suspend fun purgeOlderThan(threshold: Long): Int
+
+    @Query("SELECT COUNT(*) FROM patients WHERE is_deleted = 0")
+    fun observeTotalPatients(): Flow<Int>
 }

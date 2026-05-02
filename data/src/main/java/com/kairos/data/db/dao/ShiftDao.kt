@@ -59,4 +59,7 @@ interface ShiftDao {
 
     @Query("DELETE FROM shifts WHERE is_deleted = 1 AND deleted_at < :threshold")
     suspend fun purgeOlderThan(threshold: Long): Int
+
+    @Query("SELECT COUNT(*) FROM shifts WHERE is_deleted = 0")
+    fun observeTotalShifts(): Flow<Int>
 }

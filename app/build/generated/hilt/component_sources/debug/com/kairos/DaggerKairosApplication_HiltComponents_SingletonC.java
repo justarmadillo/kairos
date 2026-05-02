@@ -39,6 +39,7 @@ import com.kairos.data.di.DatabaseModule_ProvidePatientDaoFactory;
 import com.kairos.data.di.DatabaseModule_ProvideShiftDaoFactory;
 import com.kairos.data.repository.CaseRepositoryImpl;
 import com.kairos.data.repository.ConsultationRepositoryImpl;
+import com.kairos.data.repository.DashboardRepositoryImpl;
 import com.kairos.data.repository.DiagnosisRepositoryImpl;
 import com.kairos.data.repository.MediaRepositoryImpl;
 import com.kairos.data.repository.PatientRepositoryImpl;
@@ -61,6 +62,10 @@ import com.kairos.features.consultation.ConsultationViewModel;
 import com.kairos.features.consultation.ConsultationViewModel_HiltModules;
 import com.kairos.features.consultation.ConsultationViewModel_HiltModules_BindsModule_Binds_LazyMapKey;
 import com.kairos.features.consultation.ConsultationViewModel_HiltModules_KeyModule_Provide_LazyMapKey;
+import com.kairos.features.dashboard.DashboardViewModel;
+import com.kairos.features.dashboard.DashboardViewModel_HiltModules;
+import com.kairos.features.dashboard.DashboardViewModel_HiltModules_BindsModule_Binds_LazyMapKey;
+import com.kairos.features.dashboard.DashboardViewModel_HiltModules_KeyModule_Provide_LazyMapKey;
 import com.kairos.features.patient.PatientCaseViewModel;
 import com.kairos.features.patient.PatientCaseViewModel_HiltModules;
 import com.kairos.features.patient.PatientCaseViewModel_HiltModules_BindsModule_Binds_LazyMapKey;
@@ -441,7 +446,7 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return LazyClassKeyMap.<Boolean>of(ImmutableMap.<String, Boolean>builderWithExpectedSize(9).put(CaseDetailViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, CaseDetailViewModel_HiltModules.KeyModule.provide()).put(CaseFeedViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, CaseFeedViewModel_HiltModules.KeyModule.provide()).put(ConsultationViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ConsultationViewModel_HiltModules.KeyModule.provide()).put(DiagnosisBrowseViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, DiagnosisBrowseViewModel_HiltModules.KeyModule.provide()).put(PatientCaseViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, PatientCaseViewModel_HiltModules.KeyModule.provide()).put(SettingsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, SettingsViewModel_HiltModules.KeyModule.provide()).put(ShiftDetailViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ShiftDetailViewModel_HiltModules.KeyModule.provide()).put(ShiftsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ShiftsViewModel_HiltModules.KeyModule.provide()).put(TrashViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, TrashViewModel_HiltModules.KeyModule.provide()).build());
+      return LazyClassKeyMap.<Boolean>of(ImmutableMap.<String, Boolean>builderWithExpectedSize(10).put(CaseDetailViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, CaseDetailViewModel_HiltModules.KeyModule.provide()).put(CaseFeedViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, CaseFeedViewModel_HiltModules.KeyModule.provide()).put(ConsultationViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ConsultationViewModel_HiltModules.KeyModule.provide()).put(DashboardViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, DashboardViewModel_HiltModules.KeyModule.provide()).put(DiagnosisBrowseViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, DiagnosisBrowseViewModel_HiltModules.KeyModule.provide()).put(PatientCaseViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, PatientCaseViewModel_HiltModules.KeyModule.provide()).put(SettingsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, SettingsViewModel_HiltModules.KeyModule.provide()).put(ShiftDetailViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ShiftDetailViewModel_HiltModules.KeyModule.provide()).put(ShiftsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, ShiftsViewModel_HiltModules.KeyModule.provide()).put(TrashViewModel_HiltModules_KeyModule_Provide_LazyMapKey.lazyClassKeyName, TrashViewModel_HiltModules.KeyModule.provide()).build());
     }
 
     @Override
@@ -480,6 +485,8 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
 
     private Provider<ConsultationViewModel> consultationViewModelProvider;
 
+    private Provider<DashboardViewModel> dashboardViewModelProvider;
+
     private Provider<DiagnosisBrowseViewModel> diagnosisBrowseViewModelProvider;
 
     private Provider<PatientCaseViewModel> patientCaseViewModelProvider;
@@ -508,17 +515,18 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
       this.caseDetailViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
       this.caseFeedViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
       this.consultationViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
-      this.diagnosisBrowseViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
-      this.patientCaseViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 4);
-      this.settingsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 5);
-      this.shiftDetailViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 6);
-      this.shiftsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 7);
-      this.trashViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 8);
+      this.dashboardViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
+      this.diagnosisBrowseViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 4);
+      this.patientCaseViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 5);
+      this.settingsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 6);
+      this.shiftDetailViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 7);
+      this.shiftsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 8);
+      this.trashViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 9);
     }
 
     @Override
     public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(ImmutableMap.<String, javax.inject.Provider<ViewModel>>builderWithExpectedSize(9).put(CaseDetailViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) caseDetailViewModelProvider)).put(CaseFeedViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) caseFeedViewModelProvider)).put(ConsultationViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) consultationViewModelProvider)).put(DiagnosisBrowseViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) diagnosisBrowseViewModelProvider)).put(PatientCaseViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) patientCaseViewModelProvider)).put(SettingsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) settingsViewModelProvider)).put(ShiftDetailViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) shiftDetailViewModelProvider)).put(ShiftsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) shiftsViewModelProvider)).put(TrashViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) trashViewModelProvider)).build());
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(ImmutableMap.<String, javax.inject.Provider<ViewModel>>builderWithExpectedSize(10).put(CaseDetailViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) caseDetailViewModelProvider)).put(CaseFeedViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) caseFeedViewModelProvider)).put(ConsultationViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) consultationViewModelProvider)).put(DashboardViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) dashboardViewModelProvider)).put(DiagnosisBrowseViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) diagnosisBrowseViewModelProvider)).put(PatientCaseViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) patientCaseViewModelProvider)).put(SettingsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) settingsViewModelProvider)).put(ShiftDetailViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) shiftDetailViewModelProvider)).put(ShiftsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) shiftsViewModelProvider)).put(TrashViewModel_HiltModules_BindsModule_Binds_LazyMapKey.lazyClassKeyName, ((Provider) trashViewModelProvider)).build());
     }
 
     @Override
@@ -556,22 +564,25 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
           case 2: // com.kairos.features.consultation.ConsultationViewModel 
           return (T) new ConsultationViewModel(singletonCImpl.settingsRepositoryImplProvider.get(), singletonCImpl.consultationRepositoryImplProvider.get(), singletonCImpl.caseRepositoryImplProvider.get());
 
-          case 3: // com.kairos.features.cases.DiagnosisBrowseViewModel 
+          case 3: // com.kairos.features.dashboard.DashboardViewModel 
+          return (T) new DashboardViewModel(singletonCImpl.dashboardRepositoryImplProvider.get());
+
+          case 4: // com.kairos.features.cases.DiagnosisBrowseViewModel 
           return (T) new DiagnosisBrowseViewModel(singletonCImpl.diagnosisRepositoryImplProvider.get());
 
-          case 4: // com.kairos.features.patient.PatientCaseViewModel 
+          case 5: // com.kairos.features.patient.PatientCaseViewModel 
           return (T) new PatientCaseViewModel(singletonCImpl.patientRepositoryImplProvider.get(), singletonCImpl.caseRepositoryImplProvider.get(), singletonCImpl.diagnosisRepositoryImplProvider.get(), singletonCImpl.mediaRepositoryImplProvider.get(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.audioRecorderEngineProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 5: // com.kairos.features.settings.SettingsViewModel 
+          case 6: // com.kairos.features.settings.SettingsViewModel 
           return (T) new SettingsViewModel(singletonCImpl.settingsRepositoryImplProvider.get(), singletonCImpl.backupEngineProvider.get());
 
-          case 6: // com.kairos.features.shifts.ShiftDetailViewModel 
+          case 7: // com.kairos.features.shifts.ShiftDetailViewModel 
           return (T) new ShiftDetailViewModel(viewModelCImpl.savedStateHandle, singletonCImpl.shiftRepositoryImplProvider.get(), singletonCImpl.caseRepositoryImplProvider.get());
 
-          case 7: // com.kairos.features.shifts.ShiftsViewModel 
+          case 8: // com.kairos.features.shifts.ShiftsViewModel 
           return (T) new ShiftsViewModel(singletonCImpl.shiftRepositoryImplProvider.get());
 
-          case 8: // com.kairos.features.settings.TrashViewModel 
+          case 9: // com.kairos.features.settings.TrashViewModel 
           return (T) new TrashViewModel(singletonCImpl.patientRepositoryImplProvider.get(), singletonCImpl.caseRepositoryImplProvider.get(), singletonCImpl.shiftRepositoryImplProvider.get(), singletonCImpl.consultationRepositoryImplProvider.get());
 
           default: throw new AssertionError(id);
@@ -678,6 +689,8 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
 
     private Provider<ConsultationRepositoryImpl> consultationRepositoryImplProvider;
 
+    private Provider<DashboardRepositoryImpl> dashboardRepositoryImplProvider;
+
     private Provider<DiagnosisRepositoryImpl> diagnosisRepositoryImplProvider;
 
     private Provider<PatientRepositoryImpl> patientRepositoryImplProvider;
@@ -739,15 +752,16 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
       this.caseRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<CaseRepositoryImpl>(singletonCImpl, 9));
       this.mediaRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<MediaRepositoryImpl>(singletonCImpl, 10));
       this.consultationRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ConsultationRepositoryImpl>(singletonCImpl, 11));
-      this.diagnosisRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<DiagnosisRepositoryImpl>(singletonCImpl, 12));
-      this.patientRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<PatientRepositoryImpl>(singletonCImpl, 13));
-      this.audioRecorderEngineProvider = DoubleCheck.provider(new SwitchingProvider<AudioRecorderEngine>(singletonCImpl, 14));
-      this.shiftRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ShiftRepositoryImpl>(singletonCImpl, 15));
+      this.dashboardRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<DashboardRepositoryImpl>(singletonCImpl, 12));
+      this.diagnosisRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<DiagnosisRepositoryImpl>(singletonCImpl, 13));
+      this.patientRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<PatientRepositoryImpl>(singletonCImpl, 14));
+      this.audioRecorderEngineProvider = DoubleCheck.provider(new SwitchingProvider<AudioRecorderEngine>(singletonCImpl, 15));
+      this.shiftRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ShiftRepositoryImpl>(singletonCImpl, 16));
     }
 
     @Override
-    public void injectKairosApplication(KairosApplication arg0) {
-      injectKairosApplication2(arg0);
+    public void injectKairosApplication(KairosApplication kairosApplication) {
+      injectKairosApplication2(kairosApplication);
     }
 
     @Override
@@ -832,16 +846,19 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
           case 11: // com.kairos.data.repository.ConsultationRepositoryImpl 
           return (T) new ConsultationRepositoryImpl(singletonCImpl.consultationSessionDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 12: // com.kairos.data.repository.DiagnosisRepositoryImpl 
+          case 12: // com.kairos.data.repository.DashboardRepositoryImpl 
+          return (T) new DashboardRepositoryImpl(singletonCImpl.patientDao(), singletonCImpl.caseDao(), singletonCImpl.shiftDao());
+
+          case 13: // com.kairos.data.repository.DiagnosisRepositoryImpl 
           return (T) new DiagnosisRepositoryImpl(singletonCImpl.diagnosisDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 13: // com.kairos.data.repository.PatientRepositoryImpl 
+          case 14: // com.kairos.data.repository.PatientRepositoryImpl 
           return (T) new PatientRepositoryImpl(singletonCImpl.patientDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 14: // com.kairos.core.media.AudioRecorderEngine 
+          case 15: // com.kairos.core.media.AudioRecorderEngine 
           return (T) new AudioRecorderEngine(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 15: // com.kairos.data.repository.ShiftRepositoryImpl 
+          case 16: // com.kairos.data.repository.ShiftRepositoryImpl 
           return (T) new ShiftRepositoryImpl(singletonCImpl.shiftDao(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
           default: throw new AssertionError(id);

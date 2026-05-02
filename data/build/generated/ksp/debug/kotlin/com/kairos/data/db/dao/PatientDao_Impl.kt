@@ -509,6 +509,26 @@ public class PatientDao_Impl(
     }
   }
 
+  public override fun observeTotalPatients(): Flow<Int> {
+    val _sql: String = "SELECT COUNT(*) FROM patients WHERE is_deleted = 0"
+    return createFlow(__db, false, arrayOf("patients")) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        val _result: Int
+        if (_stmt.step()) {
+          val _tmp: Int
+          _tmp = _stmt.getLong(0).toInt()
+          _result = _tmp
+        } else {
+          _result = 0
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
   public override suspend fun deletePhonesFor(patientId: Long) {
     val _sql: String = "DELETE FROM patient_phones WHERE patient_id = ?"
     return performSuspending(__db, false, true) { _connection ->

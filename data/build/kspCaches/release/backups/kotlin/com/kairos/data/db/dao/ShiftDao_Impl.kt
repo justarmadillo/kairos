@@ -366,6 +366,26 @@ public class ShiftDao_Impl(
     }
   }
 
+  public override fun observeTotalShifts(): Flow<Int> {
+    val _sql: String = "SELECT COUNT(*) FROM shifts WHERE is_deleted = 0"
+    return createFlow(__db, false, arrayOf("shifts")) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        val _result: Int
+        if (_stmt.step()) {
+          val _tmp: Int
+          _tmp = _stmt.getLong(0).toInt()
+          _result = _tmp
+        } else {
+          _result = 0
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
   public override suspend fun softDelete(id: Long, now: Long) {
     val _sql: String = """
         |

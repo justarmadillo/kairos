@@ -6,6 +6,7 @@ import com.kairos.core.repository.BackupRepository
 import com.kairos.core.repository.CaseRepository
 import com.kairos.core.repository.ConsultationRepository
 import com.kairos.core.repository.DataSafetyCoordinator
+import com.kairos.core.repository.DashboardRepository
 import com.kairos.core.repository.DiagnosisRepository
 import com.kairos.core.repository.MediaRepository
 import com.kairos.core.repository.PatientRepository
@@ -23,6 +24,7 @@ import com.kairos.data.backup.BackupEngine
 import com.kairos.data.backup.DataSafetyCoordinatorImpl
 import com.kairos.data.repository.CaseRepositoryImpl
 import com.kairos.data.repository.ConsultationRepositoryImpl
+import com.kairos.data.repository.DashboardRepositoryImpl
 import com.kairos.data.repository.DiagnosisRepositoryImpl
 import com.kairos.data.repository.MediaRepositoryImpl
 import com.kairos.data.repository.PatientRepositoryImpl
@@ -77,6 +79,9 @@ abstract class RepositoryModule {
 
     @Binds @Singleton
     abstract fun bindConsultationRepository(impl: ConsultationRepositoryImpl): ConsultationRepository
+
+    @Binds @Singleton
+    abstract fun bindDashboardRepository(impl: DashboardRepositoryImpl): DashboardRepository
 
     @Binds @Singleton
     abstract fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepository

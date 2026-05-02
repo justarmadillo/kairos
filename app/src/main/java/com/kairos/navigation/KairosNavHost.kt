@@ -1,6 +1,8 @@
 package com.kairos.navigation
 
 import android.net.Uri
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -13,6 +15,7 @@ import com.kairos.features.cases.CaseFeedScreen
 import com.kairos.features.cases.DiagnosisBrowseScreen
 import com.kairos.features.cases.ImageViewerScreen
 import com.kairos.features.consultation.ConsultationCalendarScreen
+import com.kairos.features.dashboard.DashboardScreen
 import com.kairos.features.patient.PatientCaseScreen
 import com.kairos.features.settings.SettingsScreen
 import com.kairos.features.settings.TrashScreen
@@ -28,9 +31,19 @@ fun KairosNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = TopLevelDestination.Shifts.route,
+        startDestination = TopLevelDestination.Dashboard.route,
         modifier = modifier,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None },
     ) {
+        composable(TopLevelDestination.Dashboard.route) {
+            DashboardScreen(
+                onCaseClick = { caseId -> navController.navigate("case_detail/$caseId") },
+            )
+        }
+
         composable(TopLevelDestination.Shifts.route) {
             ShiftsListScreen(
                 onAddPatient = { navController.navigate(ROUTE_PATIENT_CASE) },

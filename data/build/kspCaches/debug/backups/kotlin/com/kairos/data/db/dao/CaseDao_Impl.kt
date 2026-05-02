@@ -979,6 +979,102 @@ public class CaseDao_Impl(
     }
   }
 
+  public override fun observeTotalCases(): Flow<Int> {
+    val _sql: String = "SELECT COUNT(*) FROM cases WHERE is_deleted = 0"
+    return createFlow(__db, false, arrayOf("cases")) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        val _result: Int
+        if (_stmt.step()) {
+          val _tmp: Int
+          _tmp = _stmt.getLong(0).toInt()
+          _result = _tmp
+        } else {
+          _result = 0
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
+  public override suspend fun countCasesInRange(startMs: Long, endMs: Long): Int {
+    val _sql: String = """
+        |
+        |        SELECT COUNT(*) FROM cases
+        |        WHERE is_deleted = 0 AND created_at >= ? AND created_at < ?
+        |        
+        """.trimMargin()
+    return performSuspending(__db, true, false) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        var _argIndex: Int = 1
+        _stmt.bindLong(_argIndex, startMs)
+        _argIndex = 2
+        _stmt.bindLong(_argIndex, endMs)
+        val _result: Int
+        if (_stmt.step()) {
+          val _tmp: Int
+          _tmp = _stmt.getLong(0).toInt()
+          _result = _tmp
+        } else {
+          _result = 0
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
+  public override fun observeRecentCases(): Flow<List<RecentCaseRow>> {
+    val _sql: String = """
+        |
+        |        SELECT c.id AS caseId, p.name AS patientName, c.case_date AS caseDate,
+        |               (SELECT d.name FROM case_diagnoses cd
+        |                INNER JOIN diagnoses d ON d.id = cd.diagnosis_id
+        |                WHERE cd.case_id = c.id LIMIT 1) AS diagnosisName
+        |        FROM cases c
+        |        INNER JOIN patients p ON p.id = c.patient_id
+        |        WHERE c.is_deleted = 0 AND p.is_deleted = 0
+        |        ORDER BY c.created_at DESC
+        |        LIMIT 5
+        |        
+        """.trimMargin()
+    return createFlow(__db, false, arrayOf("case_diagnoses", "diagnoses", "cases", "patients")) {
+        _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        val _columnIndexOfCaseId: Int = 0
+        val _columnIndexOfPatientName: Int = 1
+        val _columnIndexOfCaseDate: Int = 2
+        val _columnIndexOfDiagnosisName: Int = 3
+        val _result: MutableList<RecentCaseRow> = mutableListOf()
+        while (_stmt.step()) {
+          val _item: RecentCaseRow
+          val _tmpCaseId: Long
+          _tmpCaseId = _stmt.getLong(_columnIndexOfCaseId)
+          val _tmpPatientName: String
+          _tmpPatientName = _stmt.getText(_columnIndexOfPatientName)
+          val _tmpCaseDate: Long
+          _tmpCaseDate = _stmt.getLong(_columnIndexOfCaseDate)
+          val _tmpDiagnosisName: String?
+          if (_stmt.isNull(_columnIndexOfDiagnosisName)) {
+            _tmpDiagnosisName = null
+          } else {
+            _tmpDiagnosisName = _stmt.getText(_columnIndexOfDiagnosisName)
+          }
+          _item = RecentCaseRow(_tmpCaseId,_tmpPatientName,_tmpDiagnosisName,_tmpCaseDate)
+          _result.add(_item)
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
   public override suspend fun clearDiagnosisLinks(caseId: Long) {
     val _sql: String = "DELETE FROM case_diagnoses WHERE case_id = ?"
     return performSuspending(__db, false, true) { _connection ->

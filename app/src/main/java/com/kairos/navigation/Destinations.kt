@@ -1,10 +1,12 @@
 package com.kairos.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.SpaceDashboard
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.LocalHospital
 import androidx.compose.material.icons.outlined.MedicalServices
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.rounded.SpaceDashboard
 import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.LocalHospital
 import androidx.compose.material.icons.rounded.MedicalServices
@@ -17,6 +19,12 @@ enum class TopLevelDestination(
     val iconActive: ImageVector,
     val iconInactive: ImageVector
 ) {
+    Dashboard(
+        route = "dashboard",
+        label = "Dashboard",
+        iconActive = Icons.Rounded.SpaceDashboard,
+        iconInactive = Icons.Outlined.SpaceDashboard
+    ),
     Shifts(
         route = "shifts",
         label = "Shifts",
