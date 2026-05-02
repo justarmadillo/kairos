@@ -66,6 +66,7 @@ fun EmptyState(
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
+                shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(top = 24.dp),
             ) {
                 Text(actionLabel)

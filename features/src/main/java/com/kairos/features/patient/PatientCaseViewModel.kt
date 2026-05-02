@@ -12,11 +12,13 @@ import com.kairos.core.model.MediaType
 import com.kairos.core.model.Patient
 import com.kairos.core.model.PatientPhone
 import com.kairos.core.repository.CaseRepository
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.core.repository.DiagnosisRepository
 import com.kairos.core.repository.MediaRepository
 import com.kairos.core.repository.PatientRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -70,6 +72,7 @@ data class PatientCaseUiState(
     val error: String? = null,
 )
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class PatientCaseViewModel @Inject constructor(
     private val patientRepo: PatientRepository,
@@ -78,6 +81,7 @@ class PatientCaseViewModel @Inject constructor(
     private val mediaRepo: MediaRepository,
     val mediaFileManager: MediaFileManager,
     private val audioEngine: AudioRecorderEngine,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(PatientCaseUiState())
@@ -278,58 +282,57 @@ class PatientCaseViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                val now = System.currentTimeMillis()
+                dataSafetyCoordinator.withDataLock {
+                    val now = System.currentTimeMillis()
 
-                // 1. Patient
-                val patientId: Long = if (isNewPatient) {
-                    patientRepo.upsert(
-                        Patient(
-                            name = s.name.trim(),
-                            age = s.age.toIntOrNull(),
-                            phones = s.phones,
+                    // 1. Patient
+                    val patientId: Long = if (isNewPatient) {
+                        patientRepo.upsert(
+                            Patient(
+                                name = s.name.trim(),
+                                age = s.age.toIntOrNull(),
+                                phones = s.phones,
+                                createdAt = now,
+                                updatedAt = now,
+                            )
+                        )
+                    } else {
+                        patientToUse?.id ?: error("No patient selected")
+                    }
+
+                    // 2. Case (id = 0 -> insert, id > 0 -> update)
+                    val caseId = caseRepo.upsertCase(
+                        case = Case(
+                            id = editingCaseId,
+                            patientId = patientId,
+                            caseDate = s.caseDate,
+                            mechanism = s.mechanism.trim().ifEmpty { null },
+                            notesHtml = s.notesHtml.ifEmpty { null },
                             createdAt = now,
                             updatedAt = now,
-                        )
+                        ),
+                        diagnosisNames = s.diagnoses,
+                        linkShiftId = linkShiftId,
+                        linkSessionId = linkSessionId,
                     )
-                } else {
-                    patientToUse?.id ?: run {
-                        _state.update { it.copy(isSaving = false, error = "No patient selected") }
-                        return@launch
+
+                    // 3. Media: move temp files to final location and insert records.
+                    s.pendingMedia.forEach { pending ->
+                        val finalFile = mediaFileManager.newCaseMediaFile(caseId, pending.mediaType)
+                        pending.sourceFile.copyTo(finalFile, overwrite = true)
+                        pending.sourceFile.delete()
+
+                        mediaRepo.add(
+                            MediaItem(
+                                caseId = caseId,
+                                filePath = mediaFileManager.toRelative(finalFile),
+                                mediaType = pending.mediaType,
+                                durationMs = pending.durationMs,
+                                isPrimary = pending.isPrimary,
+                                createdAt = now,
+                            )
+                        )
                     }
-                }
-
-                // 2. Case (id = 0 → insert, id > 0 → update)
-                val caseId = caseRepo.upsertCase(
-                    case = Case(
-                        id = editingCaseId,
-                        patientId = patientId,
-                        caseDate = s.caseDate,
-                        mechanism = s.mechanism.trim().ifEmpty { null },
-                        notesHtml = s.notesHtml.ifEmpty { null },
-                        createdAt = now,
-                        updatedAt = now,
-                    ),
-                    diagnosisNames = s.diagnoses,
-                    linkShiftId = linkShiftId,
-                    linkSessionId = linkSessionId,
-                )
-
-                // 3. Media — move temp files to final location and insert records
-                s.pendingMedia.forEach { pending ->
-                    val finalFile = mediaFileManager.newCaseMediaFile(caseId, pending.mediaType)
-                    pending.sourceFile.copyTo(finalFile, overwrite = true)
-                    pending.sourceFile.delete()
-
-                    mediaRepo.add(
-                        MediaItem(
-                            caseId = caseId,
-                            filePath = mediaFileManager.toRelative(finalFile),
-                            mediaType = pending.mediaType,
-                            durationMs = pending.durationMs,
-                            isPrimary = pending.isPrimary,
-                            createdAt = now,
-                        )
-                    )
                 }
 
                 _state.update { it.copy(isSaving = false, saved = true) }

@@ -187,6 +187,7 @@ fun NewPatientTab(
             label = { Text("Name *") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
         )
         Spacer(Modifier.height(12.dp))
 
@@ -198,6 +199,7 @@ fun NewPatientTab(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
         )
         Spacer(Modifier.height(12.dp))
 
@@ -218,6 +220,7 @@ fun NewPatientTab(
         OutlinedButton(
             onClick = { showDatePicker = true },
             modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
         ) {
             Text("Case date: $dateLabel")
         }
@@ -230,6 +233,7 @@ fun NewPatientTab(
             label = { Text("Mechanism of injury") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
         )
         Spacer(Modifier.height(12.dp))
 

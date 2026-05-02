@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.outlined.Person
@@ -39,6 +38,8 @@ import com.kairos.core.model.MediaItem
 import com.kairos.core.model.MediaType
 import java.io.File
 import com.kairos.core.theme.LocalKairosExtraColors
+import com.kairos.core.theme.PaletteOnDark
+import com.kairos.core.theme.PaletteSurfaceDark
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -63,7 +64,7 @@ fun CaseCard(
                 onLongClick = onLongClick,
             ),
         colors = CardDefaults.cardColors(containerColor = extra.surfaceCard),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         shape = MaterialTheme.shapes.large,
     ) {
         Row(
@@ -162,7 +163,7 @@ private fun CaseThumbnail(
     Box(
         modifier = modifier
             .size(72.dp)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(MaterialTheme.shapes.large)
             .background(MaterialTheme.colorScheme.surfaceVariant),
         contentAlignment = Alignment.Center,
     ) {
@@ -186,13 +187,13 @@ private fun CaseThumbnail(
             Box(
                 modifier = Modifier
                     .size(34.dp)
-                    .background(androidx.compose.ui.graphics.Color.Black.copy(alpha = 0.55f), CircleShape),
+                    .background(PaletteSurfaceDark.copy(alpha = 0.55f), CircleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
                     Icons.Default.PlayArrow,
                     contentDescription = "Video",
-                    tint = androidx.compose.ui.graphics.Color.White,
+                    tint = PaletteOnDark,
                     modifier = Modifier.size(22.dp),
                 )
             }

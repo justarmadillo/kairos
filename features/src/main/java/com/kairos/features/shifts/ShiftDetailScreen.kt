@@ -71,7 +71,12 @@ fun ShiftDetailScreen(
         },
         floatingActionButton = {
             state.shift?.let { shift ->
-                FloatingActionButton(onClick = { onAddPatient(shift.id) }) {
+                FloatingActionButton(
+                    onClick = { onAddPatient(shift.id) },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    shape = MaterialTheme.shapes.medium,
+                ) {
                     Icon(Icons.Default.Add, contentDescription = "Add patient")
                 }
             }

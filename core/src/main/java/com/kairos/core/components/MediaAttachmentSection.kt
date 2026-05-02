@@ -38,6 +38,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kairos.core.model.MediaType
+import com.kairos.core.theme.PaletteOnDark
+import com.kairos.core.theme.PaletteSurfaceDark
 import java.io.File
 
 // Minimal descriptor usable both for PendingMedia (pre-save) and saved MediaItem
@@ -138,12 +140,12 @@ private fun VisualThumbnail(
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .clip(MaterialTheme.shapes.small)
+            .clip(MaterialTheme.shapes.large)
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .border(
                 width = if (item.isPrimary) 2.dp else 0.dp,
                 color = if (item.isPrimary) MaterialTheme.colorScheme.primary else Color.Transparent,
-                shape = MaterialTheme.shapes.small,
+                shape = MaterialTheme.shapes.large,
             )
             .clickable(onClick = onSetPrimary),
     ) {
@@ -159,13 +161,13 @@ private fun VisualThumbnail(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(36.dp)
-                    .background(Color.Black.copy(alpha = 0.55f), CircleShape),
+                    .background(PaletteSurfaceDark.copy(alpha = 0.55f), CircleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
                     Icons.Default.PlayArrow,
                     contentDescription = "Video",
-                    tint = Color.White,
+                    tint = PaletteOnDark,
                     modifier = Modifier.size(24.dp),
                 )
             }
@@ -177,12 +179,12 @@ private fun VisualThumbnail(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .size(28.dp)
-                .background(Color.Black.copy(alpha = 0.5f), MaterialTheme.shapes.small),
+                .background(PaletteSurfaceDark.copy(alpha = 0.5f), MaterialTheme.shapes.small),
         ) {
             Icon(
                 Icons.Default.Close,
                 contentDescription = "Remove",
-                tint = Color.White,
+                tint = PaletteOnDark,
                 modifier = Modifier.size(16.dp),
             )
         }

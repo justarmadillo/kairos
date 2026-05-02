@@ -4,8 +4,13 @@
 /.idea/
 .DS_Store
 /build
+**/build/
 /captures
 .externalNativeBuild
 .cxx
 local.properties
 *.log
+app/releases/
+singin_key
+*.jks
+*.keystore

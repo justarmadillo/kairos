@@ -1,10 +1,13 @@
 package com.kairos.data.backup
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -40,6 +43,15 @@ class ScheduledBackupWorker @AssistedInject constructor(
     }
 
     private fun notify(success: Boolean, error: String?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.POST_NOTIFICATIONS,
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
         val manager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

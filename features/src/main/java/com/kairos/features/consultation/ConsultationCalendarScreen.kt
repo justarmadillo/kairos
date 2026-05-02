@@ -20,9 +20,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -75,7 +75,10 @@ fun ConsultationCalendarScreen(
             val isConsultDay = state.selectedDate.dayOfWeek == state.consultationDayOfWeek
             if (isConsultDay) {
                 FloatingActionButton(
-                    onClick = { viewModel.getOrCreateSessionForSelected(onAddPatient) }
+                    onClick = { viewModel.getOrCreateSessionForSelected(onAddPatient) },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    shape = MaterialTheme.shapes.medium,
                 ) {
                     Icon(Icons.Default.Add, contentDescription = "Add patient")
                 }
@@ -118,7 +121,7 @@ fun ConsultationCalendarScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 IconButton(onClick = viewModel::selectPreviousConsultationDate) {
-                    Icon(Icons.Default.KeyboardArrowLeft, contentDescription = "Previous consultation date")
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Previous consultation date")
                 }
                 Text(
                     text = selectedDateLabel,
@@ -127,7 +130,7 @@ fun ConsultationCalendarScreen(
                     modifier = Modifier.weight(1f),
                 )
                 IconButton(onClick = viewModel::selectNextConsultationDate) {
-                    Icon(Icons.Default.KeyboardArrowRight, contentDescription = "Next consultation date")
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Next consultation date")
                 }
             }
 
@@ -201,7 +204,7 @@ private fun DateCell(
         Text(
             text = item.date.dayOfMonth.toString(),
             style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = if (item.isConsultationDay) FontWeight.Bold else FontWeight.Normal,
+                fontWeight = if (item.isConsultationDay) FontWeight.Medium else FontWeight.Normal,
                 fontSize = if (item.isConsultationDay) 18.sp else 15.sp,
             ),
             color = if (isSelected) MaterialTheme.colorScheme.onPrimary

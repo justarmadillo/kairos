@@ -1,4 +1,4 @@
-#Fri May 01 21:37:02 GMT+01:00 2026
+#Sat May 02 09:30:43 GMT+01:00 2026
 base.0=D\:\\claude\\Kairos\\app\\build\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

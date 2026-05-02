@@ -40,6 +40,7 @@ fun ExistingPatientTab(
             leadingIcon = { Icon(Icons.Default.Search, null) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
         )
 
         Spacer(Modifier.height(12.dp))

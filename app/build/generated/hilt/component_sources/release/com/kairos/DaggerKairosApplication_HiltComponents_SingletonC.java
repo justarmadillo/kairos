@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableSet;
 import com.kairos.core.media.AudioRecorderEngine;
 import com.kairos.core.media.MediaFileManager;
 import com.kairos.data.backup.BackupEngine;
+import com.kairos.data.backup.DataSafetyCoordinatorImpl;
 import com.kairos.data.backup.ScheduledBackupWorker;
 import com.kairos.data.backup.ScheduledBackupWorker_AssistedFactory;
 import com.kairos.data.backup.TrashPurgeWorker;
@@ -559,7 +560,7 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
           return (T) new DiagnosisBrowseViewModel(singletonCImpl.diagnosisRepositoryImplProvider.get());
 
           case 4: // com.kairos.features.patient.PatientCaseViewModel 
-          return (T) new PatientCaseViewModel(singletonCImpl.patientRepositoryImplProvider.get(), singletonCImpl.caseRepositoryImplProvider.get(), singletonCImpl.diagnosisRepositoryImplProvider.get(), singletonCImpl.mediaRepositoryImplProvider.get(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.audioRecorderEngineProvider.get());
+          return (T) new PatientCaseViewModel(singletonCImpl.patientRepositoryImplProvider.get(), singletonCImpl.caseRepositoryImplProvider.get(), singletonCImpl.diagnosisRepositoryImplProvider.get(), singletonCImpl.mediaRepositoryImplProvider.get(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.audioRecorderEngineProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
           case 5: // com.kairos.features.settings.SettingsViewModel 
           return (T) new SettingsViewModel(singletonCImpl.settingsRepositoryImplProvider.get(), singletonCImpl.backupEngineProvider.get());
@@ -657,6 +658,8 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
 
     private Provider<MediaFileManager> mediaFileManagerProvider;
 
+    private Provider<DataSafetyCoordinatorImpl> dataSafetyCoordinatorImplProvider;
+
     private Provider<BackupEngine> backupEngineProvider;
 
     private Provider<PreferencesStore> preferencesStoreProvider;
@@ -726,24 +729,25 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
       this.provideDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<KairosDatabase>(singletonCImpl, 2));
       this.mediaFileManagerProvider = DoubleCheck.provider(new SwitchingProvider<MediaFileManager>(singletonCImpl, 3));
+      this.dataSafetyCoordinatorImplProvider = DoubleCheck.provider(new SwitchingProvider<DataSafetyCoordinatorImpl>(singletonCImpl, 4));
       this.backupEngineProvider = DoubleCheck.provider(new SwitchingProvider<BackupEngine>(singletonCImpl, 1));
-      this.preferencesStoreProvider = DoubleCheck.provider(new SwitchingProvider<PreferencesStore>(singletonCImpl, 5));
-      this.settingsRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<SettingsRepositoryImpl>(singletonCImpl, 4));
+      this.preferencesStoreProvider = DoubleCheck.provider(new SwitchingProvider<PreferencesStore>(singletonCImpl, 6));
+      this.settingsRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<SettingsRepositoryImpl>(singletonCImpl, 5));
       this.scheduledBackupWorker_AssistedFactoryProvider = SingleCheck.provider(new SwitchingProvider<ScheduledBackupWorker_AssistedFactory>(singletonCImpl, 0));
-      this.trashPurgeWorker_AssistedFactoryProvider = SingleCheck.provider(new SwitchingProvider<TrashPurgeWorker_AssistedFactory>(singletonCImpl, 6));
-      this.workerSchedulerProvider = DoubleCheck.provider(new SwitchingProvider<WorkerScheduler>(singletonCImpl, 7));
-      this.caseRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<CaseRepositoryImpl>(singletonCImpl, 8));
-      this.mediaRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<MediaRepositoryImpl>(singletonCImpl, 9));
-      this.consultationRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ConsultationRepositoryImpl>(singletonCImpl, 10));
-      this.diagnosisRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<DiagnosisRepositoryImpl>(singletonCImpl, 11));
-      this.patientRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<PatientRepositoryImpl>(singletonCImpl, 12));
-      this.audioRecorderEngineProvider = DoubleCheck.provider(new SwitchingProvider<AudioRecorderEngine>(singletonCImpl, 13));
-      this.shiftRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ShiftRepositoryImpl>(singletonCImpl, 14));
+      this.trashPurgeWorker_AssistedFactoryProvider = SingleCheck.provider(new SwitchingProvider<TrashPurgeWorker_AssistedFactory>(singletonCImpl, 7));
+      this.workerSchedulerProvider = DoubleCheck.provider(new SwitchingProvider<WorkerScheduler>(singletonCImpl, 8));
+      this.caseRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<CaseRepositoryImpl>(singletonCImpl, 9));
+      this.mediaRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<MediaRepositoryImpl>(singletonCImpl, 10));
+      this.consultationRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ConsultationRepositoryImpl>(singletonCImpl, 11));
+      this.diagnosisRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<DiagnosisRepositoryImpl>(singletonCImpl, 12));
+      this.patientRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<PatientRepositoryImpl>(singletonCImpl, 13));
+      this.audioRecorderEngineProvider = DoubleCheck.provider(new SwitchingProvider<AudioRecorderEngine>(singletonCImpl, 14));
+      this.shiftRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<ShiftRepositoryImpl>(singletonCImpl, 15));
     }
 
     @Override
-    public void injectKairosApplication(KairosApplication kairosApplication) {
-      injectKairosApplication2(kairosApplication);
+    public void injectKairosApplication(KairosApplication arg0) {
+      injectKairosApplication2(arg0);
     }
 
     @Override
@@ -791,7 +795,7 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
           };
 
           case 1: // com.kairos.data.backup.BackupEngine 
-          return (T) new BackupEngine(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.mediaFileManagerProvider.get());
+          return (T) new BackupEngine(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
           case 2: // com.kairos.data.db.KairosDatabase 
           return (T) DatabaseModule_ProvideDatabaseFactory.provideDatabase(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
@@ -799,43 +803,46 @@ public final class DaggerKairosApplication_HiltComponents_SingletonC {
           case 3: // com.kairos.core.media.MediaFileManager 
           return (T) new MediaFileManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 4: // com.kairos.data.repository.SettingsRepositoryImpl 
+          case 4: // com.kairos.data.backup.DataSafetyCoordinatorImpl 
+          return (T) new DataSafetyCoordinatorImpl();
+
+          case 5: // com.kairos.data.repository.SettingsRepositoryImpl 
           return (T) new SettingsRepositoryImpl(singletonCImpl.preferencesStoreProvider.get());
 
-          case 5: // com.kairos.data.settings.PreferencesStore 
+          case 6: // com.kairos.data.settings.PreferencesStore 
           return (T) new PreferencesStore(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 6: // com.kairos.data.backup.TrashPurgeWorker_AssistedFactory 
+          case 7: // com.kairos.data.backup.TrashPurgeWorker_AssistedFactory 
           return (T) new TrashPurgeWorker_AssistedFactory() {
             @Override
             public TrashPurgeWorker create(Context context2, WorkerParameters params2) {
-              return new TrashPurgeWorker(context2, params2, singletonCImpl.patientDao(), singletonCImpl.caseDao(), singletonCImpl.caseMediaDao(), singletonCImpl.shiftDao(), singletonCImpl.consultationSessionDao(), singletonCImpl.mediaFileManagerProvider.get());
+              return new TrashPurgeWorker(context2, params2, singletonCImpl.patientDao(), singletonCImpl.caseDao(), singletonCImpl.caseMediaDao(), singletonCImpl.shiftDao(), singletonCImpl.consultationSessionDao(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
             }
           };
 
-          case 7: // com.kairos.data.backup.WorkerScheduler 
+          case 8: // com.kairos.data.backup.WorkerScheduler 
           return (T) new WorkerScheduler(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 8: // com.kairos.data.repository.CaseRepositoryImpl 
-          return (T) new CaseRepositoryImpl(singletonCImpl.caseDao(), singletonCImpl.diagnosisDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.mediaFileManagerProvider.get());
+          case 9: // com.kairos.data.repository.CaseRepositoryImpl 
+          return (T) new CaseRepositoryImpl(singletonCImpl.caseDao(), singletonCImpl.diagnosisDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 9: // com.kairos.data.repository.MediaRepositoryImpl 
-          return (T) new MediaRepositoryImpl(singletonCImpl.caseMediaDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.mediaFileManagerProvider.get());
+          case 10: // com.kairos.data.repository.MediaRepositoryImpl 
+          return (T) new MediaRepositoryImpl(singletonCImpl.caseMediaDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.mediaFileManagerProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 10: // com.kairos.data.repository.ConsultationRepositoryImpl 
-          return (T) new ConsultationRepositoryImpl(singletonCImpl.consultationSessionDao(), singletonCImpl.provideDatabaseProvider.get());
+          case 11: // com.kairos.data.repository.ConsultationRepositoryImpl 
+          return (T) new ConsultationRepositoryImpl(singletonCImpl.consultationSessionDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 11: // com.kairos.data.repository.DiagnosisRepositoryImpl 
-          return (T) new DiagnosisRepositoryImpl(singletonCImpl.diagnosisDao(), singletonCImpl.provideDatabaseProvider.get());
+          case 12: // com.kairos.data.repository.DiagnosisRepositoryImpl 
+          return (T) new DiagnosisRepositoryImpl(singletonCImpl.diagnosisDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 12: // com.kairos.data.repository.PatientRepositoryImpl 
-          return (T) new PatientRepositoryImpl(singletonCImpl.patientDao(), singletonCImpl.provideDatabaseProvider.get());
+          case 13: // com.kairos.data.repository.PatientRepositoryImpl 
+          return (T) new PatientRepositoryImpl(singletonCImpl.patientDao(), singletonCImpl.provideDatabaseProvider.get(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
-          case 13: // com.kairos.core.media.AudioRecorderEngine 
+          case 14: // com.kairos.core.media.AudioRecorderEngine 
           return (T) new AudioRecorderEngine(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 14: // com.kairos.data.repository.ShiftRepositoryImpl 
-          return (T) new ShiftRepositoryImpl(singletonCImpl.shiftDao());
+          case 15: // com.kairos.data.repository.ShiftRepositoryImpl 
+          return (T) new ShiftRepositoryImpl(singletonCImpl.shiftDao(), singletonCImpl.dataSafetyCoordinatorImplProvider.get());
 
           default: throw new AssertionError(id);
         }

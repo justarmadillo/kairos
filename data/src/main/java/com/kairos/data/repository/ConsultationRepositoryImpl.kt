@@ -3,6 +3,7 @@ package com.kairos.data.repository
 import androidx.room.withTransaction
 import com.kairos.core.model.ConsultationSession
 import com.kairos.core.repository.ConsultationRepository
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.data.db.KairosDatabase
 import com.kairos.data.db.dao.ConsultationSessionDao
 import com.kairos.data.db.entities.ConsultationSessionEntity
@@ -16,11 +17,12 @@ import javax.inject.Singleton
 class ConsultationRepositoryImpl @Inject constructor(
     private val dao: ConsultationSessionDao,
     private val db: KairosDatabase,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : ConsultationRepository {
 
-    override suspend fun getOrCreateForDate(dateMillis: Long): Long {
+    override suspend fun getOrCreateForDate(dateMillis: Long): Long = dataSafetyCoordinator.withDataLock {
         val now = System.currentTimeMillis()
-        return db.withTransaction {
+        db.withTransaction {
             dao.findByDate(dateMillis)?.id
                 ?: dao.insert(ConsultationSessionEntity(date = dateMillis, createdAt = now)).let { id ->
                     if (id != -1L) id
@@ -39,11 +41,13 @@ class ConsultationRepositoryImpl @Inject constructor(
         dao.observeForRange(startMillis, endMillis)
             .map { list -> list.map { it.toDomain() } }
 
-    override suspend fun softDelete(id: Long) =
+    override suspend fun softDelete(id: Long) = dataSafetyCoordinator.withDataLock {
         dao.softDelete(id, System.currentTimeMillis())
+    }
 
-    override suspend fun restore(id: Long) =
+    override suspend fun restore(id: Long) = dataSafetyCoordinator.withDataLock {
         dao.restore(id)
+    }
 
     override fun observeTrashed(): Flow<List<ConsultationSession>> =
         dao.observeTrashed().map { list -> list.map { it.toDomain() } }

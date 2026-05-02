@@ -16,6 +16,10 @@
         "source": "com.kairos.app-main-75:/xml/file_paths.xml"
     },
     {
+        "merged": "com.kairos.app-release-74:/xml_backup_rules.xml.flat",
+        "source": "com.kairos.app-main-75:/xml/backup_rules.xml"
+    },
+    {
         "merged": "com.kairos.app-release-74:/xml_data_extraction_rules.xml.flat",
         "source": "com.kairos.app-main-75:/xml/data_extraction_rules.xml"
     }

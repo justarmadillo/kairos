@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.kairos.core.repository.BackupRepository
 import com.kairos.core.repository.CaseRepository
 import com.kairos.core.repository.ConsultationRepository
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.core.repository.DiagnosisRepository
 import com.kairos.core.repository.MediaRepository
 import com.kairos.core.repository.PatientRepository
@@ -19,6 +20,7 @@ import com.kairos.data.db.dao.DiagnosisDao
 import com.kairos.data.db.dao.PatientDao
 import com.kairos.data.db.dao.ShiftDao
 import com.kairos.data.backup.BackupEngine
+import com.kairos.data.backup.DataSafetyCoordinatorImpl
 import com.kairos.data.repository.CaseRepositoryImpl
 import com.kairos.data.repository.ConsultationRepositoryImpl
 import com.kairos.data.repository.DiagnosisRepositoryImpl
@@ -43,7 +45,6 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext context: Context): KairosDatabase =
         Room.databaseBuilder(context, KairosDatabase::class.java, "kairos.db")
             .addMigrations(*Migrations.ALL_MIGRATIONS)
-            .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
             .build()
 
     @Provides fun providePatientDao(db: KairosDatabase): PatientDao = db.patientDao()
@@ -82,4 +83,7 @@ abstract class RepositoryModule {
 
     @Binds @Singleton
     abstract fun bindBackupRepository(impl: BackupEngine): BackupRepository
+
+    @Binds @Singleton
+    abstract fun bindDataSafetyCoordinator(impl: DataSafetyCoordinatorImpl): DataSafetyCoordinator
 }

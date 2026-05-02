@@ -12,9 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.outlined.MedicalServices
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
@@ -64,7 +64,7 @@ fun DiagnosisBrowseScreen(
                         Icon(Icons.Default.Add, contentDescription = "Add diagnosis")
                     }
                     IconButton(onClick = { showSortMenu = true }) {
-                        Icon(Icons.Default.Sort, contentDescription = "Sort")
+                        Icon(Icons.AutoMirrored.Filled.Sort, contentDescription = "Sort")
                     }
                     DropdownMenu(
                         expanded = showSortMenu,
@@ -84,7 +84,12 @@ fun DiagnosisBrowseScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddCase) {
+            FloatingActionButton(
+                onClick = onAddCase,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                shape = MaterialTheme.shapes.medium,
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "Add case")
             }
         },
@@ -103,6 +108,7 @@ fun DiagnosisBrowseScreen(
                 leadingIcon = { Icon(Icons.Default.Search, null) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium,
             )
             Spacer(Modifier.height(12.dp))
 
@@ -137,6 +143,7 @@ fun DiagnosisBrowseScreen(
                     label = { Text("Diagnosis") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.medium,
                 )
             },
             confirmButton = {

@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.FormatBold
 import androidx.compose.material.icons.filled.FormatItalic
-import androidx.compose.material.icons.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.FormatListNumbered
 import androidx.compose.material.icons.filled.FormatUnderlined
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -118,7 +118,7 @@ private fun RichTextEditorToolbar(
                 onClick = { state.toggleSpanStyle(SpanStyle(textDecoration = TextDecoration.Underline)) },
             )
             ToolbarToggleButton(
-                icon = Icons.Default.FormatListBulleted,
+                icon = Icons.AutoMirrored.Filled.FormatListBulleted,
                 contentDescription = "Bullet list",
                 active = state.isUnorderedList,
                 onClick = { state.toggleUnorderedList() },

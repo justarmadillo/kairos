@@ -78,8 +78,9 @@ fun AudioPlayerItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        shape = MaterialTheme.shapes.small,
-        tonalElevation = 1.dp,
+        shape = MaterialTheme.shapes.medium,
+        tonalElevation = 0.dp,
+        color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),

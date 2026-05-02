@@ -3,6 +3,7 @@ package com.kairos.data.backup;
 import android.content.Context;
 import androidx.work.WorkerParameters;
 import com.kairos.core.media.MediaFileManager;
+import com.kairos.core.repository.DataSafetyCoordinator;
 import com.kairos.data.db.dao.CaseDao;
 import com.kairos.data.db.dao.CaseMediaDao;
 import com.kairos.data.db.dao.ConsultationSessionDao;
@@ -44,20 +45,24 @@ public final class TrashPurgeWorker_Factory {
 
   private final Provider<MediaFileManager> mediaFileManagerProvider;
 
+  private final Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider;
+
   public TrashPurgeWorker_Factory(Provider<PatientDao> patientDaoProvider,
       Provider<CaseDao> caseDaoProvider, Provider<CaseMediaDao> caseMediaDaoProvider,
       Provider<ShiftDao> shiftDaoProvider, Provider<ConsultationSessionDao> sessionDaoProvider,
-      Provider<MediaFileManager> mediaFileManagerProvider) {
+      Provider<MediaFileManager> mediaFileManagerProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
     this.patientDaoProvider = patientDaoProvider;
     this.caseDaoProvider = caseDaoProvider;
     this.caseMediaDaoProvider = caseMediaDaoProvider;
     this.shiftDaoProvider = shiftDaoProvider;
     this.sessionDaoProvider = sessionDaoProvider;
     this.mediaFileManagerProvider = mediaFileManagerProvider;
+    this.dataSafetyCoordinatorProvider = dataSafetyCoordinatorProvider;
   }
 
   public TrashPurgeWorker get(Context context, WorkerParameters params) {
-    return newInstance(context, params, patientDaoProvider.get(), caseDaoProvider.get(), caseMediaDaoProvider.get(), shiftDaoProvider.get(), sessionDaoProvider.get(), mediaFileManagerProvider.get());
+    return newInstance(context, params, patientDaoProvider.get(), caseDaoProvider.get(), caseMediaDaoProvider.get(), shiftDaoProvider.get(), sessionDaoProvider.get(), mediaFileManagerProvider.get(), dataSafetyCoordinatorProvider.get());
   }
 
   public static TrashPurgeWorker_Factory create(
@@ -66,20 +71,23 @@ public final class TrashPurgeWorker_Factory {
       javax.inject.Provider<CaseMediaDao> caseMediaDaoProvider,
       javax.inject.Provider<ShiftDao> shiftDaoProvider,
       javax.inject.Provider<ConsultationSessionDao> sessionDaoProvider,
-      javax.inject.Provider<MediaFileManager> mediaFileManagerProvider) {
-    return new TrashPurgeWorker_Factory(Providers.asDaggerProvider(patientDaoProvider), Providers.asDaggerProvider(caseDaoProvider), Providers.asDaggerProvider(caseMediaDaoProvider), Providers.asDaggerProvider(shiftDaoProvider), Providers.asDaggerProvider(sessionDaoProvider), Providers.asDaggerProvider(mediaFileManagerProvider));
+      javax.inject.Provider<MediaFileManager> mediaFileManagerProvider,
+      javax.inject.Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new TrashPurgeWorker_Factory(Providers.asDaggerProvider(patientDaoProvider), Providers.asDaggerProvider(caseDaoProvider), Providers.asDaggerProvider(caseMediaDaoProvider), Providers.asDaggerProvider(shiftDaoProvider), Providers.asDaggerProvider(sessionDaoProvider), Providers.asDaggerProvider(mediaFileManagerProvider), Providers.asDaggerProvider(dataSafetyCoordinatorProvider));
   }
 
   public static TrashPurgeWorker_Factory create(Provider<PatientDao> patientDaoProvider,
       Provider<CaseDao> caseDaoProvider, Provider<CaseMediaDao> caseMediaDaoProvider,
       Provider<ShiftDao> shiftDaoProvider, Provider<ConsultationSessionDao> sessionDaoProvider,
-      Provider<MediaFileManager> mediaFileManagerProvider) {
-    return new TrashPurgeWorker_Factory(patientDaoProvider, caseDaoProvider, caseMediaDaoProvider, shiftDaoProvider, sessionDaoProvider, mediaFileManagerProvider);
+      Provider<MediaFileManager> mediaFileManagerProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new TrashPurgeWorker_Factory(patientDaoProvider, caseDaoProvider, caseMediaDaoProvider, shiftDaoProvider, sessionDaoProvider, mediaFileManagerProvider, dataSafetyCoordinatorProvider);
   }
 
   public static TrashPurgeWorker newInstance(Context context, WorkerParameters params,
       PatientDao patientDao, CaseDao caseDao, CaseMediaDao caseMediaDao, ShiftDao shiftDao,
-      ConsultationSessionDao sessionDao, MediaFileManager mediaFileManager) {
-    return new TrashPurgeWorker(context, params, patientDao, caseDao, caseMediaDao, shiftDao, sessionDao, mediaFileManager);
+      ConsultationSessionDao sessionDao, MediaFileManager mediaFileManager,
+      DataSafetyCoordinator dataSafetyCoordinator) {
+    return new TrashPurgeWorker(context, params, patientDao, caseDao, caseMediaDao, shiftDao, sessionDao, mediaFileManager, dataSafetyCoordinator);
   }
 }

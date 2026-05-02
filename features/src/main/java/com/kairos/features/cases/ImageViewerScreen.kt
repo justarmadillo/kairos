@@ -29,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -42,13 +41,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import coil3.compose.AsyncImage
 import com.kairos.core.model.MediaItem
 import com.kairos.core.model.MediaType
+import com.kairos.core.theme.PaletteOnDark
+import com.kairos.core.theme.PaletteSurfaceDark
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -75,7 +75,7 @@ fun ImageViewerScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black),
+            .background(PaletteSurfaceDark),
     ) {
         HorizontalPager(
             state = pagerState,
@@ -92,11 +92,11 @@ fun ImageViewerScreen(
         TopAppBar(
             title = {
                 val current = if (visualMedia.isEmpty()) 0 else pagerState.currentPage + 1
-                androidx.compose.material3.Text("$current / ${visualMedia.size}", color = Color.White)
+                androidx.compose.material3.Text("$current / ${visualMedia.size}", color = PaletteOnDark)
             },
             navigationIcon = {
                 IconButton(onClick = onNavigateBack) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = PaletteOnDark)
                 }
             },
             actions = {
@@ -109,10 +109,10 @@ fun ImageViewerScreen(
                         }
                     },
                 ) {
-                    Icon(Icons.Default.Download, contentDescription = "Save to gallery", tint = Color.White)
+                    Icon(Icons.Default.Download, contentDescription = "Save to gallery", tint = PaletteOnDark)
                 }
             },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black.copy(alpha = 0.5f)),
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = PaletteSurfaceDark.copy(alpha = 0.72f)),
             modifier = Modifier.align(Alignment.TopCenter),
         )
 
@@ -152,7 +152,6 @@ private fun ZoomableImage(
     )
 }
 
-@OptIn(UnstableApi::class)
 @Composable
 private fun VideoPlayer(
     media: MediaItem,

@@ -18,6 +18,7 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -169,6 +170,7 @@ fun SettingsScreen(
                         Button(
                             onClick = viewModel::exportNow,
                             enabled = settings.backupFolderUri != null,
+                            shape = MaterialTheme.shapes.medium,
                         ) { Text("Export") }
                     }
                 },
@@ -185,6 +187,7 @@ fun SettingsScreen(
                         Button(
                             onClick = { restorePicker.launch(arrayOf("application/zip", "*/*")) },
                             enabled = !backupUi.isExporting,
+                            shape = MaterialTheme.shapes.medium,
                         ) { Text("Restore") }
                     }
                 },
@@ -276,7 +279,8 @@ private fun <T> DropdownSetting(
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
             modifier = Modifier
                 .fillMaxWidth()
-                .menuAnchor(),
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable, enabled = true),
+            shape = MaterialTheme.shapes.medium,
         )
         ExposedDropdownMenu(
             expanded = expanded,

@@ -2,6 +2,7 @@ package com.kairos.data.repository
 
 import androidx.room.withTransaction
 import com.kairos.core.model.Patient
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.core.repository.PatientRepository
 import com.kairos.data.db.KairosDatabase
 import com.kairos.data.db.dao.PatientDao
@@ -16,12 +17,13 @@ import javax.inject.Singleton
 class PatientRepositoryImpl @Inject constructor(
     private val dao: PatientDao,
     private val db: KairosDatabase,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : PatientRepository {
 
-    override suspend fun upsert(patient: Patient): Long {
+    override suspend fun upsert(patient: Patient): Long = dataSafetyCoordinator.withDataLock {
         val now = System.currentTimeMillis()
         val entity = patient.toEntity(now)
-        return db.withTransaction {
+        db.withTransaction {
             if (patient.id == 0L) {
                 val newId = dao.insert(entity)
                 dao.deletePhonesFor(newId)
@@ -49,11 +51,13 @@ class PatientRepositoryImpl @Inject constructor(
     override fun search(query: String): Flow<List<Patient>> =
         dao.search(query).map { list -> list.map { it.toDomain() } }
 
-    override suspend fun softDelete(id: Long) =
+    override suspend fun softDelete(id: Long) = dataSafetyCoordinator.withDataLock {
         dao.softDelete(id, System.currentTimeMillis())
+    }
 
-    override suspend fun restore(id: Long) =
+    override suspend fun restore(id: Long) = dataSafetyCoordinator.withDataLock {
         dao.restore(id, System.currentTimeMillis())
+    }
 
     override fun observeTrashed(): Flow<List<Patient>> =
         dao.observeTrashed().map { list -> list.map { it.toDomain() } }

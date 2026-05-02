@@ -85,7 +85,7 @@ fun PatientCaseScreen(
                 windowInsets = WindowInsets(0.dp),
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground,
                     navigationIconContentColor = MaterialTheme.colorScheme.primary,
                     actionIconContentColor = MaterialTheme.colorScheme.primary,
                 ),
@@ -102,6 +102,7 @@ fun PatientCaseScreen(
                     } else {
                         Button(
                             onClick = { viewModel.save(linkShiftId, linkSessionId) },
+                            shape = MaterialTheme.shapes.medium,
                             modifier = Modifier.padding(end = 8.dp),
                         ) {
                             Text("Save")

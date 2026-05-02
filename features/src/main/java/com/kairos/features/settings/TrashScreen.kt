@@ -139,7 +139,10 @@ private fun TrashRow(
                 color = if (daysRemaining <= 3) MaterialTheme.colorScheme.error else extra.onSurfaceMuted,
             )
         }
-        OutlinedButton(onClick = onRestore) { Text("Restore") }
+        OutlinedButton(
+            onClick = onRestore,
+            shape = MaterialTheme.shapes.medium,
+        ) { Text("Restore") }
     }
 }
 

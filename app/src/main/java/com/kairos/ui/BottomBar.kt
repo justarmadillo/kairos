@@ -2,6 +2,7 @@ package com.kairos.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -21,7 +22,7 @@ fun BottomBar(
     val extras = LocalKairosExtraColors.current
     NavigationBar(
         modifier = modifier,
-        containerColor = extras.surfaceCard,
+        containerColor = MaterialTheme.colorScheme.background,
         tonalElevation = 0.dp
     ) {
         TopLevelDestination.entries.forEach { dest ->
@@ -42,7 +43,7 @@ fun BottomBar(
                     selectedTextColor = extras.selectedDark,
                     unselectedIconColor = extras.onSurfaceMuted,
                     unselectedTextColor = extras.onSurfaceMuted,
-                    indicatorColor = extras.divider
+                    indicatorColor = extras.surfaceCard
                 )
             )
         }

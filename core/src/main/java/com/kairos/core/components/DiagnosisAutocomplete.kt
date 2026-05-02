@@ -66,6 +66,7 @@ fun DiagnosisAutocomplete(
                 placeholder = { Text("Type to search or add…") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
+                shape = MaterialTheme.shapes.medium,
             )
 
             if (suggestions.isNotEmpty() || query.isNotBlank()) {
@@ -74,8 +75,8 @@ fun DiagnosisAutocomplete(
                         .fillMaxWidth()
                         .padding(top = 4.dp),
                     shape = MaterialTheme.shapes.small,
-                    tonalElevation = 2.dp,
-                    color = MaterialTheme.colorScheme.surface,
+                    tonalElevation = 0.dp,
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                 ) {
                     Column(
                         modifier = Modifier

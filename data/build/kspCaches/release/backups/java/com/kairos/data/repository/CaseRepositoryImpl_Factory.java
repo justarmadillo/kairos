@@ -1,6 +1,7 @@
 package com.kairos.data.repository;
 
 import com.kairos.core.media.MediaFileManager;
+import com.kairos.core.repository.DataSafetyCoordinator;
 import com.kairos.data.db.KairosDatabase;
 import com.kairos.data.db.dao.CaseDao;
 import com.kairos.data.db.dao.DiagnosisDao;
@@ -37,35 +38,42 @@ public final class CaseRepositoryImpl_Factory implements Factory<CaseRepositoryI
 
   private final Provider<MediaFileManager> mediaFileManagerProvider;
 
+  private final Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider;
+
   public CaseRepositoryImpl_Factory(Provider<CaseDao> caseDaoProvider,
       Provider<DiagnosisDao> diagnosisDaoProvider, Provider<KairosDatabase> dbProvider,
-      Provider<MediaFileManager> mediaFileManagerProvider) {
+      Provider<MediaFileManager> mediaFileManagerProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
     this.caseDaoProvider = caseDaoProvider;
     this.diagnosisDaoProvider = diagnosisDaoProvider;
     this.dbProvider = dbProvider;
     this.mediaFileManagerProvider = mediaFileManagerProvider;
+    this.dataSafetyCoordinatorProvider = dataSafetyCoordinatorProvider;
   }
 
   @Override
   public CaseRepositoryImpl get() {
-    return newInstance(caseDaoProvider.get(), diagnosisDaoProvider.get(), dbProvider.get(), mediaFileManagerProvider.get());
+    return newInstance(caseDaoProvider.get(), diagnosisDaoProvider.get(), dbProvider.get(), mediaFileManagerProvider.get(), dataSafetyCoordinatorProvider.get());
   }
 
   public static CaseRepositoryImpl_Factory create(javax.inject.Provider<CaseDao> caseDaoProvider,
       javax.inject.Provider<DiagnosisDao> diagnosisDaoProvider,
       javax.inject.Provider<KairosDatabase> dbProvider,
-      javax.inject.Provider<MediaFileManager> mediaFileManagerProvider) {
-    return new CaseRepositoryImpl_Factory(Providers.asDaggerProvider(caseDaoProvider), Providers.asDaggerProvider(diagnosisDaoProvider), Providers.asDaggerProvider(dbProvider), Providers.asDaggerProvider(mediaFileManagerProvider));
+      javax.inject.Provider<MediaFileManager> mediaFileManagerProvider,
+      javax.inject.Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new CaseRepositoryImpl_Factory(Providers.asDaggerProvider(caseDaoProvider), Providers.asDaggerProvider(diagnosisDaoProvider), Providers.asDaggerProvider(dbProvider), Providers.asDaggerProvider(mediaFileManagerProvider), Providers.asDaggerProvider(dataSafetyCoordinatorProvider));
   }
 
   public static CaseRepositoryImpl_Factory create(Provider<CaseDao> caseDaoProvider,
       Provider<DiagnosisDao> diagnosisDaoProvider, Provider<KairosDatabase> dbProvider,
-      Provider<MediaFileManager> mediaFileManagerProvider) {
-    return new CaseRepositoryImpl_Factory(caseDaoProvider, diagnosisDaoProvider, dbProvider, mediaFileManagerProvider);
+      Provider<MediaFileManager> mediaFileManagerProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new CaseRepositoryImpl_Factory(caseDaoProvider, diagnosisDaoProvider, dbProvider, mediaFileManagerProvider, dataSafetyCoordinatorProvider);
   }
 
   public static CaseRepositoryImpl newInstance(CaseDao caseDao, DiagnosisDao diagnosisDao,
-      KairosDatabase db, MediaFileManager mediaFileManager) {
-    return new CaseRepositoryImpl(caseDao, diagnosisDao, db, mediaFileManager);
+      KairosDatabase db, MediaFileManager mediaFileManager,
+      DataSafetyCoordinator dataSafetyCoordinator) {
+    return new CaseRepositoryImpl(caseDao, diagnosisDao, db, mediaFileManager, dataSafetyCoordinator);
   }
 }

@@ -1,5 +1,6 @@
 package com.kairos.data.repository;
 
+import com.kairos.core.repository.DataSafetyCoordinator;
 import com.kairos.data.db.KairosDatabase;
 import com.kairos.data.db.dao.ConsultationSessionDao;
 import dagger.internal.DaggerGenerated;
@@ -31,30 +32,36 @@ public final class ConsultationRepositoryImpl_Factory implements Factory<Consult
 
   private final Provider<KairosDatabase> dbProvider;
 
+  private final Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider;
+
   public ConsultationRepositoryImpl_Factory(Provider<ConsultationSessionDao> daoProvider,
-      Provider<KairosDatabase> dbProvider) {
+      Provider<KairosDatabase> dbProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
     this.daoProvider = daoProvider;
     this.dbProvider = dbProvider;
+    this.dataSafetyCoordinatorProvider = dataSafetyCoordinatorProvider;
   }
 
   @Override
   public ConsultationRepositoryImpl get() {
-    return newInstance(daoProvider.get(), dbProvider.get());
+    return newInstance(daoProvider.get(), dbProvider.get(), dataSafetyCoordinatorProvider.get());
   }
 
   public static ConsultationRepositoryImpl_Factory create(
       javax.inject.Provider<ConsultationSessionDao> daoProvider,
-      javax.inject.Provider<KairosDatabase> dbProvider) {
-    return new ConsultationRepositoryImpl_Factory(Providers.asDaggerProvider(daoProvider), Providers.asDaggerProvider(dbProvider));
+      javax.inject.Provider<KairosDatabase> dbProvider,
+      javax.inject.Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new ConsultationRepositoryImpl_Factory(Providers.asDaggerProvider(daoProvider), Providers.asDaggerProvider(dbProvider), Providers.asDaggerProvider(dataSafetyCoordinatorProvider));
   }
 
   public static ConsultationRepositoryImpl_Factory create(
-      Provider<ConsultationSessionDao> daoProvider, Provider<KairosDatabase> dbProvider) {
-    return new ConsultationRepositoryImpl_Factory(daoProvider, dbProvider);
+      Provider<ConsultationSessionDao> daoProvider, Provider<KairosDatabase> dbProvider,
+      Provider<DataSafetyCoordinator> dataSafetyCoordinatorProvider) {
+    return new ConsultationRepositoryImpl_Factory(daoProvider, dbProvider, dataSafetyCoordinatorProvider);
   }
 
   public static ConsultationRepositoryImpl newInstance(ConsultationSessionDao dao,
-      KairosDatabase db) {
-    return new ConsultationRepositoryImpl(dao, db);
+      KairosDatabase db, DataSafetyCoordinator dataSafetyCoordinator) {
+    return new ConsultationRepositoryImpl(dao, db, dataSafetyCoordinator);
   }
 }

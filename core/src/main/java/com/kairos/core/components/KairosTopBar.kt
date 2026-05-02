@@ -27,7 +27,7 @@ fun KairosTopBar(
         Text(
             text = title,
             style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Row(
             verticalAlignment = Alignment.CenterVertically,

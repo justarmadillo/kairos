@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -51,10 +50,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
@@ -64,6 +61,8 @@ import com.kairos.core.model.MediaItem
 import com.kairos.core.model.MediaType
 import java.io.File
 import com.kairos.core.theme.LocalKairosExtraColors
+import com.kairos.core.theme.PaletteOnDark
+import com.kairos.core.theme.PaletteSurfaceDark
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -123,7 +122,6 @@ fun CaseDetailScreen(
                 Text(
                     text = case.patient?.name ?: "",
                     style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(1f),
                 )
                 case.patient?.age?.let { age ->
@@ -274,7 +272,7 @@ private fun VisualMediaThumbnail(
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(MaterialTheme.shapes.large)
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center,
@@ -290,13 +288,13 @@ private fun VisualMediaThumbnail(
             Box(
                 modifier = Modifier
                     .size(36.dp)
-                    .background(Color.Black.copy(alpha = 0.55f), CircleShape),
+                    .background(PaletteSurfaceDark.copy(alpha = 0.55f), CircleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
                     Icons.Default.PlayArrow,
                     contentDescription = "Video",
-                    tint = Color.White,
+                    tint = PaletteOnDark,
                     modifier = Modifier.size(24.dp),
                 )
             }

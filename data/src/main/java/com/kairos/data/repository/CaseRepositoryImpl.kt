@@ -4,6 +4,7 @@ import androidx.room.withTransaction
 import com.kairos.core.media.MediaFileManager
 import com.kairos.core.model.Case
 import com.kairos.core.repository.CaseRepository
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.data.db.KairosDatabase
 import com.kairos.data.db.dao.CaseDao
 import com.kairos.data.db.dao.DiagnosisDao
@@ -24,6 +25,7 @@ class CaseRepositoryImpl @Inject constructor(
     private val diagnosisDao: DiagnosisDao,
     private val db: KairosDatabase,
     private val mediaFileManager: MediaFileManager,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : CaseRepository {
 
     /** Replace relative media paths with absolute paths usable by UI (Coil, ExoPlayer). */
@@ -48,11 +50,11 @@ class CaseRepositoryImpl @Inject constructor(
         diagnosisNames: List<String>,
         linkShiftId: Long?,
         linkSessionId: Long?,
-    ): Long {
+    ): Long = dataSafetyCoordinator.withDataLock {
         val now = System.currentTimeMillis()
         val entity = case.toEntity(now)
 
-        return db.withTransaction {
+        db.withTransaction {
             val caseId: Long = if (case.id == 0L) {
                 caseDao.insert(entity)
             } else {
@@ -97,17 +99,21 @@ class CaseRepositoryImpl @Inject constructor(
     override fun observeBySession(sessionId: Long): Flow<List<Case>> =
         caseDao.observeBySession(sessionId).map { list -> list.map { it.toDomain().resolveMediaPaths() } }
 
-    override suspend fun unlinkFromShift(caseId: Long, shiftId: Long) =
+    override suspend fun unlinkFromShift(caseId: Long, shiftId: Long) = dataSafetyCoordinator.withDataLock {
         caseDao.unlinkFromShift(shiftId, caseId)
+    }
 
-    override suspend fun unlinkFromSession(caseId: Long, sessionId: Long) =
+    override suspend fun unlinkFromSession(caseId: Long, sessionId: Long) = dataSafetyCoordinator.withDataLock {
         caseDao.unlinkFromSession(sessionId, caseId)
+    }
 
-    override suspend fun softDelete(id: Long) =
+    override suspend fun softDelete(id: Long) = dataSafetyCoordinator.withDataLock {
         caseDao.softDelete(id, System.currentTimeMillis())
+    }
 
-    override suspend fun restore(id: Long) =
+    override suspend fun restore(id: Long) = dataSafetyCoordinator.withDataLock {
         caseDao.restore(id, System.currentTimeMillis())
+    }
 
     override fun observeTrashed(): Flow<List<Case>> =
         caseDao.observeTrashed().map { list -> list.map { it.toDomain().resolveMediaPaths() } }

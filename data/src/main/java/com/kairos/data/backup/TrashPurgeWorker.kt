@@ -5,6 +5,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.kairos.core.media.MediaFileManager
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.data.db.dao.CaseDao
 import com.kairos.data.db.dao.CaseMediaDao
 import com.kairos.data.db.dao.ConsultationSessionDao
@@ -24,34 +25,37 @@ class TrashPurgeWorker @AssistedInject constructor(
     private val shiftDao: ShiftDao,
     private val sessionDao: ConsultationSessionDao,
     private val mediaFileManager: MediaFileManager,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
         return try {
-            val threshold = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(30)
+            dataSafetyCoordinator.withDataLock {
+                val threshold = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(30)
 
-            // Collect media paths BEFORE deleting DB records so cascades don't remove them first
-            val expiredCaseIds = caseDao.listExpiredTrash(threshold)
-            val mediaPaths = expiredCaseIds.flatMap { caseId ->
-                caseMediaDao.listForCase(caseId).map { it.filePath }
-            }
+                // Collect media paths BEFORE deleting DB records so cascades don't remove them first
+                val expiredCaseIds = caseDao.listExpiredTrash(threshold)
+                val mediaPaths = expiredCaseIds.flatMap { caseId ->
+                    caseMediaDao.listForCase(caseId).map { it.filePath }
+                }
 
-            // Delete DB records FIRST (cascade handles junction tables)
-            if (expiredCaseIds.isNotEmpty()) {
-                caseDao.hardDelete(expiredCaseIds)
-            }
+                // Delete DB records FIRST (cascade handles junction tables)
+                if (expiredCaseIds.isNotEmpty()) {
+                    caseDao.hardDelete(expiredCaseIds)
+                }
 
-            // Purge other entities
-            patientDao.purgeOlderThan(threshold)
-            shiftDao.purgeOlderThan(threshold)
-            sessionDao.purgeOlderThan(threshold)
+                // Purge other entities
+                patientDao.purgeOlderThan(threshold)
+                shiftDao.purgeOlderThan(threshold)
+                sessionDao.purgeOlderThan(threshold)
 
-            // THEN delete files — DB is now consistent even if this is interrupted
-            mediaPaths.forEach { path ->
-                try { mediaFileManager.delete(path) } catch (_: Exception) {}
-            }
-            expiredCaseIds.forEach { caseId ->
-                try { mediaFileManager.deleteCaseDir(caseId) } catch (_: Exception) {}
+                // THEN delete files — DB is now consistent even if this is interrupted
+                mediaPaths.forEach { path ->
+                    try { mediaFileManager.delete(path) } catch (_: Exception) {}
+                }
+                expiredCaseIds.forEach { caseId ->
+                    try { mediaFileManager.deleteCaseDir(caseId) } catch (_: Exception) {}
+                }
             }
 
             Result.success()

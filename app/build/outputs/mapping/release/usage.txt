@@ -7083,7 +7083,6 @@ androidx.compose.material.icons.automirrored.filled.FormatAlignLeftKt
 androidx.compose.material.icons.automirrored.filled.FormatAlignRightKt
 androidx.compose.material.icons.automirrored.filled.FormatIndentDecreaseKt
 androidx.compose.material.icons.automirrored.filled.FormatIndentIncreaseKt
-androidx.compose.material.icons.automirrored.filled.FormatListBulletedKt
 androidx.compose.material.icons.automirrored.filled.FormatTextdirectionLToRKt
 androidx.compose.material.icons.automirrored.filled.FormatTextdirectionRToLKt
 androidx.compose.material.icons.automirrored.filled.ForwardKt
@@ -7154,7 +7153,6 @@ androidx.compose.material.icons.automirrored.filled.SendToMobileKt
 androidx.compose.material.icons.automirrored.filled.ShortTextKt
 androidx.compose.material.icons.automirrored.filled.ShortcutKt
 androidx.compose.material.icons.automirrored.filled.ShowChartKt
-androidx.compose.material.icons.automirrored.filled.SortKt
 androidx.compose.material.icons.automirrored.filled.SpeakerNotesKt
 androidx.compose.material.icons.automirrored.filled.StarHalfKt
 androidx.compose.material.icons.automirrored.filled.StickyNote2Kt
@@ -8512,8 +8510,7 @@ androidx.compose.material.icons.filled.FormatColorTextKt
 androidx.compose.material.icons.filled.FormatIndentDecreaseKt
 androidx.compose.material.icons.filled.FormatIndentIncreaseKt
 androidx.compose.material.icons.filled.FormatLineSpacingKt
-androidx.compose.material.icons.filled.FormatListBulletedKt:
-    public static synthetic void getFormatListBulleted$annotations(androidx.compose.material.icons.Icons$Filled)
+androidx.compose.material.icons.filled.FormatListBulletedKt
 androidx.compose.material.icons.filled.FormatListNumberedRtlKt
 androidx.compose.material.icons.filled.FormatOverlineKt
 androidx.compose.material.icons.filled.FormatPaintKt
@@ -8700,10 +8697,8 @@ androidx.compose.material.icons.filled.KeyKt
 androidx.compose.material.icons.filled.KeyOffKt
 androidx.compose.material.icons.filled.KeyboardAltKt
 androidx.compose.material.icons.filled.KeyboardArrowDownKt
-androidx.compose.material.icons.filled.KeyboardArrowLeftKt:
-    public static synthetic void getKeyboardArrowLeft$annotations(androidx.compose.material.icons.Icons$Filled)
-androidx.compose.material.icons.filled.KeyboardArrowRightKt:
-    public static synthetic void getKeyboardArrowRight$annotations(androidx.compose.material.icons.Icons$Filled)
+androidx.compose.material.icons.filled.KeyboardArrowLeftKt
+androidx.compose.material.icons.filled.KeyboardArrowRightKt
 androidx.compose.material.icons.filled.KeyboardArrowUpKt
 androidx.compose.material.icons.filled.KeyboardBackspaceKt
 androidx.compose.material.icons.filled.KeyboardCapslockKt
@@ -9429,8 +9424,7 @@ androidx.compose.material.icons.filled.SoapKt
 androidx.compose.material.icons.filled.SocialDistanceKt
 androidx.compose.material.icons.filled.SolarPowerKt
 androidx.compose.material.icons.filled.SortByAlphaKt
-androidx.compose.material.icons.filled.SortKt:
-    public static synthetic void getSort$annotations(androidx.compose.material.icons.Icons$Filled)
+androidx.compose.material.icons.filled.SortKt
 androidx.compose.material.icons.filled.SosKt
 androidx.compose.material.icons.filled.SoupKitchenKt
 androidx.compose.material.icons.filled.SourceKt
@@ -19038,6 +19032,8 @@ androidx.compose.material3.ExposedDropdownMenuBoxScope:
     public final synthetic void ExposedDropdownMenu(boolean,kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.ScrollState,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
     public final void ExposedDropdownMenu-kbRbctU(boolean,kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,androidx.compose.foundation.ScrollState,boolean,boolean,androidx.compose.ui.graphics.Shape,long,float,float,androidx.compose.foundation.BorderStroke,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int,int)
     public static synthetic androidx.compose.ui.Modifier exposedDropdownSize$default(androidx.compose.material3.ExposedDropdownMenuBoxScope,androidx.compose.ui.Modifier,boolean,int,java.lang.Object)
+    public final androidx.compose.ui.Modifier menuAnchor(androidx.compose.ui.Modifier)
+    public static synthetic androidx.compose.ui.Modifier menuAnchor-fsE2BvY$default(androidx.compose.material3.ExposedDropdownMenuBoxScope,androidx.compose.ui.Modifier,java.lang.String,boolean,int,java.lang.Object)
 androidx.compose.material3.ExposedDropdownMenuDefaults$TrailingIcon$2
 androidx.compose.material3.ExposedDropdownMenuDefaults:
     public final synthetic void TrailingIcon(boolean,androidx.compose.runtime.Composer,int)
@@ -26224,14 +26220,12 @@ androidx.compose.ui.text.font.Font:
 androidx.compose.ui.text.font.FontFamily$Companion:
     public final androidx.compose.ui.text.font.GenericFontFamily getCursive()
     public final androidx.compose.ui.text.font.GenericFontFamily getMonospace()
-    public final androidx.compose.ui.text.font.GenericFontFamily getSerif()
 androidx.compose.ui.text.font.FontFamily$Resolver:
     public abstract java.lang.Object preload(androidx.compose.ui.text.font.FontFamily,kotlin.coroutines.Continuation)
 androidx.compose.ui.text.font.FontFamily:
     public static final int $stable
     public static final synthetic androidx.compose.ui.text.font.GenericFontFamily access$getCursive$cp()
     public static final synthetic androidx.compose.ui.text.font.GenericFontFamily access$getMonospace$cp()
-    public static final synthetic androidx.compose.ui.text.font.GenericFontFamily access$getSerif$cp()
     public final boolean getCanLoadSynchronously()
     public static synthetic void getCanLoadSynchronously$annotations()
 androidx.compose.ui.text.font.FontFamilyKt:
@@ -31793,7 +31787,6 @@ androidx.documentfile.R
 androidx.documentfile.provider.DocumentFile:
     static final java.lang.String TAG
     public abstract boolean canRead()
-    public abstract boolean canWrite()
     public abstract androidx.documentfile.provider.DocumentFile createDirectory(java.lang.String)
     public abstract boolean delete()
     public abstract boolean exists()
@@ -31811,12 +31804,24 @@ androidx.documentfile.provider.DocumentFile:
     public abstract long length()
     public abstract androidx.documentfile.provider.DocumentFile[] listFiles()
     public abstract boolean renameTo(java.lang.String)
-androidx.documentfile.provider.DocumentsContractApi19
+androidx.documentfile.provider.DocumentsContractApi19:
+    private static final int FLAG_VIRTUAL_DOCUMENT
+    private static final java.lang.String TAG
+    private void <init>()
+    public static boolean canRead(android.content.Context,android.net.Uri)
+    public static boolean exists(android.content.Context,android.net.Uri)
+    public static long getFlags(android.content.Context,android.net.Uri)
+    public static java.lang.String getName(android.content.Context,android.net.Uri)
+    public static java.lang.String getType(android.content.Context,android.net.Uri)
+    public static boolean isDirectory(android.content.Context,android.net.Uri)
+    public static boolean isFile(android.content.Context,android.net.Uri)
+    public static boolean isVirtual(android.content.Context,android.net.Uri)
+    public static long lastModified(android.content.Context,android.net.Uri)
+    public static long length(android.content.Context,android.net.Uri)
 androidx.documentfile.provider.RawDocumentFile
 androidx.documentfile.provider.SingleDocumentFile
 androidx.documentfile.provider.TreeDocumentFile:
     public boolean canRead()
-    public boolean canWrite()
     private static void closeQuietly(java.lang.AutoCloseable)
     public androidx.documentfile.provider.DocumentFile createDirectory(java.lang.String)
     public boolean delete()
@@ -46289,6 +46294,21 @@ com.kairos.core.repository.RestoreResult:
     public static synthetic com.kairos.core.repository.RestoreResult copy$default(com.kairos.core.repository.RestoreResult,boolean,java.lang.String,int,java.lang.Object)
 com.kairos.core.repository.ShiftRepository:
     public abstract java.lang.Object getById(long,kotlin.coroutines.Continuation)
+com.kairos.core.theme.ColorKt:
+    public static final long getPaletteAccentTeal()
+    public static final long getPaletteBlack()
+    public static final long getPaletteBody()
+    public static final long getPaletteBodyStrong()
+    public static final long getPaletteHairline()
+    public static final long getPaletteLinen()
+    public static final long getPaletteMuted()
+    public static final long getPaletteMutedSoft()
+    public static final long getPaletteOnDarkSoft()
+    public static final long getPaletteStone()
+    public static final long getPaletteSuccess()
+    public static final long getPaletteTerracotta()
+    public static final long getPaletteWarning()
+    public static final long getPaletteWhite()
 com.kairos.core.theme.KairosExtraColors:
     public static final int $stable
     public final long component1-0d7_KjU()
@@ -46298,7 +46318,22 @@ com.kairos.core.theme.KairosExtraColors:
     public final com.kairos.core.theme.KairosExtraColors copy-jRlVdoo(long,long,long,long)
     public static synthetic com.kairos.core.theme.KairosExtraColors copy-jRlVdoo$default(com.kairos.core.theme.KairosExtraColors,long,long,long,long,int,java.lang.Object)
 com.kairos.data.R
+com.kairos.data.backup.BackupEngine$ExtractedBackup:
+    public final org.json.JSONObject component1()
+    public final java.util.Set component2()
+    public final com.kairos.data.backup.BackupEngine$ExtractedBackup copy(org.json.JSONObject,java.util.Set)
+    public static synthetic com.kairos.data.backup.BackupEngine$ExtractedBackup copy$default(com.kairos.data.backup.BackupEngine$ExtractedBackup,org.json.JSONObject,java.util.Set,int,java.lang.Object)
+com.kairos.data.backup.BackupEngine:
+    public static final int BACKUP_FORMAT_VERSION
+    public static final java.lang.String DB_NAME
+    public static final java.lang.String MANIFEST_NAME
+    public static final long MAX_BACKUP_BYTES
+    public static final int MAX_BACKUP_ENTRIES
+    public static final long MAX_ENTRY_BYTES
+    public static final java.lang.String TEMP_CASE_MEDIA_PREFIX
 com.kairos.data.backup.BackupEngine_Factory
+com.kairos.data.backup.DataSafetyCoordinatorImpl_Factory$InstanceHolder
+com.kairos.data.backup.DataSafetyCoordinatorImpl_Factory
 com.kairos.data.backup.ScheduledBackupWorker:
     public static final java.lang.String CHANNEL_ID
     public static final int NOTIFICATION_ID
@@ -46544,6 +46579,7 @@ com.kairos.data.repository.CaseRepositoryImpl$observeByShift$$inlined$map$1$2$1:
     java.lang.Object L$0
 com.kairos.data.repository.CaseRepositoryImpl$observeTrashed$$inlined$map$1$2$1:
     java.lang.Object L$0
+com.kairos.data.repository.CaseRepositoryImpl$unlinkFromSession$2
 com.kairos.data.repository.CaseRepositoryImpl:
     public java.lang.Object unlinkFromSession(long,long,kotlin.coroutines.Continuation)
 com.kairos.data.repository.CaseRepositoryImpl_Factory
@@ -46552,6 +46588,7 @@ com.kairos.data.repository.ConsultationRepositoryImpl$observeForDateRange$$inlin
     java.lang.Object L$0
 com.kairos.data.repository.ConsultationRepositoryImpl$observeTrashed$$inlined$map$1$2$1:
     java.lang.Object L$0
+com.kairos.data.repository.ConsultationRepositoryImpl$softDelete$2
 com.kairos.data.repository.ConsultationRepositoryImpl:
     public java.lang.Object getById(long,kotlin.coroutines.Continuation)
     public java.lang.Object softDelete(long,kotlin.coroutines.Continuation)
@@ -46565,9 +46602,10 @@ com.kairos.data.repository.DiagnosisRepositoryImpl_Factory
 com.kairos.data.repository.MediaRepositoryImpl$observeForCase$$inlined$map$1$2$1
 com.kairos.data.repository.MediaRepositoryImpl$observeForCase$$inlined$map$1$2
 com.kairos.data.repository.MediaRepositoryImpl$observeForCase$$inlined$map$1
+com.kairos.data.repository.MediaRepositoryImpl$setPrimary$2$1
 com.kairos.data.repository.MediaRepositoryImpl$setPrimary$2
 com.kairos.data.repository.MediaRepositoryImpl:
-    public static final synthetic com.kairos.data.db.dao.CaseMediaDao access$getDao$p(com.kairos.data.repository.MediaRepositoryImpl)
+    public static final synthetic com.kairos.data.db.KairosDatabase access$getDb$p(com.kairos.data.repository.MediaRepositoryImpl)
     public kotlinx.coroutines.flow.Flow observeForCase(long)
     public java.lang.Object setPrimary(long,long,kotlin.coroutines.Continuation)
 com.kairos.data.repository.MediaRepositoryImpl_Factory
@@ -46579,6 +46617,7 @@ com.kairos.data.repository.PatientRepositoryImpl$observeTrashed$$inlined$map$1$2
     java.lang.Object L$0
 com.kairos.data.repository.PatientRepositoryImpl$search$$inlined$map$1$2$1:
     java.lang.Object L$0
+com.kairos.data.repository.PatientRepositoryImpl$softDelete$2
 com.kairos.data.repository.PatientRepositoryImpl:
     public java.lang.Object getById(long,kotlin.coroutines.Continuation)
     public kotlinx.coroutines.flow.Flow observeById(long)
@@ -59657,6 +59696,7 @@ androidx.compose.foundation.layout.SizeKt$widthIn-VpY3zN4$$inlined$debugInspecto
 androidx.compose.foundation.layout.SizeKt:
     public static final androidx.compose.foundation.layout.FillElement FillWholeMaxHeight
     public static androidx.compose.ui.Modifier fillMaxSize$default(androidx.compose.ui.Modifier)
+    public static androidx.compose.ui.Modifier fillMaxWidth$default(androidx.compose.ui.Modifier)
 androidx.compose.foundation.layout.SizeNode$measure$1:
     public final void invoke$2()
 androidx.compose.foundation.layout.SizeNode:
@@ -62038,9 +62078,13 @@ androidx.compose.material.icons.Icons$Rounded
 androidx.compose.material.icons.Icons
 androidx.compose.material.icons.automirrored.filled.ArrowBackKt:
     static void <clinit>()
+androidx.compose.material.icons.automirrored.filled.FormatListBulletedKt:
+    static void <clinit>()
 androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeftKt:
     static void <clinit>()
 androidx.compose.material.icons.automirrored.filled.KeyboardArrowRightKt:
+    static void <clinit>()
+androidx.compose.material.icons.automirrored.filled.SortKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.AddKt:
     static void <clinit>()
@@ -62062,15 +62106,9 @@ androidx.compose.material.icons.filled.FormatBoldKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.FormatItalicKt:
     static void <clinit>()
-androidx.compose.material.icons.filled.FormatListBulletedKt:
-    static void <clinit>()
 androidx.compose.material.icons.filled.FormatListNumberedKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.FormatUnderlinedKt:
-    static void <clinit>()
-androidx.compose.material.icons.filled.KeyboardArrowLeftKt:
-    static void <clinit>()
-androidx.compose.material.icons.filled.KeyboardArrowRightKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.MicKt:
     static void <clinit>()
@@ -62085,8 +62123,6 @@ androidx.compose.material.icons.filled.PlayArrowKt:
 androidx.compose.material.icons.filled.RestoreFromTrashKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.SearchKt:
-    static void <clinit>()
-androidx.compose.material.icons.filled.SortKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.StarKt:
     static void <clinit>()
@@ -62984,7 +63020,6 @@ androidx.compose.material3.ExposedDropdownMenuBoxScope:
     static void <clinit>()
     public abstract androidx.compose.ui.Modifier exposedDropdownSize()
     public abstract java.lang.String getAnchorType-Mg6Rgbw$material3_release()
-    public abstract androidx.compose.ui.Modifier menuAnchor()
     public abstract androidx.compose.ui.Modifier menuAnchor-fsE2BvY()
 androidx.compose.material3.ExposedDropdownMenuBoxScopeImpl
 androidx.compose.material3.ExposedDropdownMenuDefaults$TrailingIcon$1:
@@ -63474,7 +63509,7 @@ androidx.compose.material3.Shapes:
     public static androidx.compose.foundation.shape.CornerBasedShape getExtraLarge()
     public static androidx.compose.foundation.shape.CornerBasedShape getExtraSmall()
     public static androidx.compose.foundation.shape.CornerBasedShape getLarge()
-    public static androidx.compose.foundation.shape.CornerBasedShape getMedium()
+    public final androidx.compose.foundation.shape.CornerBasedShape getMedium()
     public static androidx.compose.foundation.shape.CornerBasedShape getSmall()
 androidx.compose.material3.ShapesKt$LocalShapes$1:
     public static androidx.compose.material3.Shapes invoke()
@@ -64213,6 +64248,7 @@ androidx.compose.material3.tokens.FabPrimaryLargeTokens:
     public static float getIconSize-D9Ej5fM()
 androidx.compose.material3.tokens.FabPrimaryTokens:
     public static final int ContainerColor
+    public static final int ContainerShape
     public static final int FocusIconColor
     public static final int HoverIconColor
     public static final androidx.compose.material3.tokens.FabPrimaryTokens INSTANCE
@@ -64234,6 +64270,7 @@ androidx.compose.material3.tokens.FabPrimaryTokens:
 androidx.compose.material3.tokens.FilledButtonTokens:
     public static final int ContainerColor
     public static final float ContainerHeight
+    public static final int ContainerShape
     public static final int DisabledIconColor
     public static final int FocusIconColor
     public static final int FocusLabelTextColor
@@ -70284,10 +70321,10 @@ androidx.compose.ui.text.font.FontFamily:
     public static final androidx.compose.ui.text.font.FontFamily$Companion Companion
     public static final androidx.compose.ui.text.font.GenericFontFamily Cursive
     public static final androidx.compose.ui.text.font.GenericFontFamily Monospace
-    public static final androidx.compose.ui.text.font.GenericFontFamily Serif
     public final boolean canLoadSynchronously
     public static final synthetic androidx.compose.ui.text.font.SystemFontFamily access$getDefault$cp()
     public static final synthetic androidx.compose.ui.text.font.GenericFontFamily access$getSansSerif$cp()
+    public static final synthetic androidx.compose.ui.text.font.GenericFontFamily access$getSerif$cp()
 androidx.compose.ui.text.font.FontFamilyKt
 androidx.compose.ui.text.font.FontFamilyResolverImpl$createDefaultTypeface$1:
     public static java.lang.Object invoke$31()
@@ -70369,8 +70406,6 @@ androidx.compose.ui.text.font.FontWeight:
 androidx.compose.ui.text.font.FontWeightAdjustmentHelper
 androidx.compose.ui.text.font.FontWeightKt
 androidx.compose.ui.text.font.GenericFontFamily:
-    public final java.lang.String fontFamilyName
-    public final java.lang.String name
     static void <clinit>()
     public final java.lang.String getName()
 androidx.compose.ui.text.font.LoadedFontFamily
@@ -72956,7 +72991,6 @@ androidx.datastore.preferences.protobuf.Writer$FieldOrder
 androidx.datastore.preferences.protobuf.Writer
 androidx.documentfile.provider.DocumentFile
 androidx.documentfile.provider.TreeDocumentFile:
-    public android.content.Context mContext
     public final androidx.documentfile.provider.TreeDocumentFile mParent
     public static androidx.documentfile.provider.TreeDocumentFile createFile()
     public static android.net.Uri getUri()
@@ -82158,6 +82192,7 @@ com.kairos.core.media.MediaFileManager:
     public static boolean deleteCaseDir()
     public final java.io.File resolve(java.lang.String)
     public static java.io.File rootDir()
+    public static java.lang.String toRelative()
 com.kairos.core.model.AppSettings:
     public static final int $stable
     static void <clinit>()
@@ -82256,24 +82291,26 @@ com.kairos.core.repository.CaseRepository:
     public abstract java.lang.Object restore()
     public abstract java.lang.Object softDelete()
     public abstract java.lang.Object unlinkFromShift()
-    public abstract java.lang.Object upsertCase(com.kairos.core.model.Case,java.util.List,java.lang.Long,java.lang.Long,com.kairos.features.patient.PatientCaseViewModel$save$3)
+    public abstract java.lang.Object upsertCase()
 com.kairos.core.repository.ConsultationRepository:
     public abstract java.lang.Object getOrCreateForDate()
     public abstract kotlinx.coroutines.flow.Flow observeForDateRange()
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object restore()
+com.kairos.core.repository.DataSafetyCoordinator:
+    public abstract java.lang.Object withDataLock(kotlin.jvm.functions.Function1,kotlin.coroutines.Continuation)
 com.kairos.core.repository.DiagnosisRepository:
     public abstract java.lang.Object getOrCreate()
     public abstract kotlinx.coroutines.flow.Flow observeAll()
     public abstract java.io.Serializable searchByPrefix(java.lang.String,int,kotlin.coroutines.jvm.internal.ContinuationImpl)
 com.kairos.core.repository.MediaRepository:
     public abstract java.lang.Object add()
-    public abstract java.lang.Object delete(long,kotlin.coroutines.jvm.internal.ContinuationImpl)
+    public abstract java.lang.Object delete()
 com.kairos.core.repository.PatientRepository:
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object restore()
     public abstract kotlinx.coroutines.flow.Flow search()
-    public abstract java.lang.Object upsert(com.kairos.core.model.Patient,com.kairos.features.patient.PatientCaseViewModel$save$3)
+    public abstract java.lang.Object upsert()
 com.kairos.core.repository.RestoreResult:
     static void <clinit>()
     public static java.lang.String getError()
@@ -82292,7 +82329,22 @@ com.kairos.core.repository.ShiftRepository:
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object restore(long,kotlin.coroutines.jvm.internal.SuspendLambda)
     public abstract java.lang.Object softDelete(long,kotlin.coroutines.jvm.internal.SuspendLambda)
-    public abstract java.lang.Object upsert(com.kairos.core.model.Shift,kotlin.coroutines.jvm.internal.ContinuationImpl)
+    public abstract java.lang.Object upsert()
+com.kairos.core.theme.ColorKt:
+    public static final long PaletteAccentTeal
+    public static final long PaletteBlack
+    public static final long PaletteBody
+    public static final long PaletteBodyStrong
+    public static final long PaletteHairline
+    public static final long PaletteLinen
+    public static final long PaletteMuted
+    public static final long PaletteMutedSoft
+    public static final long PaletteOnDarkSoft
+    public static final long PaletteStone
+    public static final long PaletteSuccess
+    public static final long PaletteTerracotta
+    public static final long PaletteWarning
+    public static final long PaletteWhite
 com.kairos.core.theme.KairosExtraColors:
     static void <clinit>()
     public static long getDivider-0d7_KjU()
@@ -82304,21 +82356,43 @@ com.kairos.core.theme.KairosThemeKt$$InternalSyntheticLambda$1$36c2364ea04e5eb08
 com.kairos.core.theme.KairosThemeKt$KairosTheme$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
 com.kairos.core.theme.TypeKt:
+    public static final androidx.compose.ui.text.font.GenericFontFamily DisplaySerif
     public static final androidx.compose.ui.text.font.FontListFontFamily Inter
+com.kairos.data.backup.BackupEngine$Companion
+com.kairos.data.backup.BackupEngine$ExtractedBackup:
+    public static java.util.Set getEntries()
+    public static org.json.JSONObject getManifest()
+com.kairos.data.backup.BackupEngine$export$2$1:
+    public int label
+    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.data.backup.BackupEngine$export$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.backup.BackupEngine$restore$2$1:
     public int label
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.data.backup.BackupEngine$restore$2:
-    public int label
-    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.backup.BackupEngine:
+    public static final com.kairos.data.backup.BackupEngine$Companion Companion
+    static void <clinit>()
     public static java.lang.String appVersionName()
+    public final int currentDbSchemaVersion()
+    public static void ensureInsideDirectory(java.io.File,java.io.File)
+    public static void ensureNoPendingWalFrames()
     public final java.lang.Object export(java.lang.String,kotlin.coroutines.jvm.internal.ContinuationImpl)
+    public static com.kairos.core.repository.BackupResult exportLocked()
     public final java.lang.Object restore()
+    public static com.kairos.core.repository.RestoreResult restoreLocked()
+    public static java.lang.String sha256()
+    public static java.lang.String toHex(byte[])
+com.kairos.data.backup.DataSafetyCoordinatorImpl$withDataLock$2$1:
+    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.data.backup.ScheduledBackupWorker$Companion
 com.kairos.data.backup.ScheduledBackupWorker:
     public static final com.kairos.data.backup.ScheduledBackupWorker$Companion Companion
     static void <clinit>()
+com.kairos.data.backup.TrashPurgeWorker$doWork$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.backup.WorkerScheduler$WhenMappings
 com.kairos.data.backup.WorkerScheduler:
     public final androidx.work.impl.WorkManagerImpl getWm()
@@ -82329,7 +82403,7 @@ com.kairos.data.db.KairosDatabase_Impl:
 com.kairos.data.db.dao.CaseDao:
     public abstract java.lang.Object clearDiagnosisLinks()
     public abstract java.lang.Object getById()
-    public abstract java.lang.Object hardDelete(java.util.List,com.kairos.data.backup.TrashPurgeWorker$doWork$1)
+    public abstract java.lang.Object hardDelete()
     public abstract java.lang.Object insert()
     public abstract java.lang.Object insertDiagnosisLinks()
     public abstract java.lang.Object linkToSession()
@@ -82382,6 +82456,7 @@ com.kairos.data.db.dao.CaseDao_Impl:
     static void <clinit>()
     public final java.lang.Object clearDiagnosisLinks()
     public final java.lang.Object getById()
+    public final java.lang.Object hardDelete()
     public final java.lang.Object insert()
     public final java.lang.Object insertDiagnosisLinks()
     public final java.lang.Object linkToSession()
@@ -82418,7 +82493,7 @@ com.kairos.data.db.dao.CaseMediaDao_Impl:
     public final java.lang.Object insert()
     public final java.lang.Object listForCase()
 com.kairos.data.db.dao.ConsultationSessionDao:
-    public abstract java.lang.Object findByDate(long,com.kairos.data.repository.ConsultationRepositoryImpl$getOrCreateForDate$2)
+    public abstract java.lang.Object findByDate(long,com.kairos.data.repository.ConsultationRepositoryImpl$getOrCreateForDate$2$1)
     public abstract java.lang.Object insert()
     public abstract kotlinx.coroutines.flow.Flow observeForRange()
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
@@ -82440,7 +82515,7 @@ com.kairos.data.db.dao.ConsultationSessionDao_Impl$Companion
 com.kairos.data.db.dao.ConsultationSessionDao_Impl:
     public static final com.kairos.data.db.dao.ConsultationSessionDao_Impl$Companion Companion
     static void <clinit>()
-    public final java.lang.Object findByDate(long,com.kairos.data.repository.ConsultationRepositoryImpl$getOrCreateForDate$2)
+    public final java.lang.Object findByDate(long,com.kairos.data.repository.ConsultationRepositoryImpl$getOrCreateForDate$2$1)
     public final java.lang.Object insert()
     public final kotlinx.coroutines.flow.Flow observeForRange()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
@@ -82475,9 +82550,9 @@ com.kairos.data.db.dao.DiagnosisDao_Impl:
     public final kotlinx.coroutines.flow.Flow observeAllByRecent()
     public final java.lang.Object searchByPrefix()
 com.kairos.data.db.dao.PatientDao:
-    public abstract java.lang.Object deletePhonesFor(long,com.kairos.data.repository.PatientRepositoryImpl$upsert$2)
+    public abstract java.lang.Object deletePhonesFor(long,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
     public abstract java.lang.Object insert()
-    public abstract java.lang.Object insertPhones(java.util.ArrayList,com.kairos.data.repository.PatientRepositoryImpl$upsert$2)
+    public abstract java.lang.Object insertPhones(java.util.ArrayList,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
     public abstract kotlinx.coroutines.flow.Flow observeTrashed()
     public abstract java.lang.Object purgeOlderThan()
     public abstract java.lang.Object restore()
@@ -82503,9 +82578,9 @@ com.kairos.data.db.dao.PatientDao_Impl$Companion
 com.kairos.data.db.dao.PatientDao_Impl:
     public static final com.kairos.data.db.dao.PatientDao_Impl$Companion Companion
     static void <clinit>()
-    public final java.lang.Object deletePhonesFor(long,com.kairos.data.repository.PatientRepositoryImpl$upsert$2)
+    public final java.lang.Object deletePhonesFor(long,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
     public final java.lang.Object insert()
-    public final java.lang.Object insertPhones(java.util.ArrayList,com.kairos.data.repository.PatientRepositoryImpl$upsert$2)
+    public final java.lang.Object insertPhones(java.util.ArrayList,com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1)
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object purgeOlderThan()
     public final java.lang.Object restore()
@@ -82661,6 +82736,14 @@ com.kairos.data.mapper.PatientMapperKt:
 com.kairos.data.mapper.ShiftMapperKt:
     public static final com.kairos.core.model.Shift toDomain(com.kairos.data.db.entities.ShiftEntity)
 com.kairos.data.repository.CaseRepositoryImpl$observeByShift$$inlined$map$1
+com.kairos.data.repository.CaseRepositoryImpl$restore$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.CaseRepositoryImpl$softDelete$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.CaseRepositoryImpl$unlinkFromShift$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.CaseRepositoryImpl$upsertCase$2$1:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.CaseRepositoryImpl$upsertCase$2:
     public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.CaseRepositoryImpl:
@@ -82673,31 +82756,47 @@ com.kairos.data.repository.CaseRepositoryImpl:
     public final java.lang.Object restore()
     public final java.lang.Object softDelete()
     public final java.lang.Object unlinkFromShift()
+    public final java.lang.Object upsertCase()
+com.kairos.data.repository.ConsultationRepositoryImpl$getOrCreateForDate$2$1:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.ConsultationRepositoryImpl$getOrCreateForDate$2:
     public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.ConsultationRepositoryImpl$observeForDateRange$$inlined$map$1
+com.kairos.data.repository.ConsultationRepositoryImpl$restore$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.ConsultationRepositoryImpl:
     public final java.lang.Object getOrCreateForDate()
     public final kotlinx.coroutines.flow.Flow observeForDateRange()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object restore()
 com.kairos.data.repository.DiagnosisRepositoryImpl$WhenMappings
+com.kairos.data.repository.DiagnosisRepositoryImpl$getOrCreate$2$1:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.DiagnosisRepositoryImpl$getOrCreate$2:
     public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.DiagnosisRepositoryImpl$observeAll$$inlined$map$1
 com.kairos.data.repository.DiagnosisRepositoryImpl:
     public final java.lang.Object getOrCreate()
     public final kotlinx.coroutines.flow.Flow observeAll()
+com.kairos.data.repository.MediaRepositoryImpl$add$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.MediaRepositoryImpl$delete$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.MediaRepositoryImpl:
     public final com.kairos.data.db.KairosDatabase db
     public final java.lang.Object add()
+    public final java.lang.Object delete()
+com.kairos.data.repository.PatientRepositoryImpl$restore$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.PatientRepositoryImpl$upsert$2$1:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.PatientRepositoryImpl$upsert$2:
     public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.PatientRepositoryImpl:
     public final kotlinx.coroutines.flow.Flow observeTrashed()
     public final java.lang.Object restore()
     public final kotlinx.coroutines.flow.Flow search()
-    public final java.lang.Object upsert(com.kairos.core.model.Patient,com.kairos.features.patient.PatientCaseViewModel$save$3)
+    public final java.lang.Object upsert()
 com.kairos.data.repository.SettingsRepositoryImpl:
     public final kotlinx.coroutines.flow.Flow observeSettings()
     public final java.lang.Object recordBackupRun(long,boolean,kotlin.coroutines.jvm.internal.ContinuationImpl)
@@ -82708,10 +82807,19 @@ com.kairos.data.repository.SettingsRepositoryImpl:
     public final java.lang.Object setThemeMode()
 com.kairos.data.repository.ShiftRepositoryImpl$observeAll$$inlined$map$1
 com.kairos.data.repository.ShiftRepositoryImpl$observeById$$inlined$map$1
+com.kairos.data.repository.ShiftRepositoryImpl$restore$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.ShiftRepositoryImpl$softDelete$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.kairos.data.repository.ShiftRepositoryImpl$upsert$2:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.data.repository.ShiftRepositoryImpl:
     public final kotlinx.coroutines.flow.Flow observeAll()
     public final kotlinx.coroutines.flow.Flow observeById()
     public final kotlinx.coroutines.flow.Flow observeTrashed()
+    public final java.lang.Object restore(long,kotlin.coroutines.jvm.internal.SuspendLambda)
+    public final java.lang.Object softDelete(long,kotlin.coroutines.jvm.internal.SuspendLambda)
+    public final java.lang.Object upsert()
 com.kairos.data.settings.PreferencesStore$Keys:
     public static final com.kairos.data.settings.PreferencesStore$Keys INSTANCE
     public static androidx.datastore.preferences.core.Preferences$Key getBACKUP_FOLDER_URI()
@@ -83257,6 +83365,7 @@ com.kairos.features.patient.PatientCaseUiState:
     public static com.kairos.features.patient.PatientCaseUiState copy()
     public final java.lang.String getAge()
     public final long getCaseDate()
+    public final java.util.List getDiagnoses()
     public final java.lang.String getDiagnosisQuery()
     public final java.util.List getDiagnosisSuggestions()
     public static java.lang.String getError()
@@ -83264,6 +83373,7 @@ com.kairos.features.patient.PatientCaseUiState:
     public final java.lang.String getName()
     public final java.lang.String getNotesHtml()
     public static java.io.File getPendingAudioFile()
+    public final java.util.List getPendingMedia()
     public final java.util.List getPhones()
     public static boolean getSaved()
     public static java.lang.String getSearchQuery()
@@ -83279,6 +83389,8 @@ com.kairos.features.patient.PatientCaseViewModel$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.features.patient.PatientCaseViewModel$loadCase$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
+com.kairos.features.patient.PatientCaseViewModel$save$3$1:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
 com.kairos.features.patient.PatientCaseViewModel$save$3:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.kairos.features.patient.PatientCaseViewModel$setDiagnosisQuery$2:
@@ -83311,6 +83423,11 @@ com.kairos.features.patient.PendingMedia:
     public static final int $stable
     static void <clinit>()
     public static com.kairos.features.patient.PendingMedia copy()
+    public final java.lang.Long getDurationMs()
+    public final int getLocalId()
+    public final com.kairos.core.model.MediaType getMediaType()
+    public final java.io.File getSourceFile()
+    public final boolean isPrimary()
 com.kairos.features.settings.BackupUiState:
     static void <clinit>()
     public static com.kairos.features.settings.BackupUiState copy()
@@ -84657,6 +84774,8 @@ kotlin.internal.jdk7.JDK7PlatformImplementations
 kotlin.internal.jdk8.JDK8PlatformImplementations$ReflectSdkVersion:
     public static final kotlin.internal.jdk8.JDK8PlatformImplementations$ReflectSdkVersion INSTANCE
 kotlin.internal.jdk8.JDK8PlatformImplementations
+kotlin.io.AccessDeniedException:
+    public void <init>(java.io.File)
 kotlin.io.ByteStreamsKt:
     public static synthetic long copyTo$default(java.io.InputStream,java.io.OutputStream)
 kotlin.io.ExceptionsKt

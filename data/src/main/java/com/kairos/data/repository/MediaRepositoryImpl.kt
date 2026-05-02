@@ -3,6 +3,7 @@ package com.kairos.data.repository
 import androidx.room.withTransaction
 import com.kairos.core.media.MediaFileManager
 import com.kairos.core.model.MediaItem
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.core.repository.MediaRepository
 import com.kairos.data.db.KairosDatabase
 import com.kairos.data.db.dao.CaseMediaDao
@@ -18,9 +19,10 @@ class MediaRepositoryImpl @Inject constructor(
     private val dao: CaseMediaDao,
     private val db: KairosDatabase,
     private val mediaFileManager: MediaFileManager,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : MediaRepository {
 
-    override suspend fun add(item: MediaItem): Long =
+    override suspend fun add(item: MediaItem): Long = dataSafetyCoordinator.withDataLock {
         dao.insert(
             CaseMediaEntity(
                 caseId = item.caseId,
@@ -31,14 +33,16 @@ class MediaRepositoryImpl @Inject constructor(
                 createdAt = item.createdAt.takeIf { it != 0L } ?: System.currentTimeMillis(),
             )
         )
+    }
 
-    override suspend fun delete(id: Long) {
+    override suspend fun delete(id: Long) = dataSafetyCoordinator.withDataLock {
         val entity = dao.getById(id)
         dao.deleteById(id)
         entity?.let { mediaFileManager.delete(it.filePath) }
+        Unit
     }
 
-    override suspend fun setPrimary(caseId: Long, mediaId: Long) {
+    override suspend fun setPrimary(caseId: Long, mediaId: Long) = dataSafetyCoordinator.withDataLock {
         db.withTransaction {
             dao.clearPrimary(caseId)
             dao.setPrimary(mediaId)

@@ -3,6 +3,7 @@ package com.kairos.data.repository
 import androidx.room.withTransaction
 import com.kairos.core.model.Diagnosis
 import com.kairos.core.model.DiagnosisSortMode
+import com.kairos.core.repository.DataSafetyCoordinator
 import com.kairos.core.repository.DiagnosisRepository
 import com.kairos.data.db.KairosDatabase
 import com.kairos.data.db.dao.DiagnosisDao
@@ -17,12 +18,13 @@ import javax.inject.Singleton
 class DiagnosisRepositoryImpl @Inject constructor(
     private val dao: DiagnosisDao,
     private val db: KairosDatabase,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
 ) : DiagnosisRepository {
 
-    override suspend fun getOrCreate(name: String): Long {
+    override suspend fun getOrCreate(name: String): Long = dataSafetyCoordinator.withDataLock {
         val trimmed = name.trim()
         val now = System.currentTimeMillis()
-        return db.withTransaction {
+        db.withTransaction {
             dao.findByNameCi(trimmed)?.id
                 ?: dao.insert(DiagnosisEntity(name = trimmed, createdAt = now)).let { id ->
                     if (id != -1L) id
