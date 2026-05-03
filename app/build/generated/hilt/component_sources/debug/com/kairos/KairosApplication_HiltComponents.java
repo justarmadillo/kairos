@@ -11,6 +11,7 @@ import com.kairos.features.cases.DiagnosisBrowseViewModel_HiltModules;
 import com.kairos.features.consultation.ConsultationViewModel_HiltModules;
 import com.kairos.features.dashboard.DashboardViewModel_HiltModules;
 import com.kairos.features.patient.PatientCaseViewModel_HiltModules;
+import com.kairos.features.search.SearchViewModel_HiltModules;
 import com.kairos.features.settings.SettingsViewModel_HiltModules;
 import com.kairos.features.settings.TrashViewModel_HiltModules;
 import com.kairos.features.shifts.ShiftDetailViewModel_HiltModules;
@@ -180,6 +181,7 @@ public final class KairosApplication_HiltComponents {
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
           PatientCaseViewModel_HiltModules.KeyModule.class,
+          SearchViewModel_HiltModules.KeyModule.class,
           SettingsViewModel_HiltModules.KeyModule.class,
           ShiftDetailViewModel_HiltModules.KeyModule.class,
           ShiftsViewModel_HiltModules.KeyModule.class,
@@ -226,6 +228,7 @@ public final class KairosApplication_HiltComponents {
           DiagnosisBrowseViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
           PatientCaseViewModel_HiltModules.BindsModule.class,
+          SearchViewModel_HiltModules.BindsModule.class,
           SettingsViewModel_HiltModules.BindsModule.class,
           ShiftDetailViewModel_HiltModules.BindsModule.class,
           ShiftsViewModel_HiltModules.BindsModule.class,

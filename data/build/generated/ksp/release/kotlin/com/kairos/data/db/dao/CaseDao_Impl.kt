@@ -1075,6 +1075,123 @@ public class CaseDao_Impl(
     }
   }
 
+  public override fun observeSearchCases(likeQuery: String, limit: Int): Flow<List<SearchCaseRow>> {
+    val _sql: String = """
+        |
+        |        SELECT c.id AS caseId,
+        |               p.name AS patientName,
+        |               p.age AS patientAge,
+        |               (SELECT GROUP_CONCAT(pp.number, char(10))
+        |                FROM patient_phones pp
+        |                WHERE pp.patient_id = p.id) AS phoneNumbers,
+        |               c.case_date AS caseDate,
+        |               c.mechanism AS mechanism,
+        |               (SELECT GROUP_CONCAT(d.name, char(10))
+        |                FROM case_diagnoses cd
+        |                INNER JOIN diagnoses d ON d.id = cd.diagnosis_id
+        |                WHERE cd.case_id = c.id) AS diagnosisNames,
+        |               c.notes_html AS notesHtml
+        |        FROM cases c
+        |        INNER JOIN patients p ON p.id = c.patient_id
+        |        WHERE c.is_deleted = 0
+        |          AND p.is_deleted = 0
+        |          AND (
+        |              LOWER(p.name) LIKE ? ESCAPE '\'
+        |              OR CAST(p.age AS TEXT) LIKE ? ESCAPE '\'
+        |              OR LOWER(IFNULL(c.mechanism, '')) LIKE ? ESCAPE '\'
+        |              OR LOWER(IFNULL(c.notes_html, '')) LIKE ? ESCAPE '\'
+        |              OR EXISTS (
+        |                  SELECT 1 FROM patient_phones pp
+        |                  WHERE pp.patient_id = p.id
+        |                    AND pp.number LIKE ? ESCAPE '\'
+        |              )
+        |              OR EXISTS (
+        |                  SELECT 1 FROM case_diagnoses cd
+        |                  INNER JOIN diagnoses d ON d.id = cd.diagnosis_id
+        |                  WHERE cd.case_id = c.id
+        |                    AND LOWER(d.name) LIKE ? ESCAPE '\'
+        |              )
+        |          )
+        |        ORDER BY c.case_date DESC, c.created_at DESC
+        |        LIMIT ?
+        |        
+        """.trimMargin()
+    return createFlow(__db, false, arrayOf("patient_phones", "case_diagnoses", "diagnoses", "cases",
+        "patients")) { _connection ->
+      val _stmt: SQLiteStatement = _connection.prepare(_sql)
+      try {
+        var _argIndex: Int = 1
+        _stmt.bindText(_argIndex, likeQuery)
+        _argIndex = 2
+        _stmt.bindText(_argIndex, likeQuery)
+        _argIndex = 3
+        _stmt.bindText(_argIndex, likeQuery)
+        _argIndex = 4
+        _stmt.bindText(_argIndex, likeQuery)
+        _argIndex = 5
+        _stmt.bindText(_argIndex, likeQuery)
+        _argIndex = 6
+        _stmt.bindText(_argIndex, likeQuery)
+        _argIndex = 7
+        _stmt.bindLong(_argIndex, limit.toLong())
+        val _columnIndexOfCaseId: Int = 0
+        val _columnIndexOfPatientName: Int = 1
+        val _columnIndexOfPatientAge: Int = 2
+        val _columnIndexOfPhoneNumbers: Int = 3
+        val _columnIndexOfCaseDate: Int = 4
+        val _columnIndexOfMechanism: Int = 5
+        val _columnIndexOfDiagnosisNames: Int = 6
+        val _columnIndexOfNotesHtml: Int = 7
+        val _result: MutableList<SearchCaseRow> = mutableListOf()
+        while (_stmt.step()) {
+          val _item: SearchCaseRow
+          val _tmpCaseId: Long
+          _tmpCaseId = _stmt.getLong(_columnIndexOfCaseId)
+          val _tmpPatientName: String
+          _tmpPatientName = _stmt.getText(_columnIndexOfPatientName)
+          val _tmpPatientAge: Int?
+          if (_stmt.isNull(_columnIndexOfPatientAge)) {
+            _tmpPatientAge = null
+          } else {
+            _tmpPatientAge = _stmt.getLong(_columnIndexOfPatientAge).toInt()
+          }
+          val _tmpPhoneNumbers: String?
+          if (_stmt.isNull(_columnIndexOfPhoneNumbers)) {
+            _tmpPhoneNumbers = null
+          } else {
+            _tmpPhoneNumbers = _stmt.getText(_columnIndexOfPhoneNumbers)
+          }
+          val _tmpCaseDate: Long
+          _tmpCaseDate = _stmt.getLong(_columnIndexOfCaseDate)
+          val _tmpMechanism: String?
+          if (_stmt.isNull(_columnIndexOfMechanism)) {
+            _tmpMechanism = null
+          } else {
+            _tmpMechanism = _stmt.getText(_columnIndexOfMechanism)
+          }
+          val _tmpDiagnosisNames: String?
+          if (_stmt.isNull(_columnIndexOfDiagnosisNames)) {
+            _tmpDiagnosisNames = null
+          } else {
+            _tmpDiagnosisNames = _stmt.getText(_columnIndexOfDiagnosisNames)
+          }
+          val _tmpNotesHtml: String?
+          if (_stmt.isNull(_columnIndexOfNotesHtml)) {
+            _tmpNotesHtml = null
+          } else {
+            _tmpNotesHtml = _stmt.getText(_columnIndexOfNotesHtml)
+          }
+          _item =
+              SearchCaseRow(_tmpCaseId,_tmpPatientName,_tmpPatientAge,_tmpPhoneNumbers,_tmpCaseDate,_tmpMechanism,_tmpDiagnosisNames,_tmpNotesHtml)
+          _result.add(_item)
+        }
+        _result
+      } finally {
+        _stmt.close()
+      }
+    }
+  }
+
   public override suspend fun clearDiagnosisLinks(caseId: Long) {
     val _sql: String = "DELETE FROM case_diagnoses WHERE case_id = ?"
     return performSuspending(__db, false, true) { _connection ->

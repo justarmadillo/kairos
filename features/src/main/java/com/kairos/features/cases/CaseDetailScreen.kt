@@ -2,10 +2,12 @@ package com.kairos.features.cases
 
 import android.content.Intent
 import android.net.Uri
+import android.content.ClipData
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -18,9 +20,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -30,18 +29,23 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,6 +57,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.kairos.core.components.AudioPlayerItem
@@ -67,6 +72,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+private const val DetailThumbnailAspectRatio = 0.78f
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun CaseDetailScreen(
@@ -79,6 +86,31 @@ fun CaseDetailScreen(
     val state by viewModel.ui.collectAsStateWithLifecycle()
     val case = state.case
     val context = LocalContext.current
+    val snackbar = remember { SnackbarHostState() }
+
+    LaunchedEffect(state.message) {
+        state.message?.let {
+            snackbar.showSnackbar(it)
+            viewModel.clearMessage()
+        }
+    }
+
+    LaunchedEffect(state.pdfToShare) {
+        val file = state.pdfToShare ?: return@LaunchedEffect
+        val uri = FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider",
+            file,
+        )
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "application/pdf"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            clipData = ClipData.newUri(context.contentResolver, file.name, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        context.startActivity(Intent.createChooser(shareIntent, "Share PDF"))
+        viewModel.clearPdfShare()
+    }
 
     Scaffold(
         topBar = {
@@ -92,6 +124,18 @@ fun CaseDetailScreen(
                     }
                 },
                 actions = {
+                    if (state.isExportingPdf) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .padding(horizontal = 12.dp)
+                                .size(24.dp),
+                            strokeWidth = 2.dp,
+                        )
+                    } else {
+                        IconButton(onClick = viewModel::exportPdf) {
+                            Icon(Icons.Default.Share, contentDescription = "Share PDF")
+                        }
+                    }
                     IconButton(onClick = { case?.let { onEditCase(it.id) } }) {
                         Icon(Icons.Default.Edit, contentDescription = "Edit")
                     }
@@ -105,6 +149,7 @@ fun CaseDetailScreen(
                 },
             )
         },
+        snackbarHost = { SnackbarHost(snackbar) },
     ) { padding ->
         if (case == null) return@Scaffold
 
@@ -219,25 +264,34 @@ fun CaseDetailScreen(
             // Images / videos
             val visualMedia = case.media.filter { it.mediaType != MediaType.AUDIO }
             if (visualMedia.isNotEmpty()) {
-                val rowCount = (visualMedia.size + 2) / 3
+                val columns = 3
+                val gridSpacing = 6.dp
                 HorizontalDivider(modifier = Modifier.padding(bottom = 14.dp))
                 Text("Images & Videos", style = MaterialTheme.typography.labelMedium)
                 Spacer(Modifier.height(8.dp))
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(3),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height((rowCount * 112).dp.coerceAtMost(340.dp)),
-                    userScrollEnabled = false,
-                ) {
-                    items(visualMedia, key = { it.id }) { media ->
-                        val index = visualMedia.indexOf(media)
-                        VisualMediaThumbnail(
-                            media = media,
-                            onClick = { onOpenImageViewer(case.id, index) },
-                        )
+                BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+                    val cellWidth = (maxWidth - gridSpacing * (columns - 1)) / columns.toFloat()
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(gridSpacing),
+                    ) {
+                        visualMedia.chunked(columns).forEach { rowMedia ->
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(gridSpacing),
+                                modifier = Modifier.fillMaxWidth(),
+                            ) {
+                                rowMedia.forEach { media ->
+                                    val index = visualMedia.indexOf(media)
+                                    VisualMediaThumbnail(
+                                        media = media,
+                                        onClick = { onOpenImageViewer(case.id, index) },
+                                        modifier = Modifier.width(cellWidth),
+                                    )
+                                }
+                                repeat(columns - rowMedia.size) {
+                                    Spacer(Modifier.width(cellWidth))
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -271,16 +325,16 @@ private fun VisualMediaThumbnail(
 ) {
     Box(
         modifier = modifier
-            .aspectRatio(1f)
+            .aspectRatio(DetailThumbnailAspectRatio)
             .clip(MaterialTheme.shapes.large)
-            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .background(PaletteSurfaceDark)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         AsyncImage(
             model = File(media.filePath),
             contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Fit,
             modifier = Modifier.matchParentSize(),
         )
 

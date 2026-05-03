@@ -5,16 +5,17 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
@@ -66,7 +67,7 @@ fun MediaAttachmentSection(
     val visual = items.filter { it.mediaType != MediaType.AUDIO }
     val audio = items.filter { it.mediaType == MediaType.AUDIO }
 
-    androidx.compose.foundation.layout.Column(modifier = modifier) {
+    Column(modifier = modifier) {
         // Action chips
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -96,23 +97,33 @@ fun MediaAttachmentSection(
 
         // Image/video grid
         if (visual.isNotEmpty()) {
-            val rowCount = (visual.size + 2) / 3
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp),
+            val columns = 3
+            val gridSpacing = 6.dp
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)
-                    .height((rowCount * 112).dp.coerceAtMost(336.dp)),
-                userScrollEnabled = false,
+                    .padding(top = 12.dp),
             ) {
-                items(visual, key = { it.localId }) { item ->
-                    VisualThumbnail(
-                        item = item,
-                        onRemove = { onRemove(item.localId) },
-                        onSetPrimary = { onSetPrimary(item.localId) },
-                    )
+                val cellWidth = (maxWidth - gridSpacing * (columns - 1)) / columns.toFloat()
+                Column(verticalArrangement = Arrangement.spacedBy(gridSpacing)) {
+                    visual.chunked(columns).forEach { rowItems ->
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(gridSpacing),
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            rowItems.forEach { item ->
+                                VisualThumbnail(
+                                    item = item,
+                                    onRemove = { onRemove(item.localId) },
+                                    onSetPrimary = { onSetPrimary(item.localId) },
+                                    modifier = Modifier.width(cellWidth),
+                                )
+                            }
+                            repeat(columns - rowItems.size) {
+                                Spacer(Modifier.width(cellWidth))
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -9,10 +9,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -115,6 +119,48 @@ fun ImageViewerScreen(
             colors = TopAppBarDefaults.topAppBarColors(containerColor = PaletteSurfaceDark.copy(alpha = 0.72f)),
             modifier = Modifier.align(Alignment.TopCenter),
         )
+
+        if (visualMedia.size > 1 && pagerState.currentPage > 0) {
+            IconButton(
+                onClick = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                    }
+                },
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(start = 12.dp)
+                    .size(48.dp)
+                    .background(PaletteSurfaceDark.copy(alpha = 0.6f), CircleShape),
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                    contentDescription = "Previous photo",
+                    tint = PaletteOnDark,
+                )
+            }
+        }
+
+        if (visualMedia.size > 1 && pagerState.currentPage < visualMedia.lastIndex) {
+            IconButton(
+                onClick = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                },
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 12.dp)
+                    .size(48.dp)
+                    .background(PaletteSurfaceDark.copy(alpha = 0.6f), CircleShape),
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = "Next photo",
+                    tint = PaletteOnDark,
+                )
+            }
+        }
 
         SnackbarHost(
             hostState = snackbar,

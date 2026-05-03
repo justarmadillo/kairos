@@ -34,33 +34,39 @@ public final class CaseDetailViewModel_Factory implements Factory<CaseDetailView
 
   private final Provider<MediaRepository> mediaRepoProvider;
 
+  private final Provider<CasePdfExporter> pdfExporterProvider;
+
   public CaseDetailViewModel_Factory(Provider<SavedStateHandle> savedStateHandleProvider,
-      Provider<CaseRepository> caseRepoProvider, Provider<MediaRepository> mediaRepoProvider) {
+      Provider<CaseRepository> caseRepoProvider, Provider<MediaRepository> mediaRepoProvider,
+      Provider<CasePdfExporter> pdfExporterProvider) {
     this.savedStateHandleProvider = savedStateHandleProvider;
     this.caseRepoProvider = caseRepoProvider;
     this.mediaRepoProvider = mediaRepoProvider;
+    this.pdfExporterProvider = pdfExporterProvider;
   }
 
   @Override
   public CaseDetailViewModel get() {
-    return newInstance(savedStateHandleProvider.get(), caseRepoProvider.get(), mediaRepoProvider.get());
+    return newInstance(savedStateHandleProvider.get(), caseRepoProvider.get(), mediaRepoProvider.get(), pdfExporterProvider.get());
   }
 
   public static CaseDetailViewModel_Factory create(
       javax.inject.Provider<SavedStateHandle> savedStateHandleProvider,
       javax.inject.Provider<CaseRepository> caseRepoProvider,
-      javax.inject.Provider<MediaRepository> mediaRepoProvider) {
-    return new CaseDetailViewModel_Factory(Providers.asDaggerProvider(savedStateHandleProvider), Providers.asDaggerProvider(caseRepoProvider), Providers.asDaggerProvider(mediaRepoProvider));
+      javax.inject.Provider<MediaRepository> mediaRepoProvider,
+      javax.inject.Provider<CasePdfExporter> pdfExporterProvider) {
+    return new CaseDetailViewModel_Factory(Providers.asDaggerProvider(savedStateHandleProvider), Providers.asDaggerProvider(caseRepoProvider), Providers.asDaggerProvider(mediaRepoProvider), Providers.asDaggerProvider(pdfExporterProvider));
   }
 
   public static CaseDetailViewModel_Factory create(
       Provider<SavedStateHandle> savedStateHandleProvider,
-      Provider<CaseRepository> caseRepoProvider, Provider<MediaRepository> mediaRepoProvider) {
-    return new CaseDetailViewModel_Factory(savedStateHandleProvider, caseRepoProvider, mediaRepoProvider);
+      Provider<CaseRepository> caseRepoProvider, Provider<MediaRepository> mediaRepoProvider,
+      Provider<CasePdfExporter> pdfExporterProvider) {
+    return new CaseDetailViewModel_Factory(savedStateHandleProvider, caseRepoProvider, mediaRepoProvider, pdfExporterProvider);
   }
 
   public static CaseDetailViewModel newInstance(SavedStateHandle savedStateHandle,
-      CaseRepository caseRepo, MediaRepository mediaRepo) {
-    return new CaseDetailViewModel(savedStateHandle, caseRepo, mediaRepo);
+      CaseRepository caseRepo, MediaRepository mediaRepo, CasePdfExporter pdfExporter) {
+    return new CaseDetailViewModel(savedStateHandle, caseRepo, mediaRepo, pdfExporter);
   }
 }

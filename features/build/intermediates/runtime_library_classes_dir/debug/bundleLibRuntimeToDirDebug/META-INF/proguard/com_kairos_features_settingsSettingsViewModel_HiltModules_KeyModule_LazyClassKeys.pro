@@ -10,5 +10,7 @@
 -keep,allowobfuscation,allowshrinking class com.kairos.features.dashboard.DashboardViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.patient.PatientCaseViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.patient.PatientCaseViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.search.SearchViewModel
+-keep,allowobfuscation,allowshrinking class com.kairos.features.search.SearchViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.settings.SettingsViewModel
 -keep,allowobfuscation,allowshrinking class com.kairos.features.settings.SettingsViewModel

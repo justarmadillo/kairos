@@ -20,6 +20,17 @@ data class RecentCaseRow(
     val caseDate: Long,
 )
 
+data class SearchCaseRow(
+    val caseId: Long,
+    val patientName: String,
+    val patientAge: Int?,
+    val phoneNumbers: String?,
+    val caseDate: Long,
+    val mechanism: String?,
+    val diagnosisNames: String?,
+    val notesHtml: String?,
+)
+
 @Dao
 interface CaseDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -140,4 +151,46 @@ interface CaseDao {
         """
     )
     fun observeRecentCases(): Flow<List<RecentCaseRow>>
+
+    @Query(
+        """
+        SELECT c.id AS caseId,
+               p.name AS patientName,
+               p.age AS patientAge,
+               (SELECT GROUP_CONCAT(pp.number, char(10))
+                FROM patient_phones pp
+                WHERE pp.patient_id = p.id) AS phoneNumbers,
+               c.case_date AS caseDate,
+               c.mechanism AS mechanism,
+               (SELECT GROUP_CONCAT(d.name, char(10))
+                FROM case_diagnoses cd
+                INNER JOIN diagnoses d ON d.id = cd.diagnosis_id
+                WHERE cd.case_id = c.id) AS diagnosisNames,
+               c.notes_html AS notesHtml
+        FROM cases c
+        INNER JOIN patients p ON p.id = c.patient_id
+        WHERE c.is_deleted = 0
+          AND p.is_deleted = 0
+          AND (
+              LOWER(p.name) LIKE :likeQuery ESCAPE '\'
+              OR CAST(p.age AS TEXT) LIKE :likeQuery ESCAPE '\'
+              OR LOWER(IFNULL(c.mechanism, '')) LIKE :likeQuery ESCAPE '\'
+              OR LOWER(IFNULL(c.notes_html, '')) LIKE :likeQuery ESCAPE '\'
+              OR EXISTS (
+                  SELECT 1 FROM patient_phones pp
+                  WHERE pp.patient_id = p.id
+                    AND pp.number LIKE :likeQuery ESCAPE '\'
+              )
+              OR EXISTS (
+                  SELECT 1 FROM case_diagnoses cd
+                  INNER JOIN diagnoses d ON d.id = cd.diagnosis_id
+                  WHERE cd.case_id = c.id
+                    AND LOWER(d.name) LIKE :likeQuery ESCAPE '\'
+              )
+          )
+        ORDER BY c.case_date DESC, c.created_at DESC
+        LIMIT :limit
+        """
+    )
+    fun observeSearchCases(likeQuery: String, limit: Int = 120): Flow<List<SearchCaseRow>>
 }

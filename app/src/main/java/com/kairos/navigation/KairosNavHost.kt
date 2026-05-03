@@ -17,12 +17,14 @@ import com.kairos.features.cases.ImageViewerScreen
 import com.kairos.features.consultation.ConsultationCalendarScreen
 import com.kairos.features.dashboard.DashboardScreen
 import com.kairos.features.patient.PatientCaseScreen
+import com.kairos.features.search.SearchScreen
 import com.kairos.features.settings.SettingsScreen
 import com.kairos.features.settings.TrashScreen
 import com.kairos.features.shifts.ShiftDetailScreen
 import com.kairos.features.shifts.ShiftsListScreen
 
 const val ROUTE_PATIENT_CASE = "patient_case"
+private const val ROUTE_SEARCH = "search"
 
 @Composable
 fun KairosNavHost(
@@ -40,6 +42,14 @@ fun KairosNavHost(
     ) {
         composable(TopLevelDestination.Dashboard.route) {
             DashboardScreen(
+                onCaseClick = { caseId -> navController.navigate("case_detail/$caseId") },
+                onSearchClick = { navController.navigate(ROUTE_SEARCH) },
+            )
+        }
+
+        composable(ROUTE_SEARCH) {
+            SearchScreen(
+                onNavigateBack = { navController.popBackStack() },
                 onCaseClick = { caseId -> navController.navigate("case_detail/$caseId") },
             )
         }

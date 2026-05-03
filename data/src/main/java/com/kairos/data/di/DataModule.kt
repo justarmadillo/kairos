@@ -10,6 +10,7 @@ import com.kairos.core.repository.DashboardRepository
 import com.kairos.core.repository.DiagnosisRepository
 import com.kairos.core.repository.MediaRepository
 import com.kairos.core.repository.PatientRepository
+import com.kairos.core.repository.SearchRepository
 import com.kairos.core.repository.SettingsRepository
 import com.kairos.core.repository.ShiftRepository
 import com.kairos.data.db.KairosDatabase
@@ -28,6 +29,7 @@ import com.kairos.data.repository.DashboardRepositoryImpl
 import com.kairos.data.repository.DiagnosisRepositoryImpl
 import com.kairos.data.repository.MediaRepositoryImpl
 import com.kairos.data.repository.PatientRepositoryImpl
+import com.kairos.data.repository.SearchRepositoryImpl
 import com.kairos.data.repository.SettingsRepositoryImpl
 import com.kairos.data.repository.ShiftRepositoryImpl
 import dagger.Binds
@@ -82,6 +84,9 @@ abstract class RepositoryModule {
 
     @Binds @Singleton
     abstract fun bindDashboardRepository(impl: DashboardRepositoryImpl): DashboardRepository
+
+    @Binds @Singleton
+    abstract fun bindSearchRepository(impl: SearchRepositoryImpl): SearchRepository
 
     @Binds @Singleton
     abstract fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepository

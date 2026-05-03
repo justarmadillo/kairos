@@ -1,9 +1,9 @@
 <libraries>
   <library
       name=":@@:core::release"
-      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\3b5d044dbcb639d39b761760efbeeeea\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\3b5d044dbcb639d39b761760efbeeeea\transformed\out\jars\libs\R.jar"
+      jars="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\7d23334d5845cc1d00fa15d98e1bd2ba\transformed\out\jars\classes.jar;C:\Users\Oracle\.gradle\caches\8.10.2\transforms\7d23334d5845cc1d00fa15d98e1bd2ba\transformed\out\jars\libs\R.jar"
       resolved="Kairos:core:unspecified"
-      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\3b5d044dbcb639d39b761760efbeeeea\transformed\out"
+      folder="C:\Users\Oracle\.gradle\caches\8.10.2\transforms\7d23334d5845cc1d00fa15d98e1bd2ba\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
