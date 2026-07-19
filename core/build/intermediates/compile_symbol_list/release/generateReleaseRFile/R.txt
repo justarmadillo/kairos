@@ -1,4 +1,0 @@
-int font inter_bold 0x0
-int font inter_medium 0x0
-int font inter_regular 0x0
-int font inter_semibold 0x0

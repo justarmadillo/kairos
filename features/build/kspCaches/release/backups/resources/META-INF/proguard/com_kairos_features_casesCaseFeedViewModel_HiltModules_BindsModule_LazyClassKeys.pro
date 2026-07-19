@@ -1,3 +1,0 @@
--keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel
--keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseDetailViewModel
--keep,allowobfuscation,allowshrinking class com.kairos.features.cases.CaseFeedViewModel

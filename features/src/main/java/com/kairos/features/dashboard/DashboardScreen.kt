@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -77,6 +78,10 @@ fun DashboardScreen(
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            state.backupWarning?.let { warning ->
+                BackupWarningCard(message = warning)
+            }
+
             HeroStatsRow(
                 totalPatients = state.totalPatients,
                 totalCases = state.totalCases,
@@ -112,6 +117,34 @@ fun DashboardScreen(
             )
 
             Spacer(Modifier.height(8.dp))
+        }
+    }
+}
+
+@Composable
+private fun BackupWarningCard(message: String) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = DashboardCardShape,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+        ),
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Icon(
+                Icons.Default.Warning,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onErrorContainer,
+            )
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onErrorContainer,
+            )
         }
     }
 }

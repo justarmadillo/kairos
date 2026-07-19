@@ -23,7 +23,12 @@ class ConsultationRepositoryImpl @Inject constructor(
     override suspend fun getOrCreateForDate(dateMillis: Long): Long = dataSafetyCoordinator.withDataLock {
         val now = System.currentTimeMillis()
         db.withTransaction {
-            dao.findByDate(dateMillis)?.id
+            dao.findByDate(dateMillis)?.let { existing ->
+                // A soft-deleted session for this date would be invisible to range queries;
+                // restore it instead of returning an id the calendar can never show.
+                if (existing.isDeleted) dao.restore(existing.id)
+                existing.id
+            }
                 ?: dao.insert(ConsultationSessionEntity(date = dateMillis, createdAt = now)).let { id ->
                     if (id != -1L) id
                     else dao.findByDate(dateMillis)?.id ?: -1L

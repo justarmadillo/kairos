@@ -2,8 +2,11 @@ package com.kairos.features.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kairos.core.model.AppSettings
+import com.kairos.core.model.BackupSchedule
 import com.kairos.core.repository.DashboardRepository
 import com.kairos.core.repository.RecentCase
+import com.kairos.core.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,6 +33,7 @@ data class DashboardUiState(
     val recentCases: List<RecentCase> = emptyList(),
     val milestone: MilestoneProgress = MilestoneProgress(0, 10, 0),
     val milestoneCelebration: Int? = null,
+    val backupWarning: String? = null,
 )
 
 data class MilestoneProgress(
@@ -53,6 +57,7 @@ private data class CaseMetrics(
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val repo: DashboardRepository,
+    settingsRepo: SettingsRepository,
 ) : ViewModel() {
 
     private val milestoneCelebration = MutableStateFlow<Int?>(null)
@@ -68,13 +73,18 @@ class DashboardViewModel @Inject constructor(
             )
         }
 
-    val ui: StateFlow<DashboardUiState> = combine(
+    private val totals = combine(
         repo.observeTotalPatients(),
         caseMetrics,
         repo.observeTotalShifts(),
+    ) { totalPatients, metrics, totalShifts -> Triple(totalPatients, metrics, totalShifts) }
+
+    val ui: StateFlow<DashboardUiState> = combine(
+        totals,
         repo.observeRecentCases(),
         milestoneCelebration,
-    ) { totalPatients, metrics, totalShifts, recentCases, celebration ->
+        settingsRepo.observeSettings(),
+    ) { (totalPatients, metrics, totalShifts), recentCases, celebration, settings ->
         val displayedMilestone = if (celebration == metrics.totalCases) {
             MilestoneProgress(
                 current = metrics.totalCases,
@@ -100,6 +110,7 @@ class DashboardViewModel @Inject constructor(
             recentCases = recentCases,
             milestone = displayedMilestone,
             milestoneCelebration = celebration,
+            backupWarning = backupWarningFor(settings, System.currentTimeMillis()),
         )
     }.stateIn(
         scope = viewModelScope,
@@ -139,6 +150,26 @@ class DashboardViewModel @Inject constructor(
         )
     }
 
+    private fun backupWarningFor(settings: AppSettings, now: Long): String? {
+        if (settings.backupSchedule == BackupSchedule.OFF || settings.backupFolderUri == null) {
+            return "Automatic backups are off. Patient data exists only on this phone — enable backups in Settings."
+        }
+        if (settings.backupLastRunSuccess == false) {
+            return "The last automatic backup failed. Check the backup folder in Settings."
+        }
+        val lastRunAt = settings.backupLastRunAt ?: return null // scheduled, first run pending
+        val staleAfterDays = when (settings.backupSchedule) {
+            BackupSchedule.DAILY -> 3
+            BackupSchedule.WEEKLY -> 10
+            BackupSchedule.MONTHLY -> 35
+            BackupSchedule.OFF -> return null
+        }
+        val ageDays = ((now - lastRunAt) / MILLIS_PER_DAY).toInt()
+        return if (ageDays >= staleAfterDays) {
+            "Last successful backup was $ageDays days ago. Check backup settings."
+        } else null
+    }
+
     private fun maybeTriggerMilestoneCelebration(totalCases: Int) {
         val isMilestone = totalCases > 0 && previousMilestone(totalCases) == totalCases
         if (hasObservedTotalCases && isMilestone && lastCelebratedMilestone != totalCases) {
@@ -170,3 +201,5 @@ fun previousMilestone(currentCases: Int): Int = when {
 
 private fun LocalDate.toStartOfDayMillis(zone: ZoneId): Long =
     atStartOfDay(zone).toInstant().toEpochMilli()
+
+private const val MILLIS_PER_DAY = 86_400_000L

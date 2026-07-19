@@ -37,7 +37,7 @@ class ScheduledBackupWorker @AssistedInject constructor(
             settingsRepo.recordBackupRun(result.timestampMs, result.success)
 
             if (result.success) {
-                pruneOldBackups(folderUri, KEEP_BACKUPS)
+                pruneOldBackups(folderUri)
             }
 
             notify(result.success, result.error)
@@ -80,21 +80,17 @@ class ScheduledBackupWorker @AssistedInject constructor(
     }
 
     /**
-     * Keep the [keep] most recent kairos-backup-*.zip files in [folderUri], delete the rest.
+     * Prune old backups in [folderUri] using [BackupPruner]'s generational policy.
      * Failures are swallowed — pruning is best-effort, never blocks the happy path.
      */
-    private fun pruneOldBackups(folderUri: String, keep: Int) {
+    private fun pruneOldBackups(folderUri: String) {
         try {
             val folder = DocumentFile.fromTreeUri(applicationContext, Uri.parse(folderUri))
                 ?: return
-            val backups = folder.listFiles()
-                .filter { it.isFile && (it.name ?: "").startsWith("kairos-backup-") && (it.name ?: "").endsWith(".zip") }
-                .sortedByDescending { it.name }  // lexicographic = chronological (yyyyMMdd-HHmmss)
-
-            if (backups.size > keep) {
-                backups.drop(keep).forEach { old ->
-                    try { old.delete() } catch (_: Exception) {}
-                }
+            val backups = folder.listFiles().filter { it.isFile }
+            val toDelete = BackupPruner.selectBackupsToDelete(backups.mapNotNull { it.name })
+            backups.filter { it.name in toDelete }.forEach { old ->
+                try { old.delete() } catch (_: Exception) {}
             }
         } catch (_: Exception) {
             // Pruning is best-effort
@@ -106,6 +102,5 @@ class ScheduledBackupWorker @AssistedInject constructor(
         const val NOTIFICATION_ID = 1001
         const val WORK_NAME = "kairos_scheduled_backup"
         const val PURGE_WORK_NAME = "kairos_trash_purge"
-        const val KEEP_BACKUPS = 5
     }
 }

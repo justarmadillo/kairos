@@ -43,4 +43,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.work)
     ksp(libs.hilt.work.compiler)
+
+    testImplementation(libs.junit)
 }
