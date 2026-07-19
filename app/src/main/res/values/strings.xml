@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">Kairos</string>
 
+    <string name="widget_label">Quick Capture</string>
+    <string name="widget_description">Start a new case or search patients straight from your home screen.</string>
+    <string name="widget_new_case">+ New Case</string>
+    <string name="widget_search">Search</string>
+
     <string name="nav_shifts">Shifts</string>
     <string name="nav_consultation">Consultation</string>
     <string name="nav_cases">Cases</string>

@@ -14,7 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -23,6 +27,7 @@ import com.kairos.core.model.ThemeMode
 import com.kairos.core.repository.SettingsRepository
 import com.kairos.core.theme.KairosTheme
 import com.kairos.navigation.KairosNavHost
+import com.kairos.navigation.ROUTE_PATIENT_CASE
 import com.kairos.navigation.TopLevelDestination
 import com.kairos.ui.BottomBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +62,16 @@ class MainActivity : ComponentActivity() {
                 val currentRoute = backStackEntry?.destination?.route
                 val showBottomBar = TopLevelDestination.entries.any { it.route == currentRoute }
 
+                // Widget deep-link: consume once (rememberSaveable survives rotation)
+                var widgetDestinationHandled by rememberSaveable { mutableStateOf(false) }
+                LaunchedEffect(Unit) {
+                    val destination = intent.getStringExtra(EXTRA_WIDGET_DESTINATION)
+                    if (!widgetDestinationHandled && destination in ALLOWED_WIDGET_DESTINATIONS) {
+                        widgetDestinationHandled = true
+                        navController.navigate(destination!!) { launchSingleTop = true }
+                    }
+                }
+
                 Scaffold(
                     bottomBar = {
                         if (showBottomBar) {
@@ -85,5 +100,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_WIDGET_DESTINATION = "com.kairos.widget.DESTINATION"
+
+        // Whitelist: the activity is exported, so never navigate to arbitrary extras
+        private val ALLOWED_WIDGET_DESTINATIONS = setOf(ROUTE_PATIENT_CASE, "search")
     }
 }
