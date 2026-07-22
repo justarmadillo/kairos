@@ -1,5 +1,4 @@
 *.iml
-.gradle
 /local.properties
 /.idea/
 .DS_Store
@@ -8,10 +7,5 @@
 /captures
 .externalNativeBuild
 .cxx
-local.properties
 *.log
 app/releases/
-singin_key
-*.jks
-*.keystore
-keystore.properties
