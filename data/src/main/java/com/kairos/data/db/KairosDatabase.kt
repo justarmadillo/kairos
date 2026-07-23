@@ -32,7 +32,7 @@ import com.kairos.data.db.entities.ShiftEntity
         ConsultationSessionEntity::class,
         ConsultationCaseCrossRef::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true,
 )
 abstract class KairosDatabase : RoomDatabase() {

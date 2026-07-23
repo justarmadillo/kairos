@@ -21,16 +21,14 @@ import androidx.room.migration.Migration
  */
 object Migrations {
 
-    // Example template — copy when bumping version:
-    //
-    // val MIGRATION_1_2 = object : Migration(1, 2) {
-    //     override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
-    //         db.execSQL("ALTER TABLE cases ADD COLUMN summary TEXT")
-    //     }
-    // }
+    val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE case_media ADD COLUMN original_file_name TEXT")
+        }
+    }
 
     /** All migrations in chronological order. Passed to addMigrations() in DataModule. */
     val ALL_MIGRATIONS: Array<Migration> = arrayOf(
-        // MIGRATION_1_2,
+        MIGRATION_1_2,
     )
 }

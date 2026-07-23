@@ -38,6 +38,7 @@ data class PendingMedia(
     val mediaType: MediaType,
     val durationMs: Long? = null,
     val isPrimary: Boolean = false,
+    val originalFileName: String? = null,
 )
 
 // ── UI State ─────────────────────────────────────────────────────────────────
@@ -207,12 +208,13 @@ class PatientCaseViewModel @Inject constructor(
      * Called after camera/gallery returns a file already written to disk.
      * [sourceFile] is the temp file (e.g. from FileProvider or copied from gallery URI).
      */
-    fun attachFile(sourceFile: File, type: MediaType) {
+    fun attachFile(sourceFile: File, type: MediaType, originalFileName: String? = null) {
         val item = PendingMedia(
             localId = nextLocalId++,
             sourceFile = sourceFile,
             mediaType = type,
-            isPrimary = _state.value.pendingMedia.isEmpty(),
+            isPrimary = type != MediaType.FILE && _state.value.pendingMedia.isEmpty(),
+            originalFileName = originalFileName,
         )
         _state.update { it.copy(pendingMedia = it.pendingMedia + item) }
     }
@@ -343,7 +345,10 @@ class PatientCaseViewModel @Inject constructor(
 
                     // 3. Media: move temp files to final location and insert records.
                     s.pendingMedia.forEach { pending ->
-                        val finalFile = mediaFileManager.newCaseMediaFile(caseId, pending.mediaType)
+                        val ext = pending.originalFileName
+                            ?.substringAfterLast('.', "")
+                            ?.takeIf { it.isNotEmpty() }
+                        val finalFile = mediaFileManager.newCaseMediaFile(caseId, pending.mediaType, ext)
                         pending.sourceFile.copyTo(finalFile, overwrite = true)
                         pending.sourceFile.delete()
 
@@ -354,6 +359,7 @@ class PatientCaseViewModel @Inject constructor(
                                 mediaType = pending.mediaType,
                                 durationMs = pending.durationMs,
                                 isPrimary = pending.isPrimary,
+                                originalFileName = pending.originalFileName,
                                 createdAt = now,
                             )
                         )

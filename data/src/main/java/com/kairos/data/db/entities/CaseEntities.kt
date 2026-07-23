@@ -73,8 +73,9 @@ data class CaseMediaEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo("case_id") val caseId: Long,
     @ColumnInfo("file_path") val filePath: String,
-    @ColumnInfo("media_type") val mediaType: String,           // IMAGE | VIDEO | AUDIO
+    @ColumnInfo("media_type") val mediaType: String,           // IMAGE | VIDEO | AUDIO | FILE
     @ColumnInfo("duration_ms") val durationMs: Long? = null,
     @ColumnInfo("is_primary") val isPrimary: Boolean = false,
+    @ColumnInfo("original_file_name") val originalFileName: String? = null,
     @ColumnInfo("created_at") val createdAt: Long
 )

@@ -31,12 +31,13 @@ class MediaFileManager @Inject constructor(
     fun resolve(relativePath: String): File = File(mediaRoot, relativePath)
 
     /** Reserve a fresh file path under cases/{caseId}/ for new media of [type]. */
-    fun newCaseMediaFile(caseId: Long, type: MediaType): File {
+    fun newCaseMediaFile(caseId: Long, type: MediaType, originalExtension: String? = null): File {
         val dir = File(mediaRoot, "cases/$caseId").apply { if (!exists()) mkdirs() }
         val ext = when (type) {
             MediaType.IMAGE -> "jpg"
             MediaType.VIDEO -> "mp4"
             MediaType.AUDIO -> "m4a"
+            MediaType.FILE -> originalExtension ?: "bin"
         }
         val name = "${System.currentTimeMillis()}_${UUID.randomUUID()}.$ext"
         return File(dir, name)

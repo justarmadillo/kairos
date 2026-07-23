@@ -144,6 +144,15 @@ private class PdfWriter(
                 drawPhoto(File(media.filePath), "Photo ${index + 1}")
             }
         }
+
+        val files = case.media.filter { it.mediaType == MediaType.FILE }
+        if (files.isNotEmpty()) {
+            drawSection("File Attachments")
+            files.forEachIndexed { index, media ->
+                val name = media.originalFileName ?: File(media.filePath).name
+                drawKeyValue("File ${index + 1}", name)
+            }
+        }
     }
 
     private fun drawTitle(text: String) {

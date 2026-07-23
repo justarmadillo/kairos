@@ -13,13 +13,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.PlayArrow
@@ -50,6 +54,7 @@ data class MediaDisplayItem(
     val mediaType: MediaType,
     val durationMs: Long? = null,
     val isPrimary: Boolean = false,
+    val originalFileName: String? = null,
 )
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -60,12 +65,14 @@ fun MediaAttachmentSection(
     onTakeVideo: () -> Unit,
     onPickFromGallery: () -> Unit,
     onRecordAudio: () -> Unit,
+    onPickFile: () -> Unit,
     onRemove: (Int) -> Unit,
     onSetPrimary: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val visual = items.filter { it.mediaType != MediaType.AUDIO }
+    val visual = items.filter { it.mediaType != MediaType.AUDIO && it.mediaType != MediaType.FILE }
     val audio = items.filter { it.mediaType == MediaType.AUDIO }
+    val files = items.filter { it.mediaType == MediaType.FILE }
 
     Column(modifier = modifier) {
         // Action chips
@@ -92,6 +99,11 @@ fun MediaAttachmentSection(
                 onClick = onRecordAudio,
                 label = { Text("Voice note") },
                 leadingIcon = { Icon(Icons.Default.Mic, null, Modifier.size(18.dp)) },
+            )
+            AssistChip(
+                onClick = onPickFile,
+                label = { Text("File") },
+                leadingIcon = { Icon(Icons.Default.AttachFile, null, Modifier.size(18.dp)) },
             )
         }
 
@@ -136,6 +148,58 @@ fun MediaAttachmentSection(
                 index = index,
                 onDelete = { onRemove(item.localId) },
                 modifier = Modifier.padding(top = 8.dp),
+            )
+        }
+
+        // File attachments
+        files.forEach { item ->
+            FileAttachmentItem(
+                fileName = item.originalFileName ?: File(item.filePath).name,
+                onRemove = { onRemove(item.localId) },
+                modifier = Modifier.padding(top = 8.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun FileAttachmentItem(
+    fileName: String,
+    onRemove: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                MaterialTheme.colorScheme.surfaceVariant,
+                RoundedCornerShape(12.dp),
+            )
+            .padding(horizontal = 12.dp, vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            Icons.Default.Description,
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.primary,
+        )
+        Spacer(Modifier.width(10.dp))
+        Text(
+            text = fileName,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f),
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+        )
+        IconButton(
+            onClick = onRemove,
+            modifier = Modifier.size(28.dp),
+        ) {
+            Icon(
+                Icons.Default.Close,
+                contentDescription = "Remove",
+                modifier = Modifier.size(16.dp),
             )
         }
     }

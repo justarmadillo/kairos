@@ -30,6 +30,7 @@ class MediaRepositoryImpl @Inject constructor(
                 mediaType = item.mediaType.name,
                 durationMs = item.durationMs,
                 isPrimary = item.isPrimary,
+                originalFileName = item.originalFileName,
                 createdAt = item.createdAt.takeIf { it != 0L } ?: System.currentTimeMillis(),
             )
         )

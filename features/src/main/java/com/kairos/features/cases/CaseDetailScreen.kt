@@ -26,6 +26,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.PlayArrow
@@ -262,7 +263,7 @@ fun CaseDetailScreen(
             }
 
             // Images / videos
-            val visualMedia = case.media.filter { it.mediaType != MediaType.AUDIO }
+            val visualMedia = case.media.filter { it.mediaType == MediaType.IMAGE || it.mediaType == MediaType.VIDEO }
             if (visualMedia.isNotEmpty()) {
                 val columns = 3
                 val gridSpacing = 6.dp
@@ -312,6 +313,44 @@ fun CaseDetailScreen(
                 }
             }
 
+            // File attachments
+            val fileMedia = case.media.filter { it.mediaType == MediaType.FILE }
+            if (fileMedia.isNotEmpty()) {
+                Spacer(Modifier.height(16.dp))
+                Text("Files", style = MaterialTheme.typography.labelMedium)
+                Spacer(Modifier.height(8.dp))
+                fileMedia.forEach { media ->
+                    FileAttachmentRow(
+                        fileName = media.originalFileName ?: File(media.filePath).name,
+                        onOpen = {
+                            val file = File(media.filePath)
+                            if (file.exists()) {
+                                val uri = FileProvider.getUriForFile(
+                                    context,
+                                    "${context.packageName}.fileprovider",
+                                    file,
+                                )
+                                val mime = when (file.extension.lowercase()) {
+                                    "pdf" -> "application/pdf"
+                                    "zip" -> "application/zip"
+                                    "doc", "docx" -> "application/msword"
+                                    "xls", "xlsx" -> "application/vnd.ms-excel"
+                                    "ppt", "pptx" -> "application/vnd.ms-powerpoint"
+                                    "txt" -> "text/plain"
+                                    else -> "*/*"
+                                }
+                                val intent = Intent(Intent.ACTION_VIEW).apply {
+                                    setDataAndType(uri, mime)
+                                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                }
+                                context.startActivity(Intent.createChooser(intent, "Open file"))
+                            }
+                        },
+                        onDelete = { viewModel.deleteMedia(media.id) },
+                    )
+                }
+            }
+
             Spacer(Modifier.height(32.dp))
         }
     }
@@ -352,6 +391,48 @@ private fun VisualMediaThumbnail(
                     modifier = Modifier.size(24.dp),
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun FileAttachmentRow(
+    fileName: String,
+    onOpen: () -> Unit,
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onOpen)
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            Icons.Default.Description,
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.primary,
+        )
+        Spacer(Modifier.width(10.dp))
+        Text(
+            text = fileName,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f),
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+        )
+        IconButton(
+            onClick = onDelete,
+            modifier = Modifier.size(28.dp),
+        ) {
+            Icon(
+                Icons.Default.Delete,
+                contentDescription = "Delete file",
+                tint = MaterialTheme.colorScheme.error,
+                modifier = Modifier.size(18.dp),
+            )
         }
     }
 }

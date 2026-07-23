@@ -36,6 +36,7 @@ fun CaseMediaEntity.toDomain(): MediaItem = MediaItem(
     mediaType = MediaType.entries.find { it.name == mediaType } ?: MediaType.IMAGE,
     durationMs = durationMs,
     isPrimary = isPrimary,
+    originalFileName = originalFileName,
     createdAt = createdAt,
 )
 

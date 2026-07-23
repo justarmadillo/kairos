@@ -3,6 +3,7 @@ package com.kairos.features.patient
 import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
@@ -62,7 +63,7 @@ fun NewPatientTab(
     onDiagnosisQuery: (String) -> Unit,
     onSelectDiagnosis: (String) -> Unit,
     onRemoveDiagnosis: (String) -> Unit,
-    onAttachFile: (java.io.File, MediaType) -> Unit,
+    onAttachFile: (java.io.File, MediaType, String?) -> Unit,
     onRemoveMedia: (Int) -> Unit,
     onSetPrimaryMedia: (Int) -> Unit,
     onStartRecording: () -> Unit,
@@ -91,7 +92,7 @@ fun NewPatientTab(
         ActivityResultContracts.TakePicture()
     ) { success ->
         if (success) {
-            pendingPhotoFile?.let { onAttachFile(it, MediaType.IMAGE) }
+            pendingPhotoFile?.let { onAttachFile(it, MediaType.IMAGE, null) }
         } else {
             pendingPhotoFile?.delete()
         }
@@ -104,7 +105,7 @@ fun NewPatientTab(
         ActivityResultContracts.CaptureVideo()
     ) { success ->
         if (success) {
-            pendingVideoFile?.let { onAttachFile(it, MediaType.VIDEO) }
+            pendingVideoFile?.let { onAttachFile(it, MediaType.VIDEO, null) }
         } else {
             pendingVideoFile?.delete()
         }
@@ -162,14 +163,33 @@ fun NewPatientTab(
         ActivityResultContracts.PickMultipleVisualMedia()
     ) { uris: List<Uri> ->
         uris.forEach { uri ->
-            // Determine type
             val mimeType = context.contentResolver.getType(uri) ?: ""
             val mediaType = if (mimeType.startsWith("video")) MediaType.VIDEO else MediaType.IMAGE
             val file = mediaFileManager.newCaseMediaFile(caseId = 0, type = mediaType)
             context.contentResolver.openInputStream(uri)?.use { input ->
                 file.outputStream().use { output -> input.copyTo(output) }
             }
-            onAttachFile(file, mediaType)
+            onAttachFile(file, mediaType, null)
+        }
+    }
+
+    // File picker (PDFs, ZIPs, docs, etc.)
+    val fileLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenMultipleDocuments()
+    ) { uris: List<Uri> ->
+        uris.forEach { uri ->
+            val displayName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    val idx = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    if (idx >= 0) cursor.getString(idx) else null
+                } else null
+            } ?: "file"
+            val ext = displayName.substringAfterLast('.', "").takeIf { it.isNotEmpty() }
+            val file = mediaFileManager.newCaseMediaFile(caseId = 0, type = MediaType.FILE, ext)
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                file.outputStream().use { output -> input.copyTo(output) }
+            }
+            onAttachFile(file, MediaType.FILE, displayName)
         }
     }
 
@@ -274,6 +294,7 @@ fun NewPatientTab(
                 mediaType = pm.mediaType,
                 durationMs = pm.durationMs,
                 isPrimary = pm.isPrimary,
+                originalFileName = pm.originalFileName,
             )
         }
 
@@ -295,6 +316,7 @@ fun NewPatientTab(
                     audioPermission.launchPermissionRequest()
                 }
             },
+            onPickFile = { fileLauncher.launch(arrayOf("*/*")) },
             onRemove = onRemoveMedia,
             onSetPrimary = onSetPrimaryMedia,
             modifier = Modifier.fillMaxWidth(),
