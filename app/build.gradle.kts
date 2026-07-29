@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
 }
 
 // Release signing credentials live outside version control in keystore.properties
@@ -15,16 +16,44 @@ val keystoreProps = Properties().apply {
     if (f.exists()) f.inputStream().use { load(it) }
 }
 
+val verifyProductionReleaseConfig by tasks.registering {
+    doLast {
+        val requiredSigningProperties = listOf(
+            "storeFile",
+            "storePassword",
+            "keyAlias",
+            "keyPassword",
+        )
+        val missingSigningProperties = requiredSigningProperties.filter {
+            keystoreProps.getProperty(it).isNullOrBlank()
+        }
+        if (missingSigningProperties.isNotEmpty()) {
+            throw GradleException(
+                "Release signing is incomplete. Missing keystore.properties values: " +
+                    missingSigningProperties.joinToString(),
+            )
+        }
+        val signingKey = rootProject.file(keystoreProps.getProperty("storeFile"))
+        if (!signingKey.isFile) {
+            throw GradleException("Release signing key was not found: ${signingKey.path}")
+        }
+    }
+}
+
+tasks.matching { it.name == "preReleaseBuild" }.configureEach {
+    dependsOn(verifyProductionReleaseConfig)
+}
+
 android {
-    namespace = "com.kairos"
+    namespace = "com.taha.kairos"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.kairos"
+        applicationId = "com.taha.kairos"
         minSdk = 26
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.7"
+        versionCode = 6
+        versionName = "1.10"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -90,10 +119,16 @@ dependencies {
 
     implementation(libs.workmanager)
 
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.appcheck)
+    debugImplementation(libs.firebase.appcheck.debug)
+    releaseImplementation(libs.firebase.appcheck.playintegrity)
+
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))

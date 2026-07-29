@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.kairos.features"
+    namespace = "com.taha.kairos.features"
     compileSdk = 35
 
     defaultConfig {
@@ -45,4 +45,6 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     debugImplementation(libs.compose.ui.tooling)
+
+    testImplementation(libs.junit)
 }

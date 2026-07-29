@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "551490701013",
+    "project_id": "kairos-21c8a",
+    "storage_bucket": "kairos-21c8a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551490701013:android:9e7aa7ad16eca47363c45c",
+        "android_client_info": {
+          "package_name": "com.taha.kairos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDarLVNN5cXeZhaS21yTP5p4K6JSeFoVa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

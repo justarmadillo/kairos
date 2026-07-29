@@ -1,0 +1,59 @@
+package com.taha.kairos.data.repository
+
+import androidx.room.withTransaction
+import com.taha.kairos.core.model.ConsultationSession
+import com.taha.kairos.core.repository.ConsultationRepository
+import com.taha.kairos.core.repository.DataSafetyCoordinator
+import com.taha.kairos.data.db.KairosDatabase
+import com.taha.kairos.data.db.dao.ConsultationSessionDao
+import com.taha.kairos.data.db.entities.ConsultationSessionEntity
+import com.taha.kairos.data.mapper.toDomain
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class ConsultationRepositoryImpl @Inject constructor(
+    private val dao: ConsultationSessionDao,
+    private val db: KairosDatabase,
+    private val dataSafetyCoordinator: DataSafetyCoordinator,
+) : ConsultationRepository {
+
+    override suspend fun getOrCreateForDate(dateMillis: Long): Long = dataSafetyCoordinator.withDataLock {
+        val now = System.currentTimeMillis()
+        db.withTransaction {
+            dao.findByDate(dateMillis)?.let { existing ->
+                // A soft-deleted session for this date would be invisible to range queries;
+                // restore it instead of returning an id the calendar can never show.
+                if (existing.isDeleted) dao.restore(existing.id)
+                existing.id
+            }
+                ?: dao.insert(ConsultationSessionEntity(date = dateMillis, createdAt = now)).let { id ->
+                    if (id != -1L) id
+                    else dao.findByDate(dateMillis)?.id ?: -1L
+                }
+        }
+    }
+
+    override suspend fun getById(id: Long): ConsultationSession? =
+        dao.getById(id)?.toDomain()
+
+    override fun observeForDateRange(
+        startMillis: Long,
+        endMillis: Long,
+    ): Flow<List<ConsultationSession>> =
+        dao.observeForRange(startMillis, endMillis)
+            .map { list -> list.map { it.toDomain() } }
+
+    override suspend fun softDelete(id: Long) = dataSafetyCoordinator.withDataLock {
+        dao.softDelete(id, System.currentTimeMillis())
+    }
+
+    override suspend fun restore(id: Long) = dataSafetyCoordinator.withDataLock {
+        dao.restore(id)
+    }
+
+    override fun observeTrashed(): Flow<List<ConsultationSession>> =
+        dao.observeTrashed().map { list -> list.map { it.toDomain() } }
+}

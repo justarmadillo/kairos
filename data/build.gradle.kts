@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.kairos.data"
+    namespace = "com.taha.kairos.data"
     compileSdk = 35
 
     defaultConfig {
@@ -38,6 +38,9 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.workmanager)
     implementation(libs.documentfile)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
